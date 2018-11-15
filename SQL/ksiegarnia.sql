@@ -1,8 +1,11 @@
+DROP DATABASE IF EXISTS Ksiegarnia;
+CREATE DATABASE Ksiegarnia;
+USE Ksiegarnia;
 CREATE TABLE `Ksiazki` (
 	`Id` INT NOT NULL AUTO_INCREMENT,
-	`Nazwa` TEXT(250) NOT NULL UNIQUE,
+	`Nazwa` TEXT NOT NULL,
 	`Autor` varchar(100) NOT NULL,
-	`Opis` TEXT NOT NULL UNIQUE,
+	`Opis` TEXT NOT NULL,
 	`Gatunek` INT NOT NULL,
 	`Data_wydania` DATE NOT NULL,
 	`Wydawnictwo` INT NOT NULL,
@@ -52,8 +55,8 @@ CREATE TABLE `Profile_uzytkownikow` (
 CREATE TABLE `Zamowienia` (
 	`Id` INT NOT NULL AUTO_INCREMENT,
 	`Id_klienta` INT NOT NULL,
-	`Rodzaj_platnosci` INT NOT NULL AUTO_INCREMENT,
-	`Usluga_wysylki` INT NOT NULL AUTO_INCREMENT,
+	`Rodzaj_platnosci` INT NOT NULL,
+	`Usluga_wysylki` INT NOT NULL,
 	`Data_zamowienia` DATE NOT NULL,
 	`Zaplacone?` tinyint(1) NOT NULL DEFAULT '0',
 	`Wykonane?` tinyint(1) NOT NULL DEFAULT '0',
