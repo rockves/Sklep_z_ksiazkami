@@ -49,6 +49,7 @@ CREATE TABLE `Profile_uzytkownikow` (
 	`Kod_pocztowy` INT(5) NOT NULL,
 	`Email` varchar(50) NOT NULL UNIQUE,
 	`Numer_telefonu` INT(16) NOT NULL,
+	`Czy_admin` TINYINT(1) NOT NULL DEFAULT 0,
 	PRIMARY KEY (`Id`)
 );
 
