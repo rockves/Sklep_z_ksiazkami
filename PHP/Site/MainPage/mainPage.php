@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <?php 
-require_once(__DIR__.'\Untitles\connection.php');
+require_once(__DIR__.'\..\Untitles\connection.php');
 ?>
 
 <head>
