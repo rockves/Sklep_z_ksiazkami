@@ -3,9 +3,9 @@
 	$errMsg = '';
 	function insertGatunek($nazwa){
 		global $connection, $errMsg;
-		$query = "SELECT Gatunek FROM gatunki WHERE Gatunek = '$nazwa'";
+		$query = "SELECT Gatunek FROM gatunki WHERE Gatunek = '$nazwa' LIMIT 1";
 		if(!($result = mysqli_query($connection,$query))){
-			$errMsg = 'Nie udało się dodać gatunku1';
+			$errMsg = 'Nie udało się dodać gatunku';
 			return;
 		}
 		if(mysqli_num_rows($result) > 0){
@@ -14,12 +14,12 @@
 		}
 		$query = "INSERT INTO gatunki(Gatunek) VALUES ('$nazwa')";
 		if(!mysqli_query($connection,$query)){
-			$errMsg = 'Nie udało się dodać gatunku2';
+			$errMsg = 'Nie udało się dodać gatunku';
 		}
 	}
 	function deleteGatunek($nazwa){
-				global $connection, $errMsg;
-		$query = "SELECT Id FROM gatunki WHERE Gatunek = '$nazwa'";
+		global $connection, $errMsg;
+		$query = "SELECT Id FROM gatunki WHERE Gatunek = '$nazwa' LIMIT 1";
 		if(!($result = mysqli_query($connection,$query))){
 			$errMsg = 'Nie udało się usunąć gatunku';
 			return;
@@ -35,8 +35,8 @@
 		}
 	}
 	function updateGatunek($nazwa, $nowaNazwa){
-				global $connection, $errMsg;
-		$query = "SELECT Gatunek FROM gatunki WHERE Gatunek = '$nazwa'";
+		global $connection, $errMsg;
+		$query = "SELECT Gatunek FROM gatunki WHERE Gatunek = '$nazwa' LIMIT 1";
 		if(!($result = mysqli_query($connection,$query))){
 			$errMsg = 'Nie udało się zmienić nazwy gatunku';
 			return;

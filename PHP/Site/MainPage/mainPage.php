@@ -15,7 +15,18 @@ require_once(__DIR__.'\..\Untitles\connection.php');
 <body>
     <div id="header"><span>Księgarnia internetowa</span></div><br>
     <div>
-        <?php?>
+        <div style="float: left;">
+            <button onclick="location.href=' ..\\GatunkiPage\\addGatunki.php';">Dodaj gatunek</button><br>
+            <button onclick="location.href=' ..\\GatunkiPage\\deleteGatunki.php';">Usuń gatunek</button><br>
+            <button onclick="location.href=' ..\\GatunkiPage\\updateGatunki.php';">Edytuj gatunek</button><br>
+            <button onclick="location.href=' ..\\GatunkiPage\\listGatunki.php';">Wyświetl gatunki</button><br>
+        </div>
+        <div style="float: left; margin-left: 5px;">
+            <button onclick="location.href=' ..\\WydawnictwoPage\\addWydawnictwo.php';">Dodaj wydawce</button><br>
+            <button onclick="location.href=' ..\\WydawnictwoPage\\deleteWydawnictwo.php';">Usuń wydawce</button><br>
+            <button onclick="location.href=' ..\\WydawnictwoPage\\updateWydawnictwo.php';">Edytuj wydawce</button><br>
+            <button onclick="location.href=' ..\\WydawnictwoPage\\listWydawnictwo.php';">Wyświetl wydawców</button><br>
+        </div>
     </div>
 </body>
 
