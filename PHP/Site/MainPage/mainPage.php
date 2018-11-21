@@ -27,6 +27,12 @@ require_once(__DIR__.'\..\Untitles\connection.php');
             <button onclick="location.href=' ..\\WydawnictwoPage\\updateWydawnictwo.php';">Edytuj wydawce</button><br>
             <button onclick="location.href=' ..\\WydawnictwoPage\\listWydawnictwo.php';">Wyświetl wydawców</button><br>
         </div>
+        <div style="float: left; margin-left: 5px;">
+            <button onclick="location.href=' ..\\SposobWysylkiPage\\addSposobWysylki.php';">Dodaj sposób wysyłki</button><br>
+            <button onclick="location.href=' ..\\SposobWysylkiPage\\deleteSposobWysylki.php';">Usuń sposób wysyłki</button><br>
+            <button onclick="location.href=' ..\\SposobWysylkiPage\\updateSposobWysylki.php';">Edytuj sposób wysyłki</button><br>
+            <button onclick="location.href=' ..\\SposobWysylkiPage\\listSposobWysylki.php';">Wyświetl sposoby wysyłki</button><br>
+        </div>
     </div>
 </body>
 
