@@ -11,7 +11,7 @@
 		$szybkosc = '';
 		$cena = '';
 		if($_SERVER["REQUEST_METHOD"] == "POST"){
-			require_once('operations_on_SposobWysylki.php');
+			require_once(__DIR__.'\..\Untitles\Tables\SposobyWysylki\operations_on_SposobyWysylki.php');
 			if($errMsg != ''){
 				$name = $_POST['nazwa'];
 				$szybkosc = $_POST['szybkosc'];
@@ -19,7 +19,6 @@
 			}
 		}
 	?>
-    <script type="text/javascript"></script><!-- Dodać skrypt sprawdzający poprawność wpisanych liczb -->
 </head>
 
 <body>

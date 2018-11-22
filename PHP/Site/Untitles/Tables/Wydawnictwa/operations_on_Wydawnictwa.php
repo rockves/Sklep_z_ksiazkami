@@ -1,9 +1,9 @@
 <?php
-	require_once(__DIR__.'\..\Untitles\connection.php');
+	require_once(__DIR__.'\..\..\connection.php');
 	$errMsg = '';
 	function insertWydawnictwo($nazwa){
 		global $connection, $errMsg;
-		$query = "SELECT Wydawca FROM wydawnictwo WHERE Wydawca = '$nazwa'";
+		$query = "SELECT Wydawca FROM wydawnictwa WHERE Wydawca = '$nazwa'";
 		if(!($result = mysqli_query($connection,$query))){
 			$errMsg = 'Nie udało się dodać wydawcy';
 			return;
@@ -12,14 +12,14 @@
 			$errMsg = 'Taki wydawca już istnieje';
 			return;
 		}
-		$query = "INSERT INTO wydawnictwo(Wydawca) VALUES ('$nazwa')";
+		$query = "INSERT INTO wydawnictwa(Wydawca) VALUES ('$nazwa')";
 		if(!mysqli_query($connection,$query)){
 			$errMsg = 'Nie udało się dodać wydawcy';
 		}
 	}
 	function deleteWydawnictwo($nazwa){
-				global $connection, $errMsg;
-		$query = "SELECT Id FROM wydawnictwo WHERE Wydawca = '$nazwa'";
+		global $connection, $errMsg;
+		$query = "SELECT Id FROM wydawnictwa WHERE Wydawca = '$nazwa'";
 		if(!($result = mysqli_query($connection,$query))){
 			$errMsg = 'Nie udało się usunąć wydawcy';
 			return;
@@ -29,14 +29,14 @@
 			return;
 		}
 		$row = mysqli_fetch_assoc($result);
-		$query = 'DELETE FROM wydawnictwo WHERE Id = '.$row['Id'];
+		$query = 'DELETE FROM wydawnictwa WHERE Id = '.$row['Id'];
 		if(!mysqli_query($connection,$query)){
 			$errMsg = 'Nie udało się usunąć wydawcy';
 		}
 	}
 	function updateWydawnictwo($nazwa, $nowaNazwa){
-				global $connection, $errMsg;
-		$query = "SELECT Wydawnictwo FROM wydawnictwo WHERE Wydawca = '$nazwa'";
+		global $connection, $errMsg;
+		$query = "SELECT Wydawca FROM wydawnictwa WHERE Wydawca = '$nazwa'";
 		if(!($result = mysqli_query($connection,$query))){
 			$errMsg = 'Nie udało się zmienić nazwy wydawcy';
 			return;
@@ -45,7 +45,7 @@
 			$errMsg = 'Taki wydawca nie istnieje';
 			return;
 		}
-		$query = "UPDATE wydawnictwo SET Wydawca = '$nowaNazwa' WHERE Wydawca = '$nazwa'";
+		$query = "UPDATE wydawnictwa SET Wydawca = '$nowaNazwa' WHERE Wydawca = '$nazwa'";
 		if(!mysqli_query($connection,$query)){
 			$errMsg = 'Nie udało się zmienić nazwy wydawcy';
 		}

@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Lista wydawców</title>
+    <title>Lista sposobów wysyłki</title>
     <?php require_once(__DIR__.'\..\Untitles\connection.php'); ?>
     <style>
     table,
@@ -19,16 +19,16 @@
 
 <body>
     <?php
-    	$query = 'SELECT Id, Wydawca FROM wydawnictwo';
+    	$query = 'SELECT Id, Nazwa_uslugi, Szybkosc_dostawy, Cena_uslugi FROM sposoby_wysylki';
     	if(!($result = mysqli_query($connection,$query))){
-			echo 'Nie udało się wyświetlić wydawców';
+			echo 'Nie udało się wyświetlić sposobów wysyłki';
 		}else if(mysqli_num_rows($result) == 0){
-			echo 'W bazie danych nie ma żadnych wydawców';
+			echo 'W bazie danych nie ma żadnych sposobów wysyłki';
 		}else{
 			echo '<table>';
-			echo '<tr><td>ID</td><td>NAZWA</td></tr>';
+			echo '<tr><td>ID</td><td>NAZWA</td><td>SZYBKOSC(DNI)</td><td>CENA</td></tr>';
 			while($row = mysqli_fetch_assoc($result)) {
-				echo '<tr><td>'.$row['Id'].'</td><td>'.$row['Wydawca'].'</td></tr>';
+				echo '<tr><td>'.$row['Id'].'</td><td>'.$row['Nazwa_uslugi'].'</td><td>'.$row['Szybkosc_dostawy'].'</td><td>'.$row['Cena_uslugi'].'</td></tr>';
 			}
 			echo '</table>';
 		}

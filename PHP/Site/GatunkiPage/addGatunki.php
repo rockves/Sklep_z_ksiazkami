@@ -9,10 +9,10 @@
 		require_once(__DIR__.'\..\Untitles\connection.php');
 		$name = '';
 		if($_SERVER["REQUEST_METHOD"] == "POST"){
-			require_once('operations_on_Gatunki.php');
+			require_once(__DIR__.'\..\Untitles\Tables\Gatunki\operations_on_Gatunki.php');
 			if($errMsg != ''){
-$name = $_POST['nazwa'];
-}
+			$name = $_POST['nazwa'];
+			}
 		}
 	?>
 </head>

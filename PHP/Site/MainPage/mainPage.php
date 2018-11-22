@@ -22,16 +22,22 @@ require_once(__DIR__.'\..\Untitles\connection.php');
             <button onclick="location.href=' ..\\GatunkiPage\\listGatunki.php';">Wyświetl gatunki</button><br>
         </div>
         <div style="float: left; margin-left: 5px;">
-            <button onclick="location.href=' ..\\WydawnictwoPage\\addWydawnictwo.php';">Dodaj wydawce</button><br>
-            <button onclick="location.href=' ..\\WydawnictwoPage\\deleteWydawnictwo.php';">Usuń wydawce</button><br>
-            <button onclick="location.href=' ..\\WydawnictwoPage\\updateWydawnictwo.php';">Edytuj wydawce</button><br>
-            <button onclick="location.href=' ..\\WydawnictwoPage\\listWydawnictwo.php';">Wyświetl wydawców</button><br>
+            <button onclick="location.href=' ..\\WydawnictwaPage\\addWydawnictwa.php';">Dodaj wydawce</button><br>
+            <button onclick="location.href=' ..\\WydawnictwaPage\\deleteWydawnictwa.php';">Usuń wydawce</button><br>
+            <button onclick="location.href=' ..\\WydawnictwaPage\\updateWydawnictwa.php';">Edytuj wydawce</button><br>
+            <button onclick="location.href=' ..\\WydawnictwaPage\\listWydawnictwa.php';">Wyświetl wydawców</button><br>
         </div>
         <div style="float: left; margin-left: 5px;">
-            <button onclick="location.href=' ..\\SposobWysylkiPage\\addSposobWysylki.php';">Dodaj sposób wysyłki</button><br>
-            <button onclick="location.href=' ..\\SposobWysylkiPage\\deleteSposobWysylki.php';">Usuń sposób wysyłki</button><br>
-            <button onclick="location.href=' ..\\SposobWysylkiPage\\updateSposobWysylki.php';">Edytuj sposób wysyłki</button><br>
-            <button onclick="location.href=' ..\\SposobWysylkiPage\\listSposobWysylki.php';">Wyświetl sposoby wysyłki</button><br>
+            <button onclick="location.href=' ..\\SposobyWysylkiPage\\addSposobyWysylki.php';">Dodaj sposób wysyłki</button><br>
+            <button onclick="location.href=' ..\\SposobyWysylkiPage\\deleteSposobyWysylki.php';">Usuń sposób wysyłki</button><br>
+            <button onclick="location.href=' ..\\SposobyWysylkiPage\\updateSposobyWysylki.php';">Edytuj sposób wysyłki</button><br>
+            <button onclick="location.href=' ..\\SposobyWysylkiPage\\listSposobyWysylki.php';">Wyświetl sposoby wysyłki</button><br>
+        </div>
+        <div style="float: left; margin-left: 5px;">
+            <button onclick="location.href=' ..\\SposobyPlatnosciPage\\addSposobyPlatnosci.php';">Dodaj sposób płatności</button><br>
+            <button onclick="location.href=' ..\\SposobyPlatnosciPage\\deleteSposobyPlatnosci.php';">Usuń sposób płatności</button><br>
+            <button onclick="location.href=' ..\\SposobyPlatnosciPage\\updateSposobyPlatnosci.php';">Edytuj sposób płatności</button><br>
+            <button onclick="location.href=' ..\\SposobyPlatnosciPage\\listSposobyPlatnosci.php';">Wyświetl sposoby płatności</button><br>
         </div>
     </div>
 </body>

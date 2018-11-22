@@ -3,17 +3,15 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Edytuj wydawce</title>
+    <title>Dodaj wydawce</title>
     <link rel="stylesheet" type="text/css" href="..\Untitles\untitles.css">
     <?php
 		require_once(__DIR__.'\..\Untitles\connection.php');
 		$name = '';
-		$newName = '';
 		if($_SERVER["REQUEST_METHOD"] == "POST"){
-			require_once('operations_on_Wydawnictwo.php');
+			require_once(__DIR__.'\..\Untitles\Tables\Wydawnictwa\operations_on_Wydawnictwa.php');
 			if($errMsg != ''){
-			$name = $_POST['nazwa'];
-			$newName = $_POST['nowaNazwa'];
+				$name = $_POST['nazwa'];
 			}
 		}
 	?>
@@ -22,16 +20,15 @@
 <body>
     <div id="form">
         <form action="" method="post">
-            <input type="hidden" name="akcja" value="update">
-            Podaj nazwę wydawcy: <input type="text" name="nazwa" value="<?php echo $name;?>" /><br>
-            Podaj nową nazwę dla tego wydawcy: <input type="text" name="nowaNazwa" value="<?php echo $newName;?>" /><br>
+            <input type="hidden" name="akcja" value="insert">
+            Podaj wydawce do dodania: <input type="text" name="nazwa" value="<?php echo $name;?>" />
             <input type="submit" />
         </form>
     </div>
     <?php
 	if($_SERVER["REQUEST_METHOD"] == "POST"){
 		if($errMsg == ''){
-			echo "<span class='succMsg'>Pomyślnie zmieniono nazwę</span>";
+			echo "<span class='succMsg'>Pomyślnie dodano wydawce</span>";
 		}else if(!empty($errMsg)){
 			echo "<span class='errMsg'>$errMsg</span>";
 		}
