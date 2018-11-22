@@ -1,13 +1,13 @@
 <?php 
-
-	class Gatunek
+	
+	class Wydawnictwo
 	{
 		private $id;
 		private $nazwa;
 
-		function __construct(string $gatunek_nazwa = '')
+		function __construct(string $wydawnictwo_nazwa = '')
 		{
-			$this->setNazwa($gatunek_nazwa);
+			$this->setNazwa($wydawnictwo_nazwa);
 		}
 	
 	    public function getNazwa()
@@ -27,79 +27,78 @@
 	        return $this->id;
 	    }
 
-	    public function insertGatunek(){
+	    function insertWydawnictwo(){
 			global $connection;
 			if(!$connection) require_once(__DIR__.'\..\..\connection.php');
 			$errMsg = '';
 
-			$query = "SELECT Gatunek FROM gatunki WHERE Gatunek = '$this->nazwa' LIMIT 1";
+			$query = "SELECT Wydawca FROM wydawnictwa WHERE Wydawca = '$this->nazwa'";
 			if(!($result = $connection->query($query))){
-				$errMsg = 'Nie udało się dodać gatunku';
+				$errMsg = 'Nie udało się dodać wydawcy';
 				$result->close();
 				return $errMsg;
 			}
 			if($result->num_rows > 0){
-				$errMsg = 'Taki gatunek już istnieje';
+				$errMsg = 'Taki wydawca już istnieje';
 				$result->close();
 				return $errMsg;
 			}
 			$result->close();
-			$query = "INSERT INTO gatunki(Gatunek) VALUES ('$this->nazwa')";
+			$query = "INSERT INTO wydawnictwa(Wydawca) VALUES ('$this->nazwa')";
 			if(!$connection->query($query)){
-				$errMsg = 'Nie udało się dodać gatunku';
+				$errMsg = 'Nie udało się dodać wydawcy';
 				$result->close();
 				return $errMsg;
 			}
 		}
-		public function deleteGatunek(){
+		function deleteWydawnictwo(){
 			global $connection;
 			if(!$connection) require_once(__DIR__.'\..\..\connection.php');
 			$errMsg = '';
 
-			$query = "SELECT Id FROM gatunki WHERE Gatunek = '$this->nazwa' LIMIT 1";
+			$query = "SELECT Id FROM wydawnictwa WHERE Wydawca = '$this->nazwa'";
 			if(!($result = $connection->query($query))){
-				$errMsg = 'Nie udało się usunąć gatunku';
+				$errMsg = 'Nie udało się usunąć wydawcy';
 				$result->close();
 				return $errMsg;
 			}
 			if($result->num_rows == 0){
-				$errMsg = 'Taki gatunek nie istnieje';
+				$errMsg = 'Taki wydawca nie istnieje';
 				$result->close();
 				return $errMsg;
 			}
 			$row = $result->fetch_assoc();
 			$result->close();
 			$this->id = $row['Id'];
-			$query = 'DELETE FROM gatunki WHERE Id = '.$this->id;
+			$query = 'DELETE FROM wydawnictwa WHERE Id = '.$this->id;
 			if(!$connection->query($query)){
-				$errMsg = 'Nie udało się usunąć gatunku';
+				$errMsg = 'Nie udało się usunąć wydawcy';
 				$result->close();
 				return $errMsg;
 			}
 		}
-		public function updateGatunek(string $nowaNazwa){
+		function updateWydawnictwo($nowaNazwa){
 			global $connection;
 			if(!$connection) require_once(__DIR__.'\..\..\connection.php');
 			$errMsg = '';
 
-			$query = "SELECT Gatunek FROM gatunki WHERE Gatunek = '$this->nazwa' LIMIT 1";
+			$query = "SELECT Wydawca FROM wydawnictwa WHERE Wydawca = '$this->nazwa'";
 			if(!($result = $connection->query($query))){
-				$errMsg = 'Nie udało się zmienić nazwy gatunku';
+				$errMsg = 'Nie udało się zmienić nazwy wydawcy';
 				$result->close();
 				return $errMsg;
 			}
 			if($result->num_rows == 0){
-				$errMsg = 'Taki gatunek nie istnieje';
+				$errMsg = 'Taki wydawca nie istnieje';
 				$result->close();
 				return $errMsg;
 			}
 			$result->close();
-			$query = "UPDATE gatunki SET Gatunek = '$nowaNazwa' WHERE Gatunek = '$this->nazwa'";
+			$query = "UPDATE wydawnictwa SET Wydawca = '$nowaNazwa' WHERE Wydawca = '$this->nazwa'";
 			if(!$connection->query($query)){
-				$errMsg = 'Nie udało się zmienić nazwy gatunku';
+				$errMsg = 'Nie udało się zmienić nazwy wydawcy';
 				return $errMsg;
 			}
 		}
-
 }
 ?>

@@ -20,14 +20,14 @@
 <body>
     <?php
     	$query = 'SELECT Id, Wydawca FROM wydawnictwa';
-    	if(!($result = mysqli_query($connection,$query))){
+    	if(!($result = $connection->query($query))){
 			echo 'Nie udało się wyświetlić wydawców';
-		}else if(mysqli_num_rows($result) == 0){
+		}else if($result->num_rows == 0){
 			echo 'W bazie danych nie ma żadnych wydawców';
 		}else{
 			echo '<table>';
 			echo '<tr><td>ID</td><td>NAZWA</td></tr>';
-			while($row = mysqli_fetch_assoc($result)) {
+			while($row = $result->fetch_assoc()) {
 				echo '<tr><td>'.$row['Id'].'</td><td>'.$row['Wydawca'].'</td></tr>';
 			}
 			echo '</table>';
