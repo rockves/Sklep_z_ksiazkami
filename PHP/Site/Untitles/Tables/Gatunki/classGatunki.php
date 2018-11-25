@@ -77,7 +77,7 @@
 				return $errMsg;
 			}
 		}
-		public function updateGatunek(string $nowaNazwa){
+		public function updateGatunek($nowaNazwa){
 			global $connection;
 			if(!$connection) require_once(__DIR__.'\..\..\connection.php');
 			$errMsg = '';
@@ -94,6 +94,7 @@
 				return $errMsg;
 			}
 			$result->close();
+			$this->nazwa = $nowaNazwa;
 			$query = "UPDATE gatunki SET Gatunek = '$nowaNazwa' WHERE Gatunek = '$this->nazwa'";
 			if(!$connection->query($query)){
 				$errMsg = 'Nie udało się zmienić nazwy gatunku';

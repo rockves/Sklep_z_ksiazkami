@@ -94,6 +94,7 @@
 				return $errMsg;
 			}
 			$result->close();
+			$this->nazwa = $nowaNazwa;
 			$query = "UPDATE wydawnictwa SET Wydawca = '$nowaNazwa' WHERE Wydawca = '$this->nazwa'";
 			if(!$connection->query($query)){
 				$errMsg = 'Nie udało się zmienić nazwy wydawcy';

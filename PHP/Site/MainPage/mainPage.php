@@ -39,6 +39,11 @@ require_once(__DIR__.'\..\Untitles\connection.php');
             <button onclick="location.href=' ..\\SposobyPlatnosciPage\\updateSposobyPlatnosci.php';">Edytuj sposób płatności</button><br>
             <button onclick="location.href=' ..\\SposobyPlatnosciPage\\listSposobyPlatnosci.php';">Wyświetl sposoby płatności</button><br>
         </div>
+        <div style="float: left; margin-left: 5px;">
+            <button onclick="location.href=' ..\\UzytkownicyPage\\addUzytkownicy.php';">Dodaj użytkownika</button><br>
+            <button onclick="location.href=' ..\\UzytkownicyPage\\deleteUzytkownicy.php';">Usuń użytkownika</button><br>
+            <button onclick="location.href=' ..\\UzytkownicyPage\\listUzytkownicy.php';">Wyświetl użytkowników</button><br>
+        </div>
     </div>
 </body>
 

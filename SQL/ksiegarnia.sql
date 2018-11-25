@@ -1,5 +1,5 @@
 DROP DATABASE IF EXISTS Ksiegarnia;
-CREATE DATABASE Ksiegarnia;
+CREATE DATABASE Ksiegarnia CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE Ksiegarnia;
 CREATE TABLE `Ksiazki` (
 	`Id` INT NOT NULL AUTO_INCREMENT,
@@ -43,12 +43,13 @@ CREATE TABLE `Sposoby_wysylki` (
 
 CREATE TABLE `Uzytkownicy` (
 	`Id` INT NOT NULL AUTO_INCREMENT,
-	`Nazwa_uzytkownika` varchar(20) NOT NULL,
+	`Nazwa_uzytkownika` varchar(20) NOT NULL UNIQUE,
 	`Haslo` varchar(255) NOT NULL,
 	`Imie` varchar(30) NOT NULL,
 	`Nazwisko` varchar(30) NOT NULL,
-	`Miasto` varchar(30) NOT NULL,
-	`Kod_pocztowy` INT(5) NOT NULL,
+	`Ulica` varchar(100) NOT NULL,
+	`Miasto` varchar(40) NOT NULL,
+	`Kod_pocztowy` varchar(10) NOT NULL,
 	`Email` varchar(50) NOT NULL UNIQUE,
 	`Numer_telefonu` INT(16) NOT NULL,
 	`Czy_pracownik` TINYINT(1) NOT NULL DEFAULT 0,

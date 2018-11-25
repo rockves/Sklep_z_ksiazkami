@@ -1,69 +1,7 @@
 <?php
 	require_once(__DIR__.'\..\..\connection.php');
+		require_once('classSposobyWysylki.php');
 	$errMsg = '';
-
-	function insertSposobWysylki($nazwa,$szybkosc,$cena){
-		global $connection, $errMsg;
-		$query = "SELECT Nazwa_uslugi FROM sposoby_wysylki WHERE Nazwa_uslugi = '$nazwa' LIMIT 1";
-		if(!($result = mysqli_query($connection,$query))){
-			$errMsg = 'Nie udało się dodać sposobu wysyłki';
-			return;
-		}
-		if(mysqli_num_rows($result) > 0){
-			$errMsg = 'Taki sposób wysyłki już istnieje';
-			return;
-		}
-		$query = "INSERT INTO sposoby_wysylki(Nazwa_uslugi, Szybkosc_dostawy, Cena_uslugi) VALUES ('$nazwa','$szybkosc','$cena')";
-		if(!mysqli_query($connection,$query)){
-			$errMsg = 'Nie udało się dodać sposobu wysyłki';
-		}
-	}
-
-	function deleteSposobWysylki($nazwa){
-		global $connection, $errMsg;
-		$query = "SELECT Id FROM sposoby_wysylki WHERE Nazwa_uslugi = '$nazwa' LIMIT 1";
-		if(!($result = mysqli_query($connection,$query))){
-			$errMsg = 'Nie udało się usunąć sposobu wysyłki';
-			return;
-		}
-		if(mysqli_num_rows($result) == 0){
-			$errMsg = 'Taki sposób wysyłki nie istnieje';
-			return;
-		}
-		$row = mysqli_fetch_assoc($result);
-		$query = 'DELETE FROM sposoby_wysylki WHERE Id = '.$row['Id'];
-		if(!mysqli_query($connection,$query)){
-			$errMsg = 'Nie udało się usunąć sposobu wysyłki';
-		}
-	}
-
-	function updateSposobWysylki($nazwa, $nowaNazwa, $nowaSzybkosc, $nowaCena){
-		global $connection, $errMsg;
-		$query = "SELECT Nazwa_uslugi FROM sposoby_wysylki WHERE Nazwa_uslugi = '$nazwa' LIMIT 1";
-		if(!($result = mysqli_query($connection,$query))){
-			$errMsg = 'Zmiany w sposobie wysyłki nie powiodły się';
-			return;
-		}
-		if(mysqli_num_rows($result) == 0){
-			$errMsg = 'Taki sposób wysyłki nie istnieje';
-			return;
-		}
-		$query = "UPDATE sposoby_wysylki SET";
-		if($nowaNazwa != ''){
-			$query .= " Nazwa_uslugi = '$nowaNazwa'";
-		}
-		if($nowaSzybkosc != ''){
-			$query .= ", Szybkosc_dostawy = '$nowaSzybkosc'";
-		}
-		if($nowaCena != ''){
-			$query .= ", Cena_uslugi = '$nowaCena'";
-		}
-		$query .= " WHERE Nazwa_uslugi = '$nazwa'";
-		if(!mysqli_query($connection,$query)){
-			$errMsg = 'Zmiany w sposobie wysyłki nie powiodły się';
-			return;
-		}
-	}
 
 	if (empty($_POST['akcja'])) {
 		exit();
@@ -73,7 +11,8 @@
 		if(!empty($_POST['nazwa'])){
 			if(!empty($_POST['szybkosc'])){
 				if(!empty($_POST['cena'])){
-					insertSposobWysylki($_POST['nazwa'],$_POST['szybkosc'],$_POST['cena']);
+					$sposobWysylki = new SposobWysylki($_POST['nazwa'],$_POST['szybkosc'],$_POST['cena']);
+					$sposobWysylki->insertSposobWysylki();
 				}else{
 					$errMsg = "Nie podano ceny usługi";
 				}
@@ -85,7 +24,8 @@
 		}
 	} else if($_POST['akcja'] == 'delete'){
 		if(!empty($_POST['nazwa'])){
-			deleteSposobWysylki($_POST['nazwa']);
+			$sposobWysylki = new SposobWysylki($_POST['nazwa']);
+			$sposobWysylki->deleteSposobWysylki();
 		}else{
 			$errMsg = "Nie podano nazwy usługi";
 		}
@@ -105,8 +45,9 @@
 				} 
 				if(!empty($_POST['nowaCena'])){
 					$nowaCena = $_POST['nowaCena'];
-				} 
-				updateSposobWysylki($_POST['nazwa'], $nowaNazwa, $nowaSzybkosc, $nowaCena);
+				}
+				$sposobWysylki = new SposobWysylki($_POST['nazwa']); 
+				$sposobWysylki->updateSposobWysylki($nowaNazwa, $nowaSzybkosc, $nowaCena);
 			}
 		}else{
 			$errMsg = "Nie podano nazwy usługi";
