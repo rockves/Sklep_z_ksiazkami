@@ -35,7 +35,7 @@
             Ulica: <input type="text" name="ulica" value="<?php echo $ulica;?>" /><br>
             Miasto: <input type="text" name="miasto" value="<?php echo $miasto;?>" /><br>
             Kod pocztowy: <input type="text" name="kod" value="<?php echo $kod;?>" /><br>
-            Email: <input type="text" name="email" value="<?php echo $email;?>" /><br>
+            Email: <input type="email" name="email" value="<?php echo $email;?>" /><br>
             Numer telefonu: <input type="text" name="numer" value="<?php echo $numer;?>" /><br>
             Pracownik: <input type="checkbox" name="czyPracownik" value="1"><br>
             <input type="submit" />

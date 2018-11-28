@@ -24,7 +24,7 @@
 		}
 	} else if($_POST['akcja'] == 'delete'){
 		if(!empty($_POST['nazwa'])){
-			$uzytkownik = $uzytkownik = new Uzytkownik($_POST['nazwa']);
+			$uzytkownik = new Uzytkownik($_POST['nazwa']);
 			$errMsg = $uzytkownik->deleteUzytkownik();
 		}else{
 			$errMsg = "Nie podano nazwy użytkownika";

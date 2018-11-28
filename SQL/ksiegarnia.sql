@@ -3,7 +3,7 @@ CREATE DATABASE Ksiegarnia CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE Ksiegarnia;
 CREATE TABLE `Ksiazki` (
 	`Id` INT NOT NULL AUTO_INCREMENT,
-	`Nazwa` TEXT NOT NULL,
+	`Tytul` TEXT NOT NULL,
 	`Autor` varchar(100) NOT NULL,
 	`Opis` TEXT NOT NULL,
 	`Gatunek` INT NOT NULL,
