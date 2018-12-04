@@ -2,9 +2,18 @@
 	require_once(__DIR__.'\..\..\connection.php');
 	require_once('classUzytkownicy.php');
 	$errMsg = '';
+	$loginErrMsg = '';
+	$registerErrMsg = '';
 
 	if (empty($_POST['akcja'])) {
 		exit();
+	}
+
+	function prepareFormData($data) {
+	  $data = trim($data);
+	  $data = stripslashes($data);
+	  $data = htmlspecialchars($data);
+	  return $data;
 	}
 
 	if ($_POST['akcja'] == 'insert') {
@@ -30,7 +39,7 @@
 			$errMsg = "Nie podano nazwy użytkownika";
 		}
 	} else if($_POST['akcja'] == 'update'){
-		if(!empty($_POST['nazwa'])){
+		/*if(!empty($_POST['nazwa'])){
 			if(empty($_POST['nowaNazwa']) && empty($_POST['nowaSzybkosc']) && empty($_POST['nowaCena'])){
 				$errMsg = "Nie podano danych do edycji";
 			}else{
@@ -47,9 +56,91 @@
 					$nowaCena = $_POST['nowaCena'];
 				} 
 				updateSposobWysylki($_POST['nazwa'], $nowaNazwa, $nowaSzybkosc, $nowaCena);
+			}*/
+		}else if($_POST['akcja'] == 'login'){
+			if(!empty($_POST['logNazwa'])){
+				if(!empty($_POST['haslo'])){
+					$nazwa = prepareFormData($_POST['logNazwa']);
+					$uzytkownik = new Uzytkownik($nazwa);
+					$loginErrMsg = $uzytkownik->getFromDB();
+					if($loginErrMsg == ''){
+						$pass = prepareFormData($_POST['haslo']);
+						if(password_verify($pass, $uzytkownik->getHaslo())){
+							$_SESSION['login'] = $_POST['logNazwa'];
+							$_SESSION['imie'] = $uzytkownik->getImie();
+							$_SESSION['nazwisko'] = $uzytkownik->getNazwisko();
+							$_SESSION['czyPracownik'] = $uzytkownik->getCzyPracownik();
+						}else{
+							$loginErrMsg = 'Błędne hasło';
+						}
+					}
+				}else{
+					$loginErrMsg = 'Nie podano hasła';
+				}
+			}else{
+				$loginErrMsg = 'Nie podano nazwy użytkownika';
 			}
-		}else{
-			$errMsg = "Nie podano nazwy usługi";
+		}else if($_POST['akcja'] == 'register'){
+			if(empty($_POST['regNazwa'])){
+				$registerErrMsg .= 'Nie podano nazwy użytkownika';
+			}else{
+				$regNazwa=prepareFormData($_POST['regNazwa']);
+				if(!preg_match("/^[a-zA-Z0-9]*$/",$regNazwa)) {
+					$registerErrMsg .= 'Nazwa użytkownika może zawierać tylko litery i cyfry'; 
+				}
+			} 
+			if(empty($_POST['regHaslo'])){
+				$registerErrMsg .= '<br>Nie podano hasła';
+			}else{
+				$regHaslo=prepareFormData($_POST['regHaslo']);
+			} 
+			if(empty($_POST['regImie'])){
+				$registerErrMsg .= '<br>Nie podano imienia';
+			}else{
+				$regImie=prepareFormData($_POST['regImie']);
+			} 
+			if(empty($_POST['regNazwisko'])){
+				$registerErrMsg .= '<br>Nie podano nazwiska';
+			}else{
+				$regNazwisko=prepareFormData($_POST['regNazwisko']);
+			} 
+			if(empty($_POST['regUlica'])){
+				$registerErrMsg .= '<br>Nie podano ulicy';
+			}else{
+				$regUlica=prepareFormData($_POST['regUlica']);
+			} 
+			if(empty($_POST['regMiasto'])){
+				$registerErrMsg .= '<br>Nie podano miasta';
+			}else{
+				$regMiasto=prepareFormData($_POST['regMiasto']);
+			} 
+			if(empty($_POST['regKod'])){
+				$registerErrMsg .= '<br>Nie podano kodu pocztowego';
+			}else{
+				$regKod=prepareFormData($_POST['regKod']);
+				if(!preg_match("/\d{2}-\d{3}/",$regKod)) {
+					$registerErrMsg .= '<br>Należy podać poprawny kod pocztowy'; 
+				}
+			} 
+			if(empty($_POST['regEmail'])){
+				$registerErrMsg .= '<br>Nie podano email';
+			}else{
+				$regEmail=prepareFormData($_POST['regEmail']);
+				if(!filter_var($regEmail, FILTER_VALIDATE_EMAIL)) {
+				  $registerErrMsg .= '<br>Należy podać poprawny adres email'; 
+				}
+			} 
+			if(empty($_POST['regNumer'])){
+				$registerErrMsg .= '<br>Nie podano numeru telefonu';
+			}else{
+				$regNumer=prepareFormData($_POST['regNumer']);
+				if(!preg_match("/^[0-9]{9,9}$/",$regNumer)) {
+					$registerErrMsg .= '<br>Należy podać poprawny numer telefonu'; 
+				}
+			} 
+			if($registerErrMsg == '') {
+				$uzytkownik = new Uzytkownik($nazwa, $haslo, $imie, $nazwisko, $ulica, $miasto, $kod, $email, $regNumer);
+				$registerErrMsg = $uzytkownik->insertUzytkownik();
+			}
 		}
-	}
 ?>

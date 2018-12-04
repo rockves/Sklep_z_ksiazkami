@@ -9,6 +9,7 @@
 		private $wydawnictwo;
 		private $ocena;
 		private $cena;
+		private $sprzedanych;
 
 		function __construct(string $ksiazka_tytul = '', string $ksiazka_autor = '', string $ksiazka_opis = '', string $ksiazka_gatunek = '', string $ksiazka_data = '', string $ksiazka_wydawnictwo = '', string $ksiazka_ocena = '', string $ksiazka_cena = ''){
 			$this->setTytul($ksiazka_tytul);
@@ -129,24 +130,52 @@
 	        return $this;
 	    }
 
+	    public function getSprzedanych()
+	    {
+	        return $this->sprzedanych;
+	    }
+
+	    public function setSprzedanych($sprzedanych)
+	    {
+	        $this->sprzedanych = $sprzedanych;
+
+	        return $this;
+	    }
+
 	    function getFromDB(){
 			global $connection;
 			if(!$connection) require_once(__DIR__.'\..\..\connection.php');
-			$query = "SELECT * FROM ksiazki WHERE Tytul = '$this->tytul' LIMIT 1";
-			if(!($result = $connection->query($query))){
-				$result->close();
+			if($this->tytul != '') {
+				$query = "SELECT * FROM ksiazki WHERE Tytul = '$this->tytul' LIMIT 1";
+			}else if($this->id != ''){
+				$query = "SELECT * FROM ksiazki WHERE Id = '$this->id' LIMIT 1";
+			}else{
+				$errMsg = 'Taka książka nie istnieje';
+				return $errMsg;
 			}
-			$row = $result->fetch_assoc();
-			$result->close();
-			$this->id = $row['Id'];
-			$this->tytul = $row['Tytul'];
-			$this->autor = $row['Autor'];
-			$this->opis = $row['Opis'];
-			$this->gatunek = $row['Gatunek'];
-			$this->data = $row['Data_wydania'];
-			$this->wydawnictwo = $row['Wydawnictwo'];
-			$this->ocena = $row['Ocena_ksiazki'];
-			$this->cena = $row['Cena'];
+			if(!($result = $connection->query($query))){
+				$errMsg = 'Błąd bazy danych';
+				$result->close();
+				return $errMsg;
+			}
+			if($result->num_rows == 0){
+				$errMsg = 'Taka książka nie istnieje';
+				$result->close();
+				return $errMsg;
+			}else{
+				$row = $result->fetch_assoc();
+				$result->close();
+				$this->id = $row['Id'];
+				$this->tytul = $row['Tytul'];
+				$this->autor = $row['Autor'];
+				$this->opis = $row['Opis'];
+				$this->gatunek = $row['Gatunek'];
+				$this->data = $row['Data_wydania'];
+				$this->wydawnictwo = $row['Wydawnictwo'];
+				$this->ocena = $row['Ocena_ksiazki'];
+				$this->cena = $row['Cena'];
+				$this->sprzedanych = $row['Sprzedanych'];
+			}
 	    }
 
 	    function uploadOkladka(string $ksiazka_okladka){
@@ -162,22 +191,49 @@
 
 			$query = "SELECT Tytul FROM ksiazki WHERE Tytul = '$this->tytul' LIMIT 1";
 			if(!($result = $connection->query($query))){
-				$errMsg = 'Nie udało się dodać ksiazki';
+				$errMsg = 'Nie udało się dodać książki';
 				$result->close();
 				return $errMsg;
 			}
 			if($result->num_rows > 0){
-				$errMsg = 'Taka ksiazka już istnieje';
+				$errMsg = 'Taka książki już istnieje';
 				$result->close();
 				return $errMsg;
 			}
 			$result->close();
 			$query = "INSERT INTO ksiazki(Tytul, Autor, Opis, Gatunek, Data_wydania, Wydawnictwo, Ocena_ksiazki, Cena) VALUES ('$this->tytul', '$this->autor', '$this->opis', '$this->gatunek', '$this->data', '$this->wydawnictwo', '$this->ocena', '$this->cena')";
 			if(!$connection->query($query)){
-				$errMsg = 'Nie udało się dodać ksiazki';
+				$errMsg = 'Nie udało się dodać książki';
 				$result->close();
 				return $errMsg;
 			}
 	    }
+
+	    function deleteKsiazka(){
+			global $connection;
+			if(!$connection) require_once(__DIR__.'\..\..\connection.php');
+			$errMsg = '';
+
+			$query = "SELECT Id FROM ksiazki WHERE Tytul = '$this->tytul'";
+			if(!($result = $connection->query($query))){
+				$errMsg = 'Nie udało się usunąć książki';
+				$result->close();
+				return $errMsg;
+			}
+			if($result->num_rows == 0){
+				$errMsg = 'Taka książka nie istnieje';
+				$result->close();
+				return $errMsg;
+			}
+			$row = $result->fetch_assoc();
+			$result->close();
+			$this->id = $row['Id'];
+			$query = 'DELETE FROM ksiazki WHERE Id = '.$this->id;
+			if(!$connection->query($query)){
+				$errMsg = 'Nie udało się usunąć książki';
+				$result->close();
+				return $errMsg;
+			}
+		}
 	}
 ?>

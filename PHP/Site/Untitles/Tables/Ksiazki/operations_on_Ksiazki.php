@@ -32,9 +32,9 @@
 	} else if($_POST['akcja'] == 'delete'){
 		if(!empty($_POST['tytul'])){
 			$ksiazka = new Ksiazka($_POST['tytul']);
-			$errMsg = $uzytkownik->deleteUzytkownik();
+			$errMsg = $ksiazka->deleteKsiazka();
 		}else{
-			$errMsg = "Nie podano nazwy użytkownika";
+			$errMsg = "Nie podano tytułu książki";
 		}
 	} else if($_POST['akcja'] == 'update'){
 		if(!empty($_POST['tytul'])){

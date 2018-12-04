@@ -63,15 +63,19 @@
 			$query = "SELECT Nazwa_uslugi FROM sposoby_wysylki WHERE Nazwa_uslugi = '$this->nazwa' LIMIT 1";
 			if(!($result = $connection->query($query))){
 				$errMsg = 'Nie udało się dodać sposobu wysyłki';
-				return;
+				$result->close();
+				return $errMsg;
 			}
 			if($result->num_rows > 0){
 				$errMsg = 'Taki sposób wysyłki już istnieje';
-				return;
+				$result->close();
+				return $errMsg;
 			}
 			$query = "INSERT INTO sposoby_wysylki(Nazwa_uslugi, Szybkosc_dostawy, Cena_uslugi) VALUES ('$this->nazwa','$this->szybkosc','$this->cena')";
 			if(!$connection->query($query)){
 				$errMsg = 'Nie udało się dodać sposobu wysyłki';
+				$result->close();
+				return $errMsg;
 			}
 		}
 

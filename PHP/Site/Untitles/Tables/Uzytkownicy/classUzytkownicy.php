@@ -148,6 +148,43 @@
 	        return $this;
 	    }
 
+	    function getFromDB(){
+			global $connection;
+			if(!$connection) require_once(__DIR__.'\..\..\connection.php');
+			if($this->nazwa != '') {
+				$query = "SELECT * FROM uzytkownicy WHERE Nazwa_uzytkownika = '$this->nazwa' LIMIT 1";
+			}else if($this->id != ''){
+				$query = "SELECT * FROM ksiazki WHERE Id = '$this->id' LIMIT 1";
+			}else{
+				$errMsg = 'Taki użytkownik nie istnieje';
+				return $errMsg;
+			}
+			if(!($result = $connection->query($query))){
+				$errMsg = 'Błąd bazy danych';
+				$result->close();
+				return $errMsg;
+			}
+			if($result->num_rows == 0){
+				$errMsg = 'Taki użytkownik nie istnieje';
+				$result->close();
+				return $errMsg;
+			}else{
+				$row = $result->fetch_assoc();
+				$result->close();
+				$this->id = $row['Id'];
+				$this->nazwa = $row['Nazwa_uzytkownika'];
+				$this->haslo = $row['Haslo'];
+				$this->imie = $row['Imie'];
+				$this->nazwisko = $row['Nazwisko'];
+				$this->ulica = $row['Ulica'];
+				$this->miasto = $row['Miasto'];
+				$this->kod = $row['Kod_pocztowy'];
+				$this->email = $row['Email'];
+				$this->numer = $row['Numer_telefonu'];
+				$this->czy_pracownik = $row['Czy_pracownik'];
+			}
+	    }
+
 	    function insertUzytkownik(){
 			global $connection;
 			if(!$connection) require_once(__DIR__.'\..\..\connection.php');
@@ -176,7 +213,7 @@
 				return $errMsg;
 			}
 			$result->close();
-			$this->haslo = password_hash($this->haslo, PASSWORD_DEFAULT);
+			$this->haslo = password_hash($this->haslo, PASSWORD_BCRYPT);
 			$query = "INSERT INTO uzytkownicy(Nazwa_uzytkownika, Haslo, Imie, Nazwisko, Ulica, Miasto, Kod_pocztowy, Email, Numer_telefonu, Czy_pracownik) VALUES ('$this->nazwa', '$this->haslo', '$this->imie', '$this->nazwisko', '$this->ulica', '$this->miasto', '$this->kod', '$this->email', '$this->numer', '$this->czy_pracownik')";
 			if(!$connection->query($query)){
 				$errMsg = 'Nie udało się dodać uzytkownika';

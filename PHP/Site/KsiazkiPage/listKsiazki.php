@@ -23,14 +23,14 @@
         $name = "/okladkaID";
         $default_name = "/default";
         $source = '';
-        $query = 'SELECT Id, Tytul, Autor, Opis, Gatunek, Data_wydania, Wydawnictwo, Ocena_ksiazki, Cena FROM ksiazki';
+        $query = 'SELECT Id, Tytul, Autor, Opis, Gatunek, Data_wydania, Wydawnictwo, Ocena_ksiazki, Cena, Sprzedanych FROM ksiazki';
         if(!($result = $connection->query($query))){
             echo 'Nie udało się wyświetlić książek';
         }else if($result->num_rows == 0){
             echo 'W bazie danych nie ma żadnych książek';
         }else{
             echo '<table>';
-            echo '<tr><td>ID</td><td>TYTUŁ</td><td>AUTOR</td><td>OPIS</td><td>GATUNEK</td><td>DATA WYDANIA</td><td>WYDAWNICTWO</td><td>OCENA</td><td>CENA</td><td>OKLADKA</td></tr>';
+            echo '<tr><td>ID</td><td>TYTUŁ</td><td>AUTOR</td><td>OPIS</td><td>GATUNEK</td><td>DATA WYDANIA</td><td>WYDAWNICTWO</td><td>OCENA</td><td>CENA</td><td>SPRZEDANYCH</td><td>OKLADKA</td></tr>';
             while($row = $result->fetch_assoc()) {
                 clearstatcache();
                 if(file_exists("C:\\xampp\\htdocs\\GitKraken\\Sklep_z_ksiazkami\\PHP\\Site\\Okladki\\okladkaID".$row['Id'].'.jpg')){
@@ -47,6 +47,7 @@
                 <td>'.$row['Wydawnictwo'].'</td>
                 <td>'.$row['Ocena_ksiazki'].'</td>
                 <td>'.$row['Cena'].'</td>
+                <td>'.$row['Sprzedanych'].'</td>
                 <td><img src = "'.$source.'" height="30" width="30"></td></tr>';
             }
             echo '</table>';
