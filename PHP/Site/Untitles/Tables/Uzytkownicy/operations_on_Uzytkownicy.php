@@ -59,12 +59,12 @@
 			}*/
 		}else if($_POST['akcja'] == 'login'){
 			if(!empty($_POST['logNazwa'])){
-				if(!empty($_POST['haslo'])){
+				if(!empty($_POST['logHaslo'])){
 					$nazwa = prepareFormData($_POST['logNazwa']);
 					$uzytkownik = new Uzytkownik($nazwa);
 					$loginErrMsg = $uzytkownik->getFromDB();
 					if($loginErrMsg == ''){
-						$pass = prepareFormData($_POST['haslo']);
+						$pass = prepareFormData($_POST['logHaslo']);
 						if(password_verify($pass, $uzytkownik->getHaslo())){
 							$_SESSION['login'] = $_POST['logNazwa'];
 							$_SESSION['imie'] = $uzytkownik->getImie();

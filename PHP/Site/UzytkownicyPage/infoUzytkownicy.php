@@ -13,6 +13,7 @@
 
 <body>
     <?php
+    if(empty($errMsg)) $errMsg = '';
         if(empty($_SESSION['login'])){
             echo "Najpierw musisz się zalogować";
             die();
