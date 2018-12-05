@@ -28,6 +28,11 @@
 			$this->setCzyPracownik($uzytkownik_czy_pracownik);
 		}
 
+	    public function getId()
+	    {
+	        return $this->id;
+	    }		
+
 	    public function getNazwa()
 	    {
 	        return $this->nazwa;

@@ -9,13 +9,6 @@
 		exit();
 	}
 
-	function prepareFormData($data) {
-	  $data = trim($data);
-	  $data = stripslashes($data);
-	  $data = htmlspecialchars($data);
-	  return $data;
-	}
-
 	if ($_POST['akcja'] == 'insert') {
 		if(empty($_POST['nazwa'])) $errMsg .= 'Nie podano nazwy użytkownika';
 		if(empty($_POST['haslo'])) $errMsg .= '<br>Nie podano hasła';
@@ -57,7 +50,7 @@
 				} 
 				updateSposobWysylki($_POST['nazwa'], $nowaNazwa, $nowaSzybkosc, $nowaCena);
 			}*/
-		}else if($_POST['akcja'] == 'login'){
+		}else if($_POST['akcja'] == 'login' && $_POST['submit'] == 'Zaloguj'){
 			if(!empty($_POST['logNazwa'])){
 				if(!empty($_POST['logHaslo'])){
 					$nazwa = prepareFormData($_POST['logNazwa']);
@@ -66,6 +59,7 @@
 					if($loginErrMsg == ''){
 						$pass = prepareFormData($_POST['logHaslo']);
 						if(password_verify($pass, $uzytkownik->getHaslo())){
+							$_SESSION['id'] = $uzytkownik->getId();
 							$_SESSION['login'] = $_POST['logNazwa'];
 							$_SESSION['imie'] = $uzytkownik->getImie();
 							$_SESSION['nazwisko'] = $uzytkownik->getNazwisko();
@@ -80,7 +74,7 @@
 			}else{
 				$loginErrMsg = 'Nie podano nazwy użytkownika';
 			}
-		}else if($_POST['akcja'] == 'register'){
+		}else if($_POST['akcja'] == 'register' && $_POST['submit'] == 'Zarejestruj'){
 			if(empty($_POST['regNazwa'])){
 				$registerErrMsg .= 'Nie podano nazwy użytkownika';
 			}else{
@@ -139,7 +133,7 @@
 				}
 			} 
 			if($registerErrMsg == '') {
-				$uzytkownik = new Uzytkownik($nazwa, $haslo, $imie, $nazwisko, $ulica, $miasto, $kod, $email, $regNumer);
+				$uzytkownik = new Uzytkownik($regNazwa, $regHaslo, $regImie, $regNazwisko, $regUlica, $regMiasto, $regKod, $regEmail, $regNumer);
 				$registerErrMsg = $uzytkownik->insertUzytkownik();
 			}
 		}

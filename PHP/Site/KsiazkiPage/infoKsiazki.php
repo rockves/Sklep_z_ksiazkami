@@ -55,6 +55,7 @@
         }else{
             $source = $path.$default_name.'.png';
         }
+        $self = htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'utf-8');
         echo <<<END
         <div class='ksiazkiInfo'>
         <img src='$source' height="30" width="30">
@@ -67,6 +68,11 @@
         <div id="ocena">$ocena</div>
         <div id="cena">$cena</div>
         <div id="sprzedane">$sprzedanych</div>
+        <form action='' method='GET'>
+        <input type='hidden' name='cart' value='add'>
+        <input type='hidden' name='product' value='$id'>
+        <input type='submit' value='Dodaj do koszyka'>
+        </form>
         </div>
 END;
     ?>

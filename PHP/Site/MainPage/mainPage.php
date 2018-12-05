@@ -19,6 +19,7 @@
             </h1>
     </div>
     <div id="menu">
+        <?php include("search.php"); ?>
         <center>
             <h2>KATALOG</h2>
         </center>
@@ -29,7 +30,13 @@
     </div>
     <div id="window">
         <?php 
-        if(!empty($_GET['product'])){
+        if(!empty($_GET['cart'])){
+            if($_GET['cart'] == 'add'){
+                include(__DIR__."\..\KoszykPage\addKoszyk.php");
+                $default = '0';
+            }
+            include(__DIR__."\..\KoszykPage\infoKoszyk.php");
+        }else if(!empty($_GET['product'])){
             include(__DIR__."\..\KsiazkiPage\infoKsiazki.php");
             $default = '0';   
         }else if(!empty($_GET['user'])){

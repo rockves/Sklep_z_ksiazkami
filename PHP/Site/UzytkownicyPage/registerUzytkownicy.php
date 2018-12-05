@@ -35,12 +35,12 @@
         Kod pocztowy: <input type="text" name="regKod" value="<?php echo $regKod;?>" /><br>
         Email: <input type="regEmail" name="regEmail" value="<?php echo $regEmail;?>" /><br>
         Numer telefonu: <input type="text" name="regNumer" value="<?php echo $regNumer;?>" /><br>
-        <input type="submit" value="Zarejestruj" />
+        <input type="submit" name="submit" value="Zarejestruj" />
     </form>
 </div>
 <?php
 	if($_SERVER["REQUEST_METHOD"] == "POST"){
-		if($registerErrMsg == ''){
+		if($registerErrMsg == '' && $_POST['submit'] == 'Zarejestruj'){
 			echo "<span class='succMsg'>Pomyślnie zarejestrowano</span>";
 		}else if(!empty($registerErrMsg)){
 			echo "<span class='errMsg'>$registerErrMsg</span>";

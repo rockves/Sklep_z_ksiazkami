@@ -11,6 +11,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 	}
 }
 
+$self = htmlspecialchars($_SERVER['PHP_SELF']);
+
 if(empty($_SESSION['login'])){
 
 	echo <<<END
@@ -19,8 +21,8 @@ if(empty($_SESSION['login'])){
 			<input type="hidden" name="akcja" value="login"/>
 			Login: <input type="text" name="logNazwa" value="$logNazwa"/><br>
 			Haslo: <input type="password" name="logHaslo"/><br>
-			<input type="submit" value='Zaloguj'/>
-			<a href='{$_SERVER['PHP_SELF']}?user=register'>Zarejestruj</a>
+			<input type="submit" name="submit" value='Zaloguj'/>
+			<a href='$self?user=register'>Zarejestruj</a>
 		</form>
 		</div>
 END;
@@ -33,7 +35,8 @@ END;
 	echo <<<END
 	<div id='userMenu'>
 	<span>Witaj {$_SESSION['login']}!<span><br>
-	<a href='{$_SERVER['PHP_SELF']}?user=profile'>Moje konto</a>
+	<a href='$self?user=profile'>Moje konto</a>
+	<a href='$self?cart=show'>Mój koszyk</a>
 	<form action='logout.php' method='POST'>
 	<input type='submit' value='Logout'>
 	</form>

@@ -6,7 +6,7 @@
     <title>Lista książek</title>
     <?php 
     require_once(__DIR__.'\..\Untitles\connection.php');
-    require_once(__DIR__.'\..\Untitles\link.php');  
+    require_once(__DIR__.'\..\Untitles\link.php'); 
     (!empty($_GET['strona'])) ? $strona = $_GET['strona'] : $strona = 1;
     (!empty($_GET['count'])) ? $result_count = $_GET['count'] : $result_count = 10;
     $start_index = ($strona - 1) * $result_count;
@@ -25,12 +25,16 @@
 
 <body>
     <?php
+
         $path = '/GitKraken/Sklep_z_ksiazkami/PHP/Site/Okladki'; //Jeśli coś się psuje z okładka to tu
         $name = "/okladkaID";
         $default_name = "/default";
         $source = '';
-        if(!empty($_GET['gatunek'])){
-            $gatunek = $_GET['gatunek'];
+        if(!empty($_GET['search'])){
+            $search = prepareFormData($_GET['search']);
+            $query = "SELECT ksiazki.Id, Tytul, Ocena_ksiazki, Cena FROM ksiazki INNER JOIN gatunki ON ksiazki.Gatunek = Gatunki.Id WHERE ksiazki.Tytul LIKE '%$search%' ORDER BY ksiazki.Sprzedanych DESC LIMIT $start_index , $result_count";
+        }else if(!empty($_GET['gatunek'])){
+            $gatunek = prepareFormData($_GET['gatunek']);
             $query = "SELECT ksiazki.Id, Tytul, Ocena_ksiazki, Cena FROM ksiazki INNER JOIN gatunki ON ksiazki.Gatunek = Gatunki.Id WHERE Gatunki.Gatunek = '$gatunek' ORDER BY ksiazki.Sprzedanych DESC LIMIT $start_index , $result_count";
         }else{
             $query = "SELECT Id, Tytul, Ocena_ksiazki, Cena FROM ksiazki ORDER BY ksiazki.Sprzedanych DESC LIMIT $start_index , $result_count";
@@ -38,8 +42,10 @@
         echo "<div class='produktContainer'>";
         if(!($result = $connection->query($query))){
             echo 'Nie udało się wyświetlić książek';
+            die();
         }else if($result->num_rows == 0){
-            echo 'W bazie danych nie ma żadnych książek';
+            echo 'W bazie danych nie ma takiej książki';
+            die();
         }else{
             echo '<center><table class="produktTable">';
             clearstatcache();
