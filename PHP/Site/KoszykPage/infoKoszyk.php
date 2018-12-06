@@ -25,20 +25,23 @@
         }else{
             echo '<center><table class="produktTable">';
             clearstatcache();
+			$suma = 0;
             while($row = $result->fetch_assoc()) {
                 if(file_exists("C:\\xampp\\htdocs\\GitKraken\\Sklep_z_ksiazkami\\PHP\\Site\\Okladki\\okladkaID".$row['Id'].'.jpg')){
                     $source = $path.$name.$row['Id'].'.jpg';
                 }else{
                     $source = $path.$default_name.'.png';
                 }
+				$suma += $row['Cena'] * $row['Ilosc'];
                 $href = $_SERVER['PHP_SELF']."?product=".$row['Id'];
                 echo '<tr><td><img src = "'.$source.'" height="30" width="30"></td>
                 <td><a class="titleLink" href="'.$href.'">'.$row['Tytul'].'</a></td>
                 <td>'.$row['Cena'].'</td>
                 <td>'.$row['Ilosc'].'</td></tr>';
             }
+			echo "<td>Do zapłaty: $suma</td>";
             echo '</table></center>';
-            echo "</div>";
+            echo '</div>';
         }
 
         $query = "SELECT COUNT(Id_produktu) AS total FROM koszyk WHERE Id_uzytkownika = '{$_SESSION['id']}'";

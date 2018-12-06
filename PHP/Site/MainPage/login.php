@@ -35,8 +35,8 @@ END;
 	echo <<<END
 	<div id='userMenu'>
 	<span>Witaj {$_SESSION['login']}!<span><br>
-	<a href='$self?user=profile'>Moje konto</a>
-	<a href='$self?cart=show'>Mój koszyk</a>
+	<a href='$self?user=profile' class='a-login'>&nbsp;Moje konto&nbsp;</a>
+	<a href='$self?cart=show' class='a-login'>&nbsp;Mój koszyk&nbsp;</a>
 	<form action='logout.php' method='POST'>
 	<input type='submit' value='Logout'>
 	</form>
