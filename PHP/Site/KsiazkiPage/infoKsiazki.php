@@ -68,11 +68,7 @@
         <div id="ocena">$ocena</div>
         <div id="cena">$cena</div>
         <div id="sprzedane">$sprzedanych</div>
-        <form action='' method='GET'>
-        <input type='hidden' name='cart' value='add'>
-        <input type='hidden' name='product' value='$id'>
-        <input type='submit' value='Dodaj do koszyka'>
-        </form>
+        <button type="button" onclick="window.location.href='$self?cart=add&product=$id'">DO KOSZYKA</button>
         </div>
 END;
     ?>

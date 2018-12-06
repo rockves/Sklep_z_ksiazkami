@@ -1,30 +1,30 @@
 * {
     margin: 0;
-		font-family: 'Bitter', serif;
+    font-family: 'Bitter', serif;
 }
 
-html,body
-{
-	margin: 0 auto;
-	width: 100%;
-	height: 100%;
-	position: absolute;
-	background: #eae8dc;
+html,
+body {
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background: #eae8dc;
 }
 
 #header {
     height: 6%;
     width: 100%;
-	box-sizing: border-box;
+    box-sizing: border-box;
     text-align: center;
     background-color: #699148;
-	border-bottom: 4px solid #466031;
+    border-bottom: 4px solid #466031;
 
 }
 
-a.headerText{
-		color: #466031;
-		text-decoration: none;
+a.headerText {
+    color: #466031;
+    text-decoration: none;
 }
 
 #search {
@@ -34,12 +34,12 @@ a.headerText{
 
 #menu {
     width: 25%;
-	box-sizing: border-box;
+    box-sizing: border-box;
     min-height: 90%;
     float: left;
     /*background-color: pink;*/
-	border-right: 4px solid #466031;
-	background: #eae8dc;
+    border-right: 4px solid #466031;
+    background: #eae8dc;
 }
 
 #loginForm {
@@ -51,22 +51,20 @@ a.headerText{
     width: 100%;
     margin-top: 10px;
     font-size: 20px;
-	padding-top: 10px;
-	padding-bottom: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     border-top: 3px solid #ceccc0;
-	border-bottom: 3px solid #ceccc0;
-	text-align: center;
+    border-bottom: 3px solid #ceccc0;
+    text-align: center;
 }
 
-.a-login
-{
-	text-decoration: none;
-	color: red;
+.a-login {
+    text-decoration: none;
+    color: red;
 }
 
-.a-login:hover
-{
-	color: #ad0808;
+.a-login:hover {
+    color: #ad0808;
 }
 
 #menu>ul {
@@ -107,28 +105,37 @@ a.headerText{
 #window {
     width: 50%;
     height: 90%;
-	box-sizing: border-box;
+    box-sizing: border-box;
     float: left;
     margin-right: 25%;
     /*background-color: red;*/
-	border-right: 4px solid #466031;
-	background: #eae8dc;
+    border-right: 4px solid #466031;
+    background: #eae8dc;
 }
 
 .produktContainer {
     width: 100%;
     margin-top: 1%;
-    height: calc(95% - 1%);
+    min-height: 95%;
 }
 
-.produktTable {
+ul.produktList {
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+li.produktItem {
+    height: 25%;
+    width: 15%;
+    float: left;
+    margin-right: 3%;
     text-align: center;
-    align-self: center;
 }
 
-.titleLink {
-    color: black;
-    text-decoration: none;
+a.itemImage>img {
+    height: 40%;
+    width: 30%;
 }
 
 .pageList {
@@ -156,12 +163,12 @@ footer {
     clear: both;
     height: 4%;
     width: 100%;
-	box-sizing: border-box;
+    box-sizing: border-box;
     /*background-color: orange;*/
     text-align: center;
-	border-top: 4px solid #466031;
-	background-color: #699148;
-	color: #466031;
+    border-top: 4px solid #466031;
+    background-color: #699148;
+    color: #466031;
 }
 
 footer>span {

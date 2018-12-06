@@ -72,6 +72,7 @@ CREATE TABLE `Zamowione` (
 	`Id` INT NOT NULL AUTO_INCREMENT,
 	`Id_zamowienia` INT NOT NULL,
 	`Id_produktu` INT NOT NULL,
+	`Ilosc` INT NOT NULL DEFAULT '1',
 	PRIMARY KEY (`Id`)
 );
 

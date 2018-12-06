@@ -9,7 +9,7 @@
     <link rel="stylesheet" type="text/css" media="screen" href="../../../CSS/mainPage.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="../Untitles/untitles.css" />
     <link href="../../../CSS/favicon.ico" rel="icon" type="image/x-icon" />
-	<link href="https://fonts.googleapis.com/css?family=Bitter:400,700&amp;subset=latin-ext" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Bitter:400,700&amp;subset=latin-ext" rel="stylesheet">
     <?php require_once(__DIR__.'\..\Untitles\connection.php'); session_start(); $default = '1';?>
 </head>
 
@@ -34,9 +34,11 @@
         if(!empty($_GET['cart'])){
             if($_GET['cart'] == 'add'){
                 include(__DIR__."\..\KoszykPage\addKoszyk.php");
-                $default = '0';
+            }else if($_GET['cart'] == 'delete'){
+                include(__DIR__."\..\KoszykPage\deleteKoszyk.php");
             }
             include(__DIR__."\..\KoszykPage\infoKoszyk.php");
+            $default = '0';
         }else if(!empty($_GET['product'])){
             include(__DIR__."\..\KsiazkiPage\infoKsiazki.php");
             $default = '0';   

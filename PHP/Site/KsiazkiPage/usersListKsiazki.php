@@ -11,33 +11,23 @@
     (!empty($_GET['count'])) ? $result_count = $_GET['count'] : $result_count = 10;
     $start_index = ($strona - 1) * $result_count;
     ?>
-    <style>
-    table,
-    tr,
-    td {
-        border: 1px solid black;
-        border-collapse: collapse;
-        padding: 5px;
-        text-align: center;
-    }
-    </style>
 </head>
 
 <body>
     <?php
-
+        $self = htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'utf-8');
         $path = '/GitKraken/Sklep_z_ksiazkami/PHP/Site/Okladki'; //Jeśli coś się psuje z okładka to tu
         $name = "/okladkaID";
         $default_name = "/default";
         $source = '';
         if(!empty($_GET['search'])){
             $search = prepareFormData($_GET['search']);
-            $query = "SELECT ksiazki.Id, Tytul, Ocena_ksiazki, Cena FROM ksiazki INNER JOIN gatunki ON ksiazki.Gatunek = Gatunki.Id WHERE ksiazki.Tytul LIKE '%$search%' ORDER BY ksiazki.Sprzedanych DESC LIMIT $start_index , $result_count";
+            $query = "SELECT ksiazki.Id, Tytul, Autor, Cena FROM ksiazki INNER JOIN gatunki ON ksiazki.Gatunek = Gatunki.Id WHERE ksiazki.Tytul LIKE '%$search%' ORDER BY ksiazki.Sprzedanych DESC LIMIT $start_index , $result_count";
         }else if(!empty($_GET['gatunek'])){
             $gatunek = prepareFormData($_GET['gatunek']);
-            $query = "SELECT ksiazki.Id, Tytul, Ocena_ksiazki, Cena FROM ksiazki INNER JOIN gatunki ON ksiazki.Gatunek = Gatunki.Id WHERE Gatunki.Gatunek = '$gatunek' ORDER BY ksiazki.Sprzedanych DESC LIMIT $start_index , $result_count";
+            $query = "SELECT ksiazki.Id, Tytul, Autor, Cena FROM ksiazki INNER JOIN gatunki ON ksiazki.Gatunek = Gatunki.Id WHERE Gatunki.Gatunek = '$gatunek' ORDER BY ksiazki.Sprzedanych DESC LIMIT $start_index , $result_count";
         }else{
-            $query = "SELECT Id, Tytul, Ocena_ksiazki, Cena FROM ksiazki ORDER BY ksiazki.Sprzedanych DESC LIMIT $start_index , $result_count";
+            $query = "SELECT Id, Tytul, Autor, Cena FROM ksiazki ORDER BY ksiazki.Sprzedanych DESC LIMIT $start_index , $result_count";
         }
         echo "<div class='produktContainer'>";
         if(!($result = $connection->query($query))){
@@ -47,7 +37,7 @@
             echo 'W bazie danych nie ma takiej książki';
             die();
         }else{
-            echo '<center><table class="produktTable">';
+            echo '<ul class="produktList">';
             clearstatcache();
             while($row = $result->fetch_assoc()) {
                 if(file_exists("C:\\xampp\\htdocs\\GitKraken\\Sklep_z_ksiazkami\\PHP\\Site\\Okladki\\okladkaID".$row['Id'].'.jpg')){
@@ -56,13 +46,20 @@
                     $source = $path.$default_name.'.png';
                 }
                 $href = $_SERVER['PHP_SELF']."?product=".$row['Id'];
-                echo '<tr><td><img src = "'.$source.'" height="30" width="30"></td>
-                <td><a class="titleLink" href="'.$href.'">'.$row['Tytul'].'</a></td>
-                <td>'.$row['Ocena_ksiazki'].'</td>
-                <td>'.$row['Cena'].'</td></tr>';
+                echo <<<LIST
+                <li class='produktItem'>
+                    <a class='itemImage' href='$href'>
+                        <img src="$source">
+                    </a>
+                    <div class='itemOpis'>
+                        <a class="itemTitle" href="$href">{$row['Tytul']}</a><br>
+                        <span class='itemAuthor'>{$row['Autor']}</span><br>
+                        <span class='itemPrice'>{$row['Cena']}</span><br>
+                        <button type="button" onclick="window.location.href='$self?cart=add&product={$row['Id']}'">DO KOSZYKA</button>
+                </li>
+LIST;
             }
-            echo '</table></center>';
-            echo "</div>";
+            echo '</ul></div>';
         }
         if(!empty($_GET['gatunek'])){
             $query = "SELECT COUNT(ksiazki.Id) AS total FROM ksiazki INNER JOIN gatunki ON ksiazki.Gatunek = Gatunki.Id WHERE Gatunki.Gatunek = '$gatunek'";
@@ -89,7 +86,7 @@
                 $add .= "&count=$result_count";
             }
             if(!empty($_GET['strona']) || !empty($_GET['count'])){
-                $href = $_SERVER['PHP_SELF']."?";
+                $href = $self."?";
                 $href .= http_build_query($url);
             }
             echo "<a href='$href$add'".($i==$strona ? "class='curPageIndex'" : "class='pageIndex'").">$i</a> ";
