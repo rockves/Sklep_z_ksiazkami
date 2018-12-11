@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <title>Lista książek</title>
     <?php 
-    require_once(__DIR__.'\..\Untitles\connection.php');
+    require_once(__DIR__.'/../Untitles/connection.php');
     require_once(__DIR__.'\..\Untitles\link.php'); 
     (!empty($_GET['strona'])) ? $strona = $_GET['strona'] : $strona = 1;
     (!empty($_GET['count'])) ? $result_count = $_GET['count'] : $result_count = 10;
@@ -37,17 +37,17 @@
             echo 'W bazie danych nie ma takiej książki';
             die();
         }else{
-            echo '<ul class="produktList">';
+            echo '<div class="produktList">';
             clearstatcache();
             while($row = $result->fetch_assoc()) {
-                if(file_exists("C:\\xampp\\htdocs\\GitKraken\\Sklep_z_ksiazkami\\PHP\\Site\\Okladki\\okladkaID".$row['Id'].'.jpg')){
+                if(file_exists("{$_SERVER['DOCUMENT_ROOT']}\\GitKraken\\Sklep_z_ksiazkami\\PHP\\Site\\Okladki\\okladkaID".$row['Id'].'.jpg')){
                     $source = $path.$name.$row['Id'].'.jpg';
                 }else{
                     $source = $path.$default_name.'.png';
                 }
                 $href = $_SERVER['PHP_SELF']."?product=".$row['Id'];
                 echo <<<LIST
-                <li class='produktItem'>
+                <div class='produktItem'>
                     <a class='itemImage' href='$href'>
                         <img src="$source">
                     </a>
@@ -56,13 +56,16 @@
                         <span class='itemAuthor'>{$row['Autor']}</span><br>
                         <span class='itemPrice'>{$row['Cena']}</span><br>
                         <button type="button" onclick="window.location.href='$self?cart=add&product={$row['Id']}'">DO KOSZYKA</button>
-                </li>
+                    </div>
+                </div>
 LIST;
             }
-            echo '</ul></div>';
+            echo '</div></div>';
         }
         if(!empty($_GET['gatunek'])){
             $query = "SELECT COUNT(ksiazki.Id) AS total FROM ksiazki INNER JOIN gatunki ON ksiazki.Gatunek = Gatunki.Id WHERE Gatunki.Gatunek = '$gatunek'";
+        }else if(!empty($_GET['search'])){
+            $query = "SELECT COUNT(ksiazki.Id) AS total FROM ksiazki INNER JOIN gatunki ON ksiazki.Gatunek = Gatunki.Id WHERE ksiazki.Tytul LIKE '%$search%'";
         }else{
             $query = "SELECT COUNT(Id) AS total FROM ksiazki";
         }

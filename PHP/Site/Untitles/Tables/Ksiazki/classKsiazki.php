@@ -144,7 +144,7 @@
 
 	    function getFromDB(){
 			global $connection;
-			if(!$connection) require_once(__DIR__.'\..\..\connection.php');
+			if(!$connection) require_once(__DIR__.'/../../connection.php');
 			if($this->tytul != '') {
 				$query = "SELECT * FROM ksiazki WHERE Tytul = '$this->tytul' LIMIT 1";
 			}else if($this->id != ''){
@@ -186,7 +186,7 @@
 
 	    function insertKsiazka(){
 			global $connection;
-			if(!$connection) require_once(__DIR__.'\..\..\connection.php');
+			if(!$connection) require_once(__DIR__.'/../../connection.php');
 			$errMsg = '';
 
 			$query = "SELECT Tytul FROM ksiazki WHERE Tytul = '$this->tytul' LIMIT 1";
@@ -211,7 +211,7 @@
 
 	    function deleteKsiazka(){
 			global $connection;
-			if(!$connection) require_once(__DIR__.'\..\..\connection.php');
+			if(!$connection) require_once(__DIR__.'/../../connection.php');
 			$errMsg = '';
 
 			$query = "SELECT Id FROM ksiazki WHERE Tytul = '$this->tytul'";

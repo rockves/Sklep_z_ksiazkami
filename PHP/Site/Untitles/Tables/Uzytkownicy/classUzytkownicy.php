@@ -155,7 +155,7 @@
 
 	    function getFromDB(){
 			global $connection;
-			if(!$connection) require_once(__DIR__.'\..\..\connection.php');
+			if(!$connection) require_once(__DIR__.'/../../connection.php');
 			if($this->nazwa != '') {
 				$query = "SELECT * FROM uzytkownicy WHERE Nazwa_uzytkownika = '$this->nazwa' LIMIT 1";
 			}else if($this->id != ''){
@@ -192,7 +192,7 @@
 
 	    function insertUzytkownik(){
 			global $connection;
-			if(!$connection) require_once(__DIR__.'\..\..\connection.php');
+			if(!$connection) require_once(__DIR__.'/../../connection.php');
 			$errMsg = '';
 
 			$query = "SELECT Nazwa_uzytkownika FROM uzytkownicy WHERE Nazwa_uzytkownika = '$this->nazwa'";
@@ -229,7 +229,7 @@
 
 		function deleteUzytkownik(){
 			global $connection;
-			if(!$connection) require_once(__DIR__.'\..\..\connection.php');
+			if(!$connection) require_once(__DIR__.'/../../connection.php');
 			$errMsg = '';
 
 			$query = "SELECT Id FROM uzytkownicy WHERE Nazwa_uzytkownika = '$this->nazwa'";

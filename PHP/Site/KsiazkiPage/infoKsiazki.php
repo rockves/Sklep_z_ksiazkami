@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <title>Zobacz książke</title>
     <?php 
-    require_once(__DIR__.'\..\Untitles\connection.php'); 
+    require_once(__DIR__.'/../Untitles/connection.php'); 
     require_once(__DIR__.'\..\Untitles\Tables\Ksiazki\classKsiazki.php');
     ?>
     <link rel="stylesheet" type="text/css" media="screen" href="../../../CSS/infoKsiazki.css" />
@@ -13,7 +13,7 @@
 
 <body>
     <?php
-        $path = '/GitKraken/Sklep_z_ksiazkami/PHP/Site/Okladki'; //Jeśli coś się psuje z okładka to tu
+        $path = "/GitKraken/Sklep_z_ksiazkami/PHP/Site/Okladki"; //Jeśli coś się psuje z okładka to tu
         $name = "/okladkaID";
         $default_name = "/default";
         $source = '';
@@ -50,7 +50,7 @@
             die();
         }
         clearstatcache();
-        if(file_exists("C:\\xampp\\htdocs\\GitKraken\\Sklep_z_ksiazkami\\PHP\\Site\\Okladki\\okladkaID".$id.'.jpg')){
+        if(file_exists("{$_SERVER['DOCUMENT_ROOT']}\\GitKraken\\Sklep_z_ksiazkami\\PHP\\Site\\Okladki\\okladkaID".$id.'.jpg')){
             $source = $path.$name.$id.'.jpg';
         }else{
             $source = $path.$default_name.'.png';

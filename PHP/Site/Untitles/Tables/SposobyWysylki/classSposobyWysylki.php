@@ -57,7 +57,7 @@
 
 		function insertSposobWysylki(){
 			global $connection;
-			if(!$connection) require_once(__DIR__.'\..\..\connection.php');
+			if(!$connection) require_once(__DIR__.'/../../connection.php');
 			$errMsg = '';
             
 			$query = "SELECT Nazwa_uslugi FROM sposoby_wysylki WHERE Nazwa_uslugi = '$this->nazwa' LIMIT 1";
@@ -81,7 +81,7 @@
 
 		function deleteSposobWysylki(){
 			global $connection;
-			if(!$connection) require_once(__DIR__.'\..\..\connection.php');
+			if(!$connection) require_once(__DIR__.'/../../connection.php');
 			$errMsg = '';
             
 			$query = "SELECT Id FROM sposoby_wysylki WHERE Nazwa_uslugi = '$this->nazwa' LIMIT 1";
@@ -102,7 +102,7 @@
 
 		function updateSposobWysylki($nowaNazwa, $nowaSzybkosc, $nowaCena){
 			global $connection;
-			if(!$connection) require_once(__DIR__.'\..\..\connection.php');
+			if(!$connection) require_once(__DIR__.'/../../connection.php');
 			$errMsg = '';
             
 			$query = "SELECT Nazwa_uslugi FROM sposoby_wysylki WHERE Nazwa_uslugi = '$this->nazwa' LIMIT 1";

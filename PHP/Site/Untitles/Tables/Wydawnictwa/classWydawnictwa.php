@@ -29,7 +29,7 @@
 
 	    function insertWydawnictwo(){
 			global $connection;
-			if(!$connection) require_once(__DIR__.'\..\..\connection.php');
+			if(!$connection) require_once(__DIR__.'/../../connection.php');
 			$errMsg = '';
 
 			$query = "SELECT Wydawca FROM wydawnictwa WHERE Wydawca = '$this->nazwa'";
@@ -53,7 +53,7 @@
 		}
 		function deleteWydawnictwo(){
 			global $connection;
-			if(!$connection) require_once(__DIR__.'\..\..\connection.php');
+			if(!$connection) require_once(__DIR__.'/../../connection.php');
 			$errMsg = '';
 
 			$query = "SELECT Id FROM wydawnictwa WHERE Wydawca = '$this->nazwa'";
@@ -79,7 +79,7 @@
 		}
 		function updateWydawnictwo($nowaNazwa){
 			global $connection;
-			if(!$connection) require_once(__DIR__.'\..\..\connection.php');
+			if(!$connection) require_once(__DIR__.'/../../connection.php');
 			$errMsg = '';
 
 			$query = "SELECT Wydawca FROM wydawnictwa WHERE Wydawca = '$this->nazwa'";

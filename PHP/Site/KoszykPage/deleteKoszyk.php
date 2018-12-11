@@ -1,6 +1,6 @@
 <?php 
 
-	require_once(__DIR__.'\..\Untitles\connection.php'); 
+	require_once(__DIR__.'/../Untitles/connection.php'); 
 	if (session_status() == PHP_SESSION_NONE) session_start();
 
 	if(empty($_SESSION['login'])){

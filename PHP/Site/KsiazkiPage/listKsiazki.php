@@ -1,20 +1,14 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-    <meta charset="UTF-8">
-    <title>Lista książek</title>
-    <?php require_once(__DIR__.'\..\Untitles\connection.php'); ?>
-    <style>
-    table,
-    tr,
-    td {
-        border: 1px solid black;
-        border-collapse: collapse;
-        padding: 5px;
-        text-align: center;
-    }
-    </style>
+<?php require_once(__DIR__.'/../Untitles/connection.php'); if(!$_SESSION['czyPracownik']) die(); ?>
+<style>
+table,
+tr,
+td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 5px;
+    text-align: center;
+}
+</style>
 </head>
 
 <body>
@@ -33,7 +27,7 @@
             echo '<tr><td>ID</td><td>TYTUŁ</td><td>AUTOR</td><td>OPIS</td><td>GATUNEK</td><td>DATA WYDANIA</td><td>WYDAWNICTWO</td><td>OCENA</td><td>CENA</td><td>SPRZEDANYCH</td><td>OKLADKA</td></tr>';
             while($row = $result->fetch_assoc()) {
                 clearstatcache();
-                if(file_exists("C:\\xampp\\htdocs\\GitKraken\\Sklep_z_ksiazkami\\PHP\\Site\\Okladki\\okladkaID".$row['Id'].'.jpg')){
+                if(file_exists("{$_SERVER['DOCUMENT_ROOT']}\\GitKraken\\Sklep_z_ksiazkami\\PHP\\Site\\Okladki\\okladkaID".$row['Id'].'.jpg')){
                     $source = $path.$name.$row['Id'].'.jpg';
                 }else{
                     $source = $path.$default_name.'.png';

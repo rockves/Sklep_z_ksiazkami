@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="" />
     <?php 
-    require_once(__DIR__.'\..\Untitles\connection.php');
+    require_once(__DIR__.'/../Untitles/connection.php');
     ?>
 </head>
 

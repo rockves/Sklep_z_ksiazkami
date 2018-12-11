@@ -1,12 +1,6 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-    <meta charset="UTF-8">
-    <title>Dodaj użytkownika</title>
-    <link rel="stylesheet" type="text/css" href="..\Untitles\untitles.css">
-    <?php
-		require_once(__DIR__.'\..\Untitles\connection.php');
+<?php
+		require_once(__DIR__.'/../Untitles/connection.php');
+		if(!$_SESSION['czyPracownik']) die();
 		$nazwa = $imie = $nazwisko = $ulica = $miasto = $kod = $email = $numer = '';
 		if($_SERVER["REQUEST_METHOD"] == "POST"){
 			require_once(__DIR__.'\..\Untitles\Tables\Uzytkownicy\operations_on_Uzytkownicy.php');
@@ -22,26 +16,23 @@
 			}
 		}
 	?>
-</head>
-
-<body>
-    <div id="form">
-        <form action="" method="post">
-            <input type="hidden" name="akcja" value="insert">
-            Nazwa użytkownika: <input type="text" name="nazwa" value="<?php echo $nazwa;?>" /><br>
-            Hasło: <input type="password" name="haslo" /><br>
-            Imie: <input type="text" name="imie" value="<?php echo $imie;?>" /><br>
-            Nazwisko: <input type="text" name="nazwisko" value="<?php echo $nazwisko;?>" /><br>
-            Ulica: <input type="text" name="ulica" value="<?php echo $ulica;?>" /><br>
-            Miasto: <input type="text" name="miasto" value="<?php echo $miasto;?>" /><br>
-            Kod pocztowy: <input type="text" name="kod" value="<?php echo $kod;?>" /><br>
-            Email: <input type="email" name="email" value="<?php echo $email;?>" /><br>
-            Numer telefonu: <input type="text" name="numer" value="<?php echo $numer;?>" /><br>
-            Pracownik: <input type="checkbox" name="czyPracownik" value="1"><br>
-            <input type="submit" />
-        </form>
-    </div>
-    <?php
+<div id="form">
+    <form action="" method="post">
+        <input type="hidden" name="akcja" value="insert">
+        Nazwa użytkownika: <input type="text" name="nazwa" value="<?php echo $nazwa;?>" /><br>
+        Hasło: <input type="password" name="haslo" /><br>
+        Imie: <input type="text" name="imie" value="<?php echo $imie;?>" /><br>
+        Nazwisko: <input type="text" name="nazwisko" value="<?php echo $nazwisko;?>" /><br>
+        Ulica: <input type="text" name="ulica" value="<?php echo $ulica;?>" /><br>
+        Miasto: <input type="text" name="miasto" value="<?php echo $miasto;?>" /><br>
+        Kod pocztowy: <input type="text" name="kod" value="<?php echo $kod;?>" /><br>
+        Email: <input type="email" name="email" value="<?php echo $email;?>" /><br>
+        Numer telefonu: <input type="text" name="numer" value="<?php echo $numer;?>" /><br>
+        Pracownik: <input type="checkbox" name="czyPracownik" value="1"><br>
+        <input type="submit" />
+    </form>
+</div>
+<?php
 	if($_SERVER["REQUEST_METHOD"] == "POST"){
 		if($errMsg == ''){
 			echo "<span class='succMsg'>Pomyślnie dodano użytkownika</span>";
@@ -50,6 +41,3 @@
 		}
 	}
 	?>
-</body>
-
-</html>

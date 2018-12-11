@@ -1,5 +1,5 @@
 <?php
-		require_once(__DIR__.'\..\Untitles\connection.php');
+		require_once(__DIR__.'/../Untitles/connection.php');
 		if (!(session_status() == PHP_SESSION_NONE)) {
 			if(!empty($_SESSION['login'])){
 				echo "Jesteś już zarejestrowany";

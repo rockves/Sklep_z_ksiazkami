@@ -30,7 +30,7 @@ CREATE TABLE `Wydawnictwa` (
 CREATE TABLE `Sposoby_platnosci` (
 	`Id` INT NOT NULL AUTO_INCREMENT,
 	`Nazwa_uslugi` varchar(100) NOT NULL UNIQUE,
-	`Cena_uslugi` DECIMAL(6,2) NOT NULL UNIQUE,
+	`Cena_uslugi` DECIMAL(6,2) NOT NULL,
 	PRIMARY KEY (`Id`)
 );
 
@@ -102,6 +102,11 @@ ALTER TABLE `Koszyk` ADD CONSTRAINT `Koszyk_fk0` FOREIGN KEY (`Id_uzytkownika`) 
 
 ALTER TABLE `Koszyk` ADD CONSTRAINT `Koszyk_fk1` FOREIGN KEY (`Id_produktu`) REFERENCES `Ksiazki`(`Id`);
 
+INSERT INTO uzytkownicy (Nazwa_uzytkownika, Haslo, Imie, Nazwisko, Ulica, Miasto, Kod_pocztowy, Email, Numer_telefonu, Czy_pracownik) VALUES
+('rockves', '$2y$10$HYw0oZHbOedRPU3Qnb.b7OQcSFh5tFyrfgHvAiaTAHJatFw4rdCcS', 'x', 'x', 'x', 'x', '05-870', 'm.99@tlen.pl', 662213312, 1);
+INSERT INTO uzytkownicy (Nazwa_uzytkownika, Haslo, Imie, Nazwisko, Ulica, Miasto, Kod_pocztowy, Email, Numer_telefonu, Czy_pracownik) VALUES
+('kowalski', '$2y$10$HYw0oZHbOedRPU3Qnb.b7OQcSFh5tFyrfgHvAiaTAHJatFw4rdCcS', 'x', 'x', 'x', 'x', '05-870', 'm.99@gmail.com', 662213312, 0);
+
 INSERT INTO gatunki(Gatunek) VALUES ('Fantastyka');
 INSERT INTO gatunki(Gatunek) VALUES ('Literatura piękna');
 INSERT INTO gatunki(Gatunek) VALUES ('Historia');
@@ -124,6 +129,16 @@ INSERT INTO wydawnictwa(Wydawca) VALUES ('Helion');
 INSERT INTO wydawnictwa(Wydawca) VALUES ('Egmont');
 INSERT INTO wydawnictwa(Wydawca) VALUES ('Zielona Sowa');
 
+INSERT INTO sposoby_wysylki(Nazwa_uslugi,Cena_uslugi) VALUES ('Poczta Polska','7');
+INSERT INTO sposoby_wysylki(Nazwa_uslugi,Cena_uslugi) VALUES ('Kurier DPD','14');
+INSERT INTO sposoby_wysylki(Nazwa_uslugi,Cena_uslugi) VALUES ('Odbiór osobisty','0');
+INSERT INTO sposoby_wysylki(Nazwa_uslugi,Cena_uslugi) VALUES ('Paczkomaty InPost','11');
+
+INSERT INTO sposoby_platnosci(Nazwa_uslugi,Cena_uslugi) VALUES ('Przelew internetowy','3');
+INSERT INTO sposoby_platnosci(Nazwa_uslugi,Cena_uslugi) VALUES ('Przelew tradycyjny','0');
+INSERT INTO sposoby_platnosci(Nazwa_uslugi,Cena_uslugi) VALUES ('BLIK','0');
+INSERT INTO sposoby_platnosci(Nazwa_uslugi,Cena_uslugi) VALUES ('Płatność kartą','0');
+INSERT INTO sposoby_platnosci(Nazwa_uslugi,Cena_uslugi) VALUES ('Przy odbiorze','5');
 
 
 INSERT INTO ksiazki(Tytul,Autor,Opis,Gatunek,Data_wydania,Wydawnictwo,Ocena_ksiazki,Cena,Sprzedanych) VALUES ('Duma i uprzedzenie ',' Jane Austen ',' ','7','2011-2-1','8','2','70','2');

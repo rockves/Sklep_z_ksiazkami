@@ -1,9 +1,8 @@
 <?php
-require_once(__DIR__.'\..\Untitles\connection.php');
+require_once(__DIR__.'/../Untitles/connection.php');
 require_once(__DIR__.'\..\Untitles\link.php');
 if (session_status() == PHP_SESSION_NONE) session_start();
-function userMenu(){
-	global $connection;
+
 	$query = 'SELECT Gatunek FROM gatunki';
     if(!($result = $connection->query($query))){
 		die();
@@ -24,20 +23,6 @@ function userMenu(){
         	(substr($href, -4) == '.php') ? $href .= '?' : '';
 			echo "<li><a href='".$href."gatunek=".$row['Gatunek']."' class='$class'>".$row['Gatunek'].'</a></li>';
 		}
+		echo '</ul>';
 	}
-} 
-
-function adminMenu(){
-	
-}
-
-if(!empty($_SESSION['login'])){
-	if($_SESSION['czyPracownik'] == true){
-		adminMenu();
-	}else{
-		userMenu();
-	}
-}else{
-	userMenu();
-}
 ?>

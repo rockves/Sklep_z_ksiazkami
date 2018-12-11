@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <title>Lista użytkowników</title>
     <?php 
-    require_once(__DIR__.'\..\Untitles\connection.php'); 
+    require_once(__DIR__.'/../Untitles/connection.php'); 
     require_once(__DIR__.'\..\Untitles\Tables\Uzytkownicy\classUzytkownicy.php');
     if (session_status() == PHP_SESSION_NONE) session_start();
     ?>

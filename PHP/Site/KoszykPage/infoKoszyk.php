@@ -1,13 +1,12 @@
 <?php
 
-    require_once(__DIR__.'\..\Untitles\connection.php');
+    require_once(__DIR__.'/../Untitles/connection.php');
     require_once(__DIR__.'\..\Untitles\link.php'); 
     (!empty($_GET['strona'])) ? $strona = $_GET['strona'] : $strona = 1;
     (!empty($_GET['count'])) ? $result_count = $_GET['count'] : $result_count = 10;
     $start_index = ($strona - 1) * $result_count;
 
-
-    $self = htmlspecialchars($_SERVER['PHP_SELF']);
+        $self = htmlspecialchars($_SERVER['PHP_SELF']);
         $path = '/GitKraken/Sklep_z_ksiazkami/PHP/Site/Okladki'; //Jeśli coś się psuje z okładka to tu
         $name = "/okladkaID";
         $default_name = "/default";
@@ -16,6 +15,11 @@
         $query = "SELECT ksiazki.Id AS Id, ksiazki.Tytul AS Tytul, ksiazki.Cena AS Cena, koszyk.Ilosc AS Ilosc FROM koszyk INNER JOIN ksiazki ON ksiazki.Id = koszyk.Id_produktu WHERE koszyk.Id_uzytkownika = '{$_SESSION['id']}' ORDER BY ksiazki.Cena ASC LIMIT $start_index , $result_count";
 
         echo "<div class='produktContainer'>";
+        if(!empty($_SESSION['successAddZamowienia'])){
+            echo $_SESSION['successAddZamowienia'];
+            unset($_SESSION['successAddZamowienia']);
+            die();
+        }
         if(!($result = $connection->query($query))){
             echo 'Nie udało się wyświetlić koszyka';
             die();
@@ -27,7 +31,7 @@
             clearstatcache();
 			$suma = 0;
             while($row = $result->fetch_assoc()) {
-                if(file_exists("C:\\xampp\\htdocs\\GitKraken\\Sklep_z_ksiazkami\\PHP\\Site\\Okladki\\okladkaID".$row['Id'].'.jpg')){
+                if(file_exists("{$_SERVER['DOCUMENT_ROOT']}\\GitKraken\\Sklep_z_ksiazkami\\PHP\\Site\\Okladki\\okladkaID".$row['Id'].'.jpg')){
                     $source = $path.$name.$row['Id'].'.jpg';
                 }else{
                     $source = $path.$default_name.'.png';
@@ -46,6 +50,54 @@ LIST;
             }
 			echo "<td>Do zapłaty: $suma</td>";
             echo '</table></center>';
+            echo "<form action='../ZamowieniaPage/addZamowienia.php' method='POST'>";
+            $query = 'SELECT Id, Nazwa_uslugi, Szybkosc_dostawy, Cena_uslugi FROM sposoby_wysylki ORDER BY Nazwa_uslugi ASC';
+            if(!($result = $connection->query($query))){
+                echo 'Nie udało się wyświetlić sposobów wysyłki';
+                die();
+            }else if($result->num_rows == 0){
+                echo 'Nie ma sposobów wysyłki';
+                die();
+            }else{
+                echo '<fieldset id="wysylkaForm" style="border:0;"><span style="font-weight:bold">Wybierz metodę wysyłki:</span><table class="wysylkaTable">';
+                while($row = $result->fetch_assoc()){
+                echo<<<LIST
+                    <tr>
+                        <td><input type="radio" value="{$row['Id']}" name="wysylkaForm"></td>
+                        <td>{$row['Nazwa_uslugi']}</td>
+                        <td>{$row['Szybkosc_dostawy']} dni</td>
+                        <td>{$row['Cena_uslugi']} zł</td>
+                    </tr>
+LIST;
+            }
+                echo '</table></fieldset>';
+            }
+
+            $query = 'SELECT Id, Nazwa_uslugi, Cena_uslugi FROM Sposoby_platnosci ORDER BY Nazwa_uslugi ASC';
+            if(!($result = $connection->query($query))){
+                echo 'Nie udało się wyświetlić sposobów płatności';
+                die();
+            }else if($result->num_rows == 0){
+                echo 'Nie ma sposobów płatności';
+                die();
+            }else{
+                echo '<fieldset id="platnoscForm" style="border:0;"><span style="font-weight:bold">Wybierz metodę płatnosci:</span><table class="platnoscTable">';
+                while($row = $result->fetch_assoc()){
+                echo<<<LIST
+                    <tr>
+                        <td><input type="radio" value="{$row['Id']}" name="platnoscForm"></td>
+                        <td>{$row['Nazwa_uslugi']}</td>
+                        <td>{$row['Cena_uslugi']} zł</td>
+                    </tr>
+LIST;
+            }
+                echo '</table></fieldset><input type="submit">';
+            }
+            echo '</form>';
+            if(!empty($_SESSION['errorAddZamowienia'])){
+                echo $_SESSION['errorAddZamowienia'];
+                unset($_SESSION['errorAddZamowienia']);
+            }
             echo '</div>';
         }
 

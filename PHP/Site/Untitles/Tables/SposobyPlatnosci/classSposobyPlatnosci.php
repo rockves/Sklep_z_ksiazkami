@@ -41,7 +41,7 @@
         
         function insertSposobPlatnosci(){
 			global $connection;
-			if(!$connection) require_once(__DIR__.'\..\..\connection.php');
+			if(!$connection) require_once(__DIR__.'/../../connection.php');
 			$errMsg = '';
             
             $query = "SELECT Nazwa_uslugi FROM sposoby_platnosci WHERE Nazwa_uslugi = '$this->nazwa' LIMIT 1";
@@ -65,7 +65,7 @@
 
         function deleteSposobPlatnosci(){
 			global $connection;
-			if(!$connection) require_once(__DIR__.'\..\..\connection.php');
+			if(!$connection) require_once(__DIR__.'/../../connection.php');
 			$errMsg = '';
             
             $query = "SELECT Id FROM sposoby_platnosci WHERE Nazwa_uslugi = '$this->nazwa' LIMIT 1";
@@ -92,7 +92,7 @@
 
         function updateSposobPlatnosci($nowaNazwa, $nowaCena){
 			global $connection;
-			if(!$connection) require_once(__DIR__.'\..\..\connection.php');
+			if(!$connection) require_once(__DIR__.'/../../connection.php');
 			$errMsg = '';
             
             $query = "SELECT Nazwa_uslugi FROM sposoby_platnosci WHERE Nazwa_uslugi = '$this->nazwa' LIMIT 1";

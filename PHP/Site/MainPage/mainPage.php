@@ -10,14 +10,12 @@
     <link rel="stylesheet" type="text/css" media="screen" href="../Untitles/untitles.css" />
     <link href="../../../CSS/favicon.ico" rel="icon" type="image/x-icon" />
     <link href="https://fonts.googleapis.com/css?family=Bitter:400,700&amp;subset=latin-ext" rel="stylesheet">
-    <?php require_once(__DIR__.'\..\Untitles\connection.php'); session_start(); $default = '1';?>
+    <?php require_once(__DIR__.'/../Untitles/connection.php'); session_start(); $default = '1';?>
 </head>
 
 <body>
     <div id="header">
-        <h1>
-            <a class="headerText" href="mainPage.php">Księgarnia internetowa</a>
-            </h1>
+        <a class="headerText" href="mainPage.php">Księgarnia internetowa</a>
     </div>
     <div id="menu">
         <?php include("search.php"); ?>
@@ -27,35 +25,26 @@
         <ul>
             <?php include("menu.php"); ?>
         </ul>
-        <?php include("login.php"); ?>
+        <?php 
+            if(!empty($_SESSION['login']) && $_SESSION['czyPracownik']){
+                if($_SESSION['czyPracownik'] == true){
+                    require_once("adminPanel.php");
+                }
+            }
+        ?>
     </div>
     <div id="window">
         <?php 
-        if(!empty($_GET['cart'])){
-            if($_GET['cart'] == 'add'){
-                include(__DIR__."\..\KoszykPage\addKoszyk.php");
-            }else if($_GET['cart'] == 'delete'){
-                include(__DIR__."\..\KoszykPage\deleteKoszyk.php");
-            }
-            include(__DIR__."\..\KoszykPage\infoKoszyk.php");
-            $default = '0';
-        }else if(!empty($_GET['product'])){
-            include(__DIR__."\..\KsiazkiPage\infoKsiazki.php");
-            $default = '0';   
-        }else if(!empty($_GET['user'])){
-            if($_GET['user'] == 'profile'){
-                include(__DIR__."\..\UzytkownicyPage\infoUzytkownicy.php");
-                $default = '0';  
-            }else if($_GET['user'] == 'register'){
-                include(__DIR__."\..\UzytkownicyPage\\registerUzytkownicy.php");
-                $default = '0';
-            }
-        }
-        if($default == '1') include(__DIR__."\..\KsiazkiPage\usersListKsiazki.php");
-
+            require_once("mainPageUserWindow.php");
         ?>
     </div>
-    <footer><span>&#x24B8;2018 Miłosz Leszko</span></footer>
+    <div id="rightWindow">
+        <?php include("login.php"); ?>
+    </div>
+    <footer>
+        <span>&#x24B8;2018 Miłosz Leszko</span>
+        <?php if($connection->ping()) $connection->close(); ?>
+    </footer>
 </body>
 
 </html>

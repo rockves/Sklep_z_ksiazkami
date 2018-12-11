@@ -19,12 +19,17 @@ body {
     text-align: center;
     background-color: #699148;
     border-bottom: 4px solid #466031;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
 
 }
 
 a.headerText {
     color: #466031;
     text-decoration: none;
+    font-size: 1.5vw;
+    font-weight: 600;
 }
 
 #search {
@@ -33,12 +38,13 @@ a.headerText {
 }
 
 #menu {
-    width: 25%;
+    width: 23%;
+    margin-left: 1%;
+    margin-right: 1%;
     box-sizing: border-box;
     min-height: 90%;
     float: left;
     /*background-color: pink;*/
-    border-right: 4px solid #466031;
     background: #eae8dc;
 }
 
@@ -49,7 +55,6 @@ a.headerText {
 
 #userMenu {
     width: 100%;
-    margin-top: 10px;
     font-size: 20px;
     padding-top: 10px;
     padding-bottom: 10px;
@@ -102,46 +107,68 @@ a.headerText {
 
 .gatunekLi:hover {}
 
+div.adminPanel>div.functionList>dl {
+    list-style-type: circle;
+}
+
+div.adminPanel>div.functionList>dl>dt {
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+}
+
+div.adminPanel>div.functionList>dl>dd {
+    display: list-item;
+    list-style-type: disc;
+    margin-left: 8%;
+}
+
+div.adminPanel>div.functionList>dl>dd>a {
+    text-decoration: none;
+    color: black;
+
+}
+
 #window {
     width: 50%;
-    height: 90%;
+    min-height: 90%;
     box-sizing: border-box;
     float: left;
-    margin-right: 25%;
     /*background-color: red;*/
     border-right: 4px solid #466031;
+    border-left: 4px solid #466031;
     background: #eae8dc;
 }
 
 .produktContainer {
     width: 100%;
     margin-top: 1%;
-    min-height: 95%;
+    height: 94%;
 }
 
-ul.produktList {
-    list-style: none;
-    margin: 0px;
-    padding: 0px;
+div.produktList {
+    height: 100%;
 }
 
-li.produktItem {
-    height: 25%;
-    width: 15%;
+div.produktItem {
+    height: 280px;
+    width: 30%;
     float: left;
     margin-right: 3%;
     text-align: center;
+    font-size: 95%;
 }
 
 a.itemImage>img {
-    height: 40%;
-    width: 30%;
+    height: 128px;
+    width: 96px;
 }
 
 .pageList {
     height: 5%;
     width: 100%;
     text-align: center;
+    clear: both;
 }
 
 .curPageIndex {
@@ -155,8 +182,22 @@ a.itemImage>img {
     text-decoration: none;
 }
 
+table.adminList {
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 5px;
+    text-align: center;
+}
+
 #regForm {
     width: 100%;
+}
+
+#rightWindow {
+    width: 25%;
+    min-height: 90%;
+    box-sizing: border-box;
+    float: left;
 }
 
 footer {

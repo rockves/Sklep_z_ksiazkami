@@ -29,7 +29,7 @@
 
 	    public function insertGatunek(){
 			global $connection;
-			if(!$connection) require_once(__DIR__.'\..\..\connection.php');
+			if(!$connection) require_once(__DIR__.'/../../connection.php');
 			$errMsg = '';
 
 			$query = "SELECT Gatunek FROM gatunki WHERE Gatunek = '$this->nazwa' LIMIT 1";
@@ -53,7 +53,7 @@
 		}
 		public function deleteGatunek(){
 			global $connection;
-			if(!$connection) require_once(__DIR__.'\..\..\connection.php');
+			if(!$connection) require_once(__DIR__.'/../../connection.php');
 			$errMsg = '';
 
 			$query = "SELECT Id FROM gatunki WHERE Gatunek = '$this->nazwa' LIMIT 1";
@@ -79,7 +79,7 @@
 		}
 		public function updateGatunek($nowaNazwa){
 			global $connection;
-			if(!$connection) require_once(__DIR__.'\..\..\connection.php');
+			if(!$connection) require_once(__DIR__.'/../../connection.php');
 			$errMsg = '';
 
 			$query = "SELECT Gatunek FROM gatunki WHERE Gatunek = '$this->nazwa' LIMIT 1";
@@ -94,11 +94,12 @@
 				return $errMsg;
 			}
 			$result->close();
-			$this->nazwa = $nowaNazwa;
 			$query = "UPDATE gatunki SET Gatunek = '$nowaNazwa' WHERE Gatunek = '$this->nazwa'";
 			if(!$connection->query($query)){
 				$errMsg = 'Nie udało się zmienić nazwy gatunku';
 				return $errMsg;
+			}else{
+				$this->nazwa = $nowaNazwa;
 			}
 		}
 
