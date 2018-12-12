@@ -10,7 +10,7 @@
 		}
 		$regNazwa = $regImie = $regNazwisko = $regUlica = $regMiasto = $regKod = $regEmail = $regNumer = '';
 		if($_SERVER["REQUEST_METHOD"] == "POST"){
-			require_once(__DIR__.'\..\Untitles\Tables\Uzytkownicy\operations_on_Uzytkownicy.php');
+			require_once(__DIR__.'/../Untitles/Tables/Uzytkownicy/operations_on_Uzytkownicy.php');
 			if($registerErrMsg != ''){
 				$regNazwa = $_POST['regNazwa'];
 				$regImie = $_POST['regImie'];

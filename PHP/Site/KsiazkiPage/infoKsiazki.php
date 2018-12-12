@@ -6,7 +6,7 @@
     <title>Zobacz książke</title>
     <?php 
     require_once(__DIR__.'/../Untitles/connection.php'); 
-    require_once(__DIR__.'\..\Untitles\Tables\Ksiazki\classKsiazki.php');
+    require_once(__DIR__.'/../Untitles/Tables/Ksiazki/classKsiazki.php');
     ?>
     <link rel="stylesheet" type="text/css" media="screen" href="../../../CSS/infoKsiazki.css" />
 </head>
@@ -50,7 +50,7 @@
             die();
         }
         clearstatcache();
-        if(file_exists("{$_SERVER['DOCUMENT_ROOT']}\\GitKraken\\Sklep_z_ksiazkami\\PHP\\Site\\Okladki\\okladkaID".$id.'.jpg')){
+        if(file_exists("{$_SERVER['DOCUMENT_ROOT']}//GitKraken//Sklep_z_ksiazkami//PHP//Site//Okladki//okladkaID".$id.'.jpg')){
             $source = $path.$name.$id.'.jpg';
         }else{
             $source = $path.$default_name.'.png';

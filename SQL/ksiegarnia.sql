@@ -63,8 +63,8 @@ CREATE TABLE `Zamowienia` (
 	`Rodzaj_platnosci` INT NOT NULL,
 	`Usluga_wysylki` INT NOT NULL,
 	`Data_zamowienia` DATE NOT NULL,
-	`Zaplacone?` tinyint(1) NOT NULL DEFAULT '0',
-	`Wykonane?` tinyint(1) NOT NULL DEFAULT '0',
+	`Zaplacone` tinyint(1) NOT NULL DEFAULT '0',
+	`Wykonane` tinyint(1) NOT NULL DEFAULT '0',
 	PRIMARY KEY (`Id`)
 );
 

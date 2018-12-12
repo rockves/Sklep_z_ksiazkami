@@ -1,6 +1,6 @@
 <?php
 require_once(__DIR__.'/../Untitles/connection.php');
-require_once(__DIR__.'\..\Untitles\link.php');
+require_once(__DIR__.'/../Untitles/link.php');
 if (session_status() == PHP_SESSION_NONE) session_start();
 
 	$query = 'SELECT Gatunek FROM gatunki';

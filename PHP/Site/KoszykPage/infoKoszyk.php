@@ -1,7 +1,7 @@
 <?php
 
     require_once(__DIR__.'/../Untitles/connection.php');
-    require_once(__DIR__.'\..\Untitles\link.php'); 
+    require_once(__DIR__.'/../Untitles/link.php'); 
     (!empty($_GET['strona'])) ? $strona = $_GET['strona'] : $strona = 1;
     (!empty($_GET['count'])) ? $result_count = $_GET['count'] : $result_count = 10;
     $start_index = ($strona - 1) * $result_count;
@@ -31,7 +31,7 @@
             clearstatcache();
 			$suma = 0;
             while($row = $result->fetch_assoc()) {
-                if(file_exists("{$_SERVER['DOCUMENT_ROOT']}\\GitKraken\\Sklep_z_ksiazkami\\PHP\\Site\\Okladki\\okladkaID".$row['Id'].'.jpg')){
+                if(file_exists("{$_SERVER['DOCUMENT_ROOT']}//GitKraken//Sklep_z_ksiazkami//PHP//Site//Okladki//okladkaID".$row['Id'].'.jpg')){
                     $source = $path.$name.$row['Id'].'.jpg';
                 }else{
                     $source = $path.$default_name.'.png';
@@ -73,7 +73,7 @@ LIST;
                 echo '</table></fieldset>';
             }
 
-            $query = 'SELECT Id, Nazwa_uslugi, Cena_uslugi FROM Sposoby_platnosci ORDER BY Nazwa_uslugi ASC';
+            $query = 'SELECT Id, Nazwa_uslugi, Cena_uslugi FROM sposoby_platnosci ORDER BY Nazwa_uslugi ASC';
             if(!($result = $connection->query($query))){
                 echo 'Nie udało się wyświetlić sposobów płatności';
                 die();

@@ -27,7 +27,7 @@ td {
             echo '<tr><td>ID</td><td>TYTUŁ</td><td>AUTOR</td><td>OPIS</td><td>GATUNEK</td><td>DATA WYDANIA</td><td>WYDAWNICTWO</td><td>OCENA</td><td>CENA</td><td>SPRZEDANYCH</td><td>OKLADKA</td></tr>';
             while($row = $result->fetch_assoc()) {
                 clearstatcache();
-                if(file_exists("{$_SERVER['DOCUMENT_ROOT']}\\GitKraken\\Sklep_z_ksiazkami\\PHP\\Site\\Okladki\\okladkaID".$row['Id'].'.jpg')){
+                if(file_exists("{$_SERVER['DOCUMENT_ROOT']}//GitKraken//Sklep_z_ksiazkami//PHP//Site//Okladki//okladkaID".$row['Id'].'.jpg')){
                     $source = $path.$name.$row['Id'].'.jpg';
                 }else{
                     $source = $path.$default_name.'.png';

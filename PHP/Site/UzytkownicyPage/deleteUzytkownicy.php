@@ -3,7 +3,7 @@
 		if(!$_SESSION['czyPracownik']) die();
 		$name = '';
 		if($_SERVER["REQUEST_METHOD"] == "POST"){
-			require_once(__DIR__.'\..\Untitles\Tables\Uzytkownicy\operations_on_Uzytkownicy.php');
+			require_once(__DIR__.'/../Untitles/Tables/Uzytkownicy/operations_on_Uzytkownicy.php');
 			if($errMsg != ''){
 			$name = $_POST['nazwa'];
 			}

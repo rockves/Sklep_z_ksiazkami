@@ -3,7 +3,7 @@
 		if(!$_SESSION['czyPracownik']) die();
 		$name = '';
 		if($_SERVER["REQUEST_METHOD"] == "POST"){
-			require_once(__DIR__.'\..\Untitles\Tables\Gatunki\operations_on_Gatunki.php');
+			require_once(__DIR__.'/../Untitles/Tables/Gatunki/operations_on_Gatunki.php');
 			if($errMsg != ''){
 			$name = $_POST['nazwa'];
 			}

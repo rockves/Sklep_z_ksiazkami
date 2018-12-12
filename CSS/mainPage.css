@@ -164,6 +164,12 @@ a.itemImage>img {
     width: 96px;
 }
 
+a.itemTitle {
+    text-decoration: none;
+    color: #466031;
+    font-weight: 600;
+}
+
 .pageList {
     height: 5%;
     width: 100%;

@@ -3,7 +3,7 @@
 		if(!$_SESSION['czyPracownik']) die();
 		$nazwa = $imie = $nazwisko = $ulica = $miasto = $kod = $email = $numer = '';
 		if($_SERVER["REQUEST_METHOD"] == "POST"){
-			require_once(__DIR__.'\..\Untitles\Tables\Uzytkownicy\operations_on_Uzytkownicy.php');
+			require_once(__DIR__.'/../Untitles/Tables/Uzytkownicy/operations_on_Uzytkownicy.php');
 			if($errMsg != ''){
 				$nazwa = $_POST['nazwa'];
 				$imie = $_POST['imie'];

@@ -5,7 +5,7 @@
 		$newName = '';
 		$newPrice = '';
 		if($_SERVER["REQUEST_METHOD"] == "POST"){
-			require_once(__DIR__.'\..\Untitles\Tables\SposobyPlatnosci\operations_on_SposobyPlatnosci.php');
+			require_once(__DIR__.'/../Untitles/Tables/SposobyPlatnosci/operations_on_SposobyPlatnosci.php');
 			if($errMsg != ''){
 			$name = $_POST['nazwa'];
 			$newName = $_POST['nowaNazwa'];

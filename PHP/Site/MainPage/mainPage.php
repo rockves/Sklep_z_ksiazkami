@@ -10,6 +10,8 @@
     <link rel="stylesheet" type="text/css" media="screen" href="../Untitles/untitles.css" />
     <link href="../../../CSS/favicon.ico" rel="icon" type="image/x-icon" />
     <link href="https://fonts.googleapis.com/css?family=Bitter:400,700&amp;subset=latin-ext" rel="stylesheet">
+    <script type="text/javascript" src="../../../FusionCharts/js/fusioncharts.js"></script>
+    <script type="text/javascript" src="../../../FusionCharts/js/themes/fusioncharts.theme.fusion.js"></script>
     <?php require_once(__DIR__.'/../Untitles/connection.php'); session_start(); $default = '1';?>
 </head>
 

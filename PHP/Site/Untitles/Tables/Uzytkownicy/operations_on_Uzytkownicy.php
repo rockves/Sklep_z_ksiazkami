@@ -112,7 +112,7 @@
 				$registerErrMsg .= '<br>Nie podano kodu pocztowego';
 			}else{
 				$regKod=prepareFormData($_POST['regKod']);
-				if(!preg_match("/\d{2}-\d{3}/",$regKod)) {
+				if(!preg_match("//d{2}-/d{3}/",$regKod)) {
 					$registerErrMsg .= '<br>Należy podać poprawny kod pocztowy'; 
 				}
 			} 

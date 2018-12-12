@@ -6,7 +6,7 @@
 		$newSpeed = '';
 		$newPrice = '';
 		if($_SERVER["REQUEST_METHOD"] == "POST"){
-			require_once(__DIR__.'\..\Untitles\Tables\SposobyWysylki\operations_on_SposobyWysylki.php');
+			require_once(__DIR__.'/../Untitles/Tables/SposobyWysylki/operations_on_SposobyWysylki.php');
 			if($errMsg != ''){
 			$name = $_POST['nazwa'];
 			$newName = $_POST['nowaNazwa'];

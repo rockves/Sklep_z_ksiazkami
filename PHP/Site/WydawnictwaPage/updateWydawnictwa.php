@@ -4,7 +4,7 @@
 		$name = '';
 		$newName = '';
 		if($_SERVER["REQUEST_METHOD"] == "POST"){
-			require_once(__DIR__.'\..\Untitles\Tables\Wydawnictwa\operations_on_Wydawnictwa.php');
+			require_once(__DIR__.'/../Untitles/Tables/Wydawnictwa/operations_on_Wydawnictwa.php');
 			if($errMsg != ''){
 			$name = $_POST['nazwa'];
 			$newName = $_POST['nowaNazwa'];

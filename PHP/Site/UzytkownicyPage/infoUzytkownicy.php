@@ -6,7 +6,7 @@
     <title>Lista użytkowników</title>
     <?php 
     require_once(__DIR__.'/../Untitles/connection.php'); 
-    require_once(__DIR__.'\..\Untitles\Tables\Uzytkownicy\classUzytkownicy.php');
+    require_once(__DIR__.'/../Untitles/Tables/Uzytkownicy/classUzytkownicy.php');
     if (session_status() == PHP_SESSION_NONE) session_start();
     ?>
 </head>
@@ -18,7 +18,8 @@
             echo "Najpierw musisz się zalogować";
             die();
         }
-    	$query = "SELECT Id, Nazwa_uzytkownika, Imie, Nazwisko, Ulica, Miasto, Kod_pocztowy, Email, Numer_telefonu, Czy_pracownik FROM uzytkownicy WHERE Nazwa_uzytkownika = '{$_SESSION['login']}'";
+        $user_name = (!empty($_GET['account'])) ? $_GET['account'] : $_SESSION['login'];
+    	$query = "SELECT Id, Nazwa_uzytkownika, Imie, Nazwisko, Ulica, Miasto, Kod_pocztowy, Email, Numer_telefonu, Czy_pracownik FROM uzytkownicy WHERE Nazwa_uzytkownika = '$user_name'";
     	if(!($result = $connection->query($query))){
 			$errMsg = 'Nie udało się wyświetlić informacji o użytkowniku';
             $result->close();
