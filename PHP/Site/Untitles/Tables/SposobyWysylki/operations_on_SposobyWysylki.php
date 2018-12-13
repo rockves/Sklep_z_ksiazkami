@@ -47,7 +47,7 @@
                     $nowaCena = $_POST['nowaCena'];
                 }
                 $sposobWysylki = new SposobWysylki($_POST['nazwa']);
-                $sposobWysylki->updateSposobWysylki($nowaNazwa, $nowaSzybkosc, $nowaCena);
+                $errMsg = $sposobWysylki->updateSposobWysylki($nowaNazwa, $nowaSzybkosc, $nowaCena);
             }
         } else {
             $errMsg = "Nie podano nazwy usługi";

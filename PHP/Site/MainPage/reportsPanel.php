@@ -8,6 +8,7 @@
             <dd><a href="mainPage.php?report=sellListZysk">Lista zysku ze sprzedaży produktów</a></dd>
             <dt>Zamówienia</dt>
             <dd><a href="mainPage.php?report=orderCount">Ilość złożonych zamówień</a></dd>
+            <dd><a href="mainPage.php?report=orderCountAll">Ilość wszystkich zamówień</a></dd>
         </dl>
     </div>
 </div>

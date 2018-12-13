@@ -113,33 +113,47 @@
                 require_once(__DIR__.'/../../connection.php');
             }
             $errMsg = '';
-            
+            $staraNazwa = $this->nazwa;
             $query = "SELECT Nazwa_uslugi FROM sposoby_wysylki WHERE Nazwa_uslugi = '$this->nazwa' LIMIT 1";
             if (!($result = $connection->query($query))) {
                 $errMsg = 'Zmiany w sposobie wysyłki nie powiodły się';
-                return;
+                return $errMsg;
             }
             if ($result->num_rows == 0) {
                 $errMsg = 'Taki sposób wysyłki nie istnieje';
-                return;
+                return $errMsg;
             }
-            $query = "UPDATE sposoby_wysylki SET";
+            $query = "UPDATE sposoby_wysylki SET ";
+            $czyDodane = 0;
             if ($nowaNazwa != '') {
-                $query .= " Nazwa_uslugi = '$nowaNazwa'";
+                $query .= "Nazwa_uslugi = '$nowaNazwa'";
                 $this->setNazwa($nowaNazwa);
+                $czyDodane = 1;
             }
             if ($nowaSzybkosc != '') {
-                $query .= ", Szybkosc_dostawy = '$nowaSzybkosc'";
+                if($czyDodane == 1){
+                    $query .= ", Szybkosc_dostawy = '$nowaSzybkosc'";
+                }else{
+                    $query .= "Szybkosc_dostawy = '$nowaSzybkosc'";
+                }
+                
                 $this->setSzybkosc($nowaSzybkosc);
+                $czyDodane = 1;
             }
             if ($nowaCena != '') {
-                $query .= ", Cena_uslugi = '$nowaCena'";
+                if($czyDodane == 1){
+                    $query .= ", Cena_uslugi = '$nowaCena'";
+                }else{
+                    $query = "Cena_uslugi = '$nowaCena'";
+                }
+                
                 $this->setCena($nowaCena);
+                $czyDodane = 1;
             }
-            $query .= " WHERE Nazwa_uslugi = '$this->nazwa'";
+            $query .= " WHERE Nazwa_uslugi = '$staraNazwa'";
             if (!$connection->query($query)) {
                 $errMsg = 'Zmiany w sposobie wysyłki nie powiodły się';
-                return;
+                return $errMsg;
             }
         }
     }

@@ -57,24 +57,54 @@
                 $errMsg = "Nie podano nazwy użytkownika";
             }
         } elseif ($_POST['akcja'] == 'update') {
-            /*if(!empty($_POST['nazwa'])){
-                if(empty($_POST['nowaNazwa']) && empty($_POST['nowaSzybkosc']) && empty($_POST['nowaCena'])){
+            if(!empty($_POST['nazwa'])){
+                if(empty($_POST['newNazwa']) && empty($_POST['newHaslo']) && empty($_POST['newImie']) && empty($_POST['newNazwisko']) && empty($_POST['newUlica']) && empty($_POST['newMiasto']) && empty($_POST['newKodPocztowy']) && empty($_POST['newEmail']) && empty($_POST['newNumer'])){
                     $errMsg = "Nie podano danych do edycji";
                 }else{
-                    $nowaNazwa = '';
-                    $nowaSzybkosc = '';
-                    $nowaCena = '';
-                    if(!empty($_POST['nowaNazwa'])){
-                        $nowaNazwa = $_POST['nowaNazwa'];
+                    $newNazwa = $newHaslo = $newImie = $newNazwisko = $newUlica = $newMiasto = $newKodPocztowy = $newEmail = $newNumer = '';
+                    if(!empty($_POST['newNazwa'])){
+                        $newNazwa=prepareFormData($_POST['newNazwa']);
+                        if (!preg_match("/^[a-zA-Z0-9]*$/", $newNazwa)) {
+                            $errMsg = 'Nazwa użytkownika może zawierać tylko litery i cyfry';
+                        }
                     }
-                    if(!empty($_POST['nowaSzybkosc'])){
-                        $nowaSzybkosc = $_POST['nowaSzybkosc'];
+                    if(!empty($_POST['newHaslo'])){
+                        $newHaslo = $_POST['newHaslo'];
                     }
-                    if(!empty($_POST['nowaCena'])){
-                        $nowaCena = $_POST['nowaCena'];
+                    if(!empty($_POST['newImie'])){
+                        $newImie = $_POST['newImie'];
                     }
-                    updateSposobWysylki($_POST['nazwa'], $nowaNazwa, $nowaSzybkosc, $nowaCena);
-                }*/
+                    if(!empty($_POST['newNazwisko'])){
+                        $newNazwisko = $_POST['newNazwisko'];
+                    }
+                    if(!empty($_POST['newUlica'])){
+                        $newUlica = $_POST['newUlica'];
+                    }
+                    if(!empty($_POST['newMiasto'])){
+                        $newMiasto = $_POST['newMiasto'];
+                    }
+                    if(!empty($_POST['newKodPocztowy'])){
+                        $newKodPocztowy=prepareFormData($_POST['newKodPocztowy']);
+                        if (!preg_match("/\d{2}-\d{3}/", $newKodPocztowy)) {
+                            $errMsg .= '<br>Należy podać poprawny kod pocztowy';
+                        }
+                    }
+                    if(!empty($_POST['newEmail'])){
+                        $newEmail=prepareFormData($_POST['newEmail']);
+                        if (!filter_var($regEmail, FILTER_VALIDATE_EMAIL)) {
+                            $errMsg .= '<br>Należy podać poprawny adres email';
+                        }
+                    }
+                    if(!empty($_POST['newNumer'])){
+                        $newNumer=prepareFormData($_POST['newNumer']);
+                        if (!preg_match("/^[0-9]{9,9}$/", $regNumer)) {
+                            $errMsg .= '<br>Należy podać poprawny numer telefonu';
+                        }
+                    }
+                    if($errMsg == ''){
+                    updateSposobWysylki($newNazwa, $newHaslo, $newImie, $newNazwisko, $newUlica, $newMiasto, $newKodPocztowy, $newEmail, $newNumer);
+                    }
+                }
         } elseif ($_POST['akcja'] == 'login' && $_POST['submit'] == 'Zaloguj') {
             if (!empty($_POST['logNazwa'])) {
                 if (!empty($_POST['logHaslo'])) {
@@ -163,3 +193,4 @@
             }
         }
     }
+}

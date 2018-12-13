@@ -40,11 +40,11 @@
                 $href = $_SERVER['PHP_SELF']."?product=".$row['Id'];
                 echo<<<LIST
                 <tr>
-                	<td><img src = "$source" height="30" width="30"></td>
-                	<td><a class="titleLink" href="$href">{$row['Tytul']}</a></td>
-                	<td>{$row['Cena']}</td>
-                	<td>{$row['Ilosc']}</td>
-                	<td><button type="button" onclick="window.location.href='$self?cart=delete&product={$row['Id']}'">USUŃ</button></td>
+                    <td><img src = "$source" height="30" width="30"></td>
+                    <td><a class="titleLink" href="$href">{$row['Tytul']}</a></td>
+                    <td>{$row['Cena']}</td>
+                    <td>{$row['Ilosc']}</td>
+                    <td><button type="button" onclick="window.location.href='$self?cart=delete&product={$row['Id']}'">USUŃ</button></td>
                 </tr>
 LIST;
             }
@@ -108,10 +108,11 @@ LIST;
         $row = $result->fetch_assoc();
         $total_pages = ceil($row['total'] / $result_count);
         if ($total_pages < 2) {
-            die();
-        }
+            
+        }else{
         echo "<div class='pageList'>";
         for ($i = 1; $i <= $total_pages; $i++) {
             echo "<a href='$self?strona=$i&count=$result_count'".($i==$strona ? "class='curPageIndex'" : "class='pageIndex'").">$i</a> ";
         }
         echo "</div>";
+        }

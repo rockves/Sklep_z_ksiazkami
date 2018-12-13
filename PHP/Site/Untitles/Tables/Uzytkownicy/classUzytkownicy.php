@@ -262,4 +262,41 @@
                 return $errMsg;
             }
         }
+
+        public function updateSposobWysylki($newNazwa, $newHaslo, $newImie, $newNazwisko, $newUlica, $newMiasto, $newKodPocztowy, $newEmail, $newNumer)
+        {
+            global $connection;
+            if (!$connection) {
+                require_once(__DIR__.'/../../connection.php');
+            }
+            $errMsg = '';
+            
+            $query = "SELECT Nazwa_uzytkownika FROM uzytkownicy WHERE Nazwa_uzytkownika = '$this->nazwa' LIMIT 1";
+            if (!($result = $connection->query($query))) {
+                $errMsg = 'Zmiany w danych użytkownika nie powiodły się';
+                return;
+            }
+            if ($result->num_rows == 0) {
+                $errMsg = 'Taki użytkownik nie istnieje';
+                return;
+            }
+            $query = "UPDATE sposoby_wysylki SET";
+            if ($nowaNazwa != '') {
+                $query .= " Nazwa_uslugi = '$nowaNazwa'";
+                $this->setNazwa($nowaNazwa);
+            }
+            if ($nowaSzybkosc != '') {
+                $query .= ", Szybkosc_dostawy = '$nowaSzybkosc'";
+                $this->setSzybkosc($nowaSzybkosc);
+            }
+            if ($nowaCena != '') {
+                $query .= ", Cena_uslugi = '$nowaCena'";
+                $this->setCena($nowaCena);
+            }
+            $query .= " WHERE Nazwa_uslugi = '$this->nazwa'";
+            if (!$connection->query($query)) {
+                $errMsg = 'Zmiany w sposobie wysyłki nie powiodły się';
+                return;
+            }
+        }
     }

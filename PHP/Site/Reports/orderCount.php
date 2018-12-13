@@ -17,7 +17,7 @@
           $arrData = array(
               "chart" => array(
                   "theme" => "fusion",
-                  "caption" => "Lista sprzedaży od {$_POST['data1']} do {$_POST['data2']}",
+                  "caption" => "Lista zamówień od {$_POST['data1']} do {$_POST['data2']}",
                   "subCaption" => "",
                   "yaxisname" => "Zamówień",
                   "showvalues" => "0",

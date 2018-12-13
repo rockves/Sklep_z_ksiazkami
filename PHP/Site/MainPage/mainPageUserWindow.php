@@ -95,6 +95,8 @@
                             include(__DIR__."/../ZamowieniaPage/updateZamowienia.php");
                         } elseif ($_GET['action'] == 'list') {
                             include(__DIR__."/../ZamowieniaPage/listZamowienia.php");
+                        } elseif ($_GET['action'] == 'info'){
+                            include(__DIR__."/../ZamowieniaPage/infoZamowienia.php");
                         }
                         break;
 
@@ -115,6 +117,9 @@
                         break;
                     case 'orderCount':
                         include(__DIR__."/../Reports/orderCount.php");
+                        break;
+                    case 'orderCountAll':
+                        include(__DIR__."/../Reports/orderCountAll.php");
                         break;
                 }
             }

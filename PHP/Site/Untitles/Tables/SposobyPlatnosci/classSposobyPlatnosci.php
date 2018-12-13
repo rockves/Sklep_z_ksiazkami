@@ -104,7 +104,7 @@
                 require_once(__DIR__.'/../../connection.php');
             }
             $errMsg = '';
-            
+            $staraNazwa = $this->nazwa;
             $query = "SELECT Nazwa_uslugi FROM sposoby_platnosci WHERE Nazwa_uslugi = '$this->nazwa' LIMIT 1";
             if (!($result = $connection->query($query))) {
                 $errMsg = 'Zmiany w sposobie płatności nie powiodły się ';
@@ -125,7 +125,7 @@
                 $query .= ", Cena_uslugi = '$nowaCena'";
                 $this->setCena($nowaCena);
             }
-            $query .= " WHERE Nazwa_uslugi = '$this->nazwa'";
+            $query .= " WHERE Nazwa_uslugi = '$staraNazwa'";
             if (!$connection->query($query)) {
                 $errMsg = 'Zmiany w sposobie płatności nie powiodły się';
                 $result->close();

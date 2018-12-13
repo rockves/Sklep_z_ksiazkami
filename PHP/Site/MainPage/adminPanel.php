@@ -31,6 +31,7 @@
             <dd><a href="mainPage.php?table=Uzytkownicy&action=update">Edytuj użytkownika</a></dd>
             <dd><a href="mainPage.php?table=Uzytkownicy&action=list">Wyświetl użytkowników</a></dd>
             <dt>Zamówienia</dt>
+            <dd><a href="mainPage.php?table=Zamowienia&action=info">Pokaż zamówienie</a></dd>
             <dd><a href="mainPage.php?table=Zamowienia&action=delete">Usuń zamówienie</a></dd>
             <dd><a href="mainPage.php?table=Zamowienia&action=update">Edytuj zamówienie</a></dd>
             <dd><a href="mainPage.php?table=Zamowienia&action=list">Wyświetl zamówienia</a></dd>
