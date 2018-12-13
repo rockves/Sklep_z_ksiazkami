@@ -1,10 +1,12 @@
 <?php
         require_once(__DIR__.'/../Untitles/connection.php');
-        if(!$_SESSION['czyPracownik']) die();
+        if (!$_SESSION['czyPracownik']) {
+            die();
+        }
         $tytul = $autor = $opis = $data = $ocena = $cena = '';
-        if($_SERVER["REQUEST_METHOD"] == "POST"){
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
             require_once(__DIR__.'/../Untitles/Tables/Ksiazki/operations_on_Ksiazki.php');
-            if($errMsg != ''){
+            if ($errMsg != '') {
                 $tytul = $_POST['tytul'];
                 $autor = $_POST['autor'];
                 $opis = $_POST['opis'];
@@ -22,11 +24,11 @@
         Opis: <textarea name="opis" rows="10" cols="50"><?php echo $opis?></textarea><br>
         Gatunek: <select name="gatunek">
             <option style="display:none" disabled selected value> -- Wybierz gatunek -- </option>
-            <?php 
+            <?php
                 $query = 'SELECT * FROM gatunki ORDER BY Id';
-                if(($result = $connection->query($query))){
-                    while($row = $result->fetch_assoc()){
-                    echo '<option value="'.$row['Id'].'">'.$row['Gatunek'].'</option>';
+                if (($result = $connection->query($query))) {
+                    while ($row = $result->fetch_assoc()) {
+                        echo '<option value="'.$row['Id'].'">'.$row['Gatunek'].'</option>';
                     }
                     $result->close();
                 }
@@ -35,11 +37,11 @@
         Data wydania: <input type="date" name="data" max="<?php echo date('Y-m-d');?>" value="<?php echo $data;?>" /><br>
         Wydawnictwo: <select name="wydawnictwo">
             <option style="display:none" disabled selected value> -- Wybierz wydawnictwo -- </option>
-            <?php 
+            <?php
                 $query = 'SELECT * FROM wydawnictwa ORDER BY Id';
-                if(($result = $connection->query($query))){
-                    while($row = $result->fetch_assoc()){
-                    echo '<option value="'.$row['Id'].'">'.$row['Wydawca'].'</option>';
+                if (($result = $connection->query($query))) {
+                    while ($row = $result->fetch_assoc()) {
+                        echo '<option value="'.$row['Id'].'">'.$row['Wydawca'].'</option>';
                     }
                     $result->close();
                 }
@@ -52,10 +54,10 @@
     </form>
 </div>
 <?php
-    if($_SERVER["REQUEST_METHOD"] == "POST"){
-        if($errMsg == ''){
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        if ($errMsg == '') {
             echo "<span class='succMsg'>Pomyślnie dodano książkę</span>";
-        }else if(!empty($errMsg)){
+        } elseif (!empty($errMsg)) {
             echo "<span class='errMsg'>$errMsg</span>";
         }
     }

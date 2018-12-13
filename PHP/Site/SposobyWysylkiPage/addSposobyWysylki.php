@@ -1,18 +1,20 @@
 <?php
-		require_once(__DIR__.'/../Untitles/connection.php');
-		if(!$_SESSION['czyPracownik']) die();
-		$name = '';
-		$szybkosc = '';
-		$cena = '';
-		if($_SERVER["REQUEST_METHOD"] == "POST"){
-			require_once(__DIR__.'/../Untitles/Tables/SposobyWysylki/operations_on_SposobyWysylki.php');
-			if($errMsg != ''){
-				$name = $_POST['nazwa'];
-				$szybkosc = $_POST['szybkosc'];
-				$cena = $_POST['cena'];
-			}
-		}
-	?>
+        require_once(__DIR__.'/../Untitles/connection.php');
+        if (!$_SESSION['czyPracownik']) {
+            die();
+        }
+        $name = '';
+        $szybkosc = '';
+        $cena = '';
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            require_once(__DIR__.'/../Untitles/Tables/SposobyWysylki/operations_on_SposobyWysylki.php');
+            if ($errMsg != '') {
+                $name = $_POST['nazwa'];
+                $szybkosc = $_POST['szybkosc'];
+                $cena = $_POST['cena'];
+            }
+        }
+    ?>
 <div id="form">
     <form action="" method="post">
         <input type="hidden" name="akcja" value="insert">
@@ -23,11 +25,11 @@
     </form>
 </div>
 <?php
-	if($_SERVER["REQUEST_METHOD"] == "POST"){
-		if($errMsg == ''){
-			echo "<span class='succMsg'>Pomyślnie dodano sposób wysyłki</span>";
-		}else if(!empty($errMsg)){
-			echo "<span class='errMsg'>$errMsg</span>";
-		}
-	}
-	?>
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        if ($errMsg == '') {
+            echo "<span class='succMsg'>Pomyślnie dodano sposób wysyłki</span>";
+        } elseif (!empty($errMsg)) {
+            echo "<span class='errMsg'>$errMsg</span>";
+        }
+    }
+    ?>

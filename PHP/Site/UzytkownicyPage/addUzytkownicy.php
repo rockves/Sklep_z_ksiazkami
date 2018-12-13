@@ -1,21 +1,23 @@
 <?php
-		require_once(__DIR__.'/../Untitles/connection.php');
-		if(!$_SESSION['czyPracownik']) die();
-		$nazwa = $imie = $nazwisko = $ulica = $miasto = $kod = $email = $numer = '';
-		if($_SERVER["REQUEST_METHOD"] == "POST"){
-			require_once(__DIR__.'/../Untitles/Tables/Uzytkownicy/operations_on_Uzytkownicy.php');
-			if($errMsg != ''){
-				$nazwa = $_POST['nazwa'];
-				$imie = $_POST['imie'];
-				$nazwisko = $_POST['nazwisko'];
-				$ulica = $_POST['ulica'];
-				$miasto = $_POST['miasto'];
-				$kod = $_POST['kod'];
-				$email = $_POST['email'];
-				$numer = $_POST['numer'];
-			}
-		}
-	?>
+        require_once(__DIR__.'/../Untitles/connection.php');
+        if (!$_SESSION['czyPracownik']) {
+            die();
+        }
+        $nazwa = $imie = $nazwisko = $ulica = $miasto = $kod = $email = $numer = '';
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            require_once(__DIR__.'/../Untitles/Tables/Uzytkownicy/operations_on_Uzytkownicy.php');
+            if ($errMsg != '') {
+                $nazwa = $_POST['nazwa'];
+                $imie = $_POST['imie'];
+                $nazwisko = $_POST['nazwisko'];
+                $ulica = $_POST['ulica'];
+                $miasto = $_POST['miasto'];
+                $kod = $_POST['kod'];
+                $email = $_POST['email'];
+                $numer = $_POST['numer'];
+            }
+        }
+    ?>
 <div id="form">
     <form action="" method="post">
         <input type="hidden" name="akcja" value="insert">
@@ -33,11 +35,11 @@
     </form>
 </div>
 <?php
-	if($_SERVER["REQUEST_METHOD"] == "POST"){
-		if($errMsg == ''){
-			echo "<span class='succMsg'>Pomyślnie dodano użytkownika</span>";
-		}else if(!empty($errMsg)){
-			echo "<span class='errMsg'>$errMsg</span>";
-		}
-	}
-	?>
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        if ($errMsg == '') {
+            echo "<span class='succMsg'>Pomyślnie dodano użytkownika</span>";
+        } elseif (!empty($errMsg)) {
+            echo "<span class='errMsg'>$errMsg</span>";
+        }
+    }
+    ?>

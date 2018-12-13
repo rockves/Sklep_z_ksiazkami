@@ -1,5 +1,6 @@
-<?php 
-        function liczSumeProduktowZamowienia($id){
+<?php
+        function liczSumeProduktowZamowienia($id)
+        {
             global $connection;
             $suma = 0;
             $query = "SELECT ksiazki.Cena AS Cena 
@@ -7,20 +8,22 @@
                         INNER JOIN ksiazki 
                         ON ksiazki.Id = zamowione.Id_produktu 
                         WHERE zamowione.Id_zamowienia = '$id'";
-            if(!($result = $connection->query($query))){
+            if (!($result = $connection->query($query))) {
                 $result->close();
                 return $suma;
-            }else if($result->num_rows < 1){
+            } elseif ($result->num_rows < 1) {
                 $result->close();
                 return $suma;
             }
-            while($row = $result->fetch_assoc()){
+            while ($row = $result->fetch_assoc()) {
                 $suma += $row['Cena'];
             }
             return $suma;
         }
         require_once(__DIR__.'/../Untitles/connection.php');
-        if(!$_SESSION['czyPracownik']) die();
+        if (!$_SESSION['czyPracownik']) {
+            die();
+        }
         $query = 'SELECT zamowienia.Id AS Id,
                     uzytkownicy.Nazwa_uzytkownika AS Nazwa_klienta,
                     sposoby_platnosci.Nazwa_uslugi AS Platnosc_nazwa,
@@ -37,13 +40,13 @@
                     ON sposoby_wysylki.Id = zamowienia.Usluga_wysylki)
                     INNER JOIN uzytkownicy 
                     ON uzytkownicy.Id = zamowienia.Id_klienta)';
-        if(!($result = $connection->query($query))){
+        if (!($result = $connection->query($query))) {
             echo 'Nie udało się wyświetlić zamówień';
             $result->close();
-        }else if($result->num_rows == 0){
+        } elseif ($result->num_rows == 0) {
             echo 'W bazie danych nie ma żadnych zamówień';
             $result->close();
-        }else{
+        } else {
             echo '<table class="adminList">';
             echo <<<TITLE
             <tr>
@@ -56,7 +59,7 @@
                 <td>SUMA</td>
             </tr>
 TITLE;
-            while($row = $result->fetch_assoc()) {
+            while ($row = $result->fetch_assoc()) {
                 $zaplacone = ($row['Zaplacone'] == 0) ? 'NIE' : 'TAK';
                 $wykonane = ($row['Wykonane'] == 0) ? 'NIE' : 'TAK';
                 $suma = liczSumeProduktowZamowienia($row['Id']);
@@ -78,4 +81,3 @@ ROW;
             echo '</table>';
         }
         $result->close();
-    ?>

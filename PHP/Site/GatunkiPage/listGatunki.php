@@ -1,17 +1,18 @@
-<?php 
+<?php
         require_once(__DIR__.'/../Untitles/connection.php');
-        if(!$_SESSION['czyPracownik']) die();
+        if (!$_SESSION['czyPracownik']) {
+            die();
+        }
         $query = 'SELECT Id, Gatunek FROM gatunki';
-        if(!($result = $connection->query($query))){
+        if (!($result = $connection->query($query))) {
             echo 'Nie udało się wyświetlić gatunków';
-        }else if($result->num_rows == 0){
+        } elseif ($result->num_rows == 0) {
             echo 'W bazie danych nie ma żadnych gatunków';
-        }else{
+        } else {
             echo '<table class="adminList">';
             echo '<tr><td>ID</td><td>NAZWA</td></tr>';
-            while($row = $result->fetch_assoc()) {
+            while ($row = $result->fetch_assoc()) {
                 echo '<tr><td>'.$row['Id'].'</td><td>'.$row['Gatunek'].'</td></tr>';
             }
             echo '</table>';
         }
-    ?>

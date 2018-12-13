@@ -1,13 +1,15 @@
 <?php
-        require_once(__DIR__.'/../Untitles/connection.php'); 
-        if(!$_SESSION['czyPracownik']) die();
+        require_once(__DIR__.'/../Untitles/connection.php');
+        if (!$_SESSION['czyPracownik']) {
+            die();
+        }
 
         $query = 'SELECT Id, Nazwa_uzytkownika, Imie, Nazwisko, Ulica, Miasto, Kod_pocztowy, Email, Numer_telefonu, Czy_pracownik FROM uzytkownicy';
-        if(!($result = $connection->query($query))){
+        if (!($result = $connection->query($query))) {
             echo 'Nie udało się wyświetlić sposobów płatności';
-        }else if($result->num_rows == 0){
+        } elseif ($result->num_rows == 0) {
             echo 'W bazie danych nie ma żadnych sposobów płatności';
-        }else{
+        } else {
             echo '<table class="adminList">';
             echo '
                 <tr>
@@ -22,7 +24,7 @@
                     <td>NUMER TELEFONU</td>
                     <td>PRACOWNIK</td>
                 </tr>';
-            while($row = $result->fetch_assoc()) {
+            while ($row = $result->fetch_assoc()) {
                 $pracownik = ($row['Czy_pracownik'] == '0') ? 'NIE' : 'TAK';
                 $href = "{$_SERVER['PHP_SELF']}?user=profile&account={$row['Nazwa_uzytkownika']}";
                 echo <<<TABLE
@@ -42,4 +44,3 @@ TABLE;
             }
             echo '</table>';
         }
-    ?>

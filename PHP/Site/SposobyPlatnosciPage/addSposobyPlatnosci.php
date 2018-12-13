@@ -1,16 +1,18 @@
 <?php
-		require_once(__DIR__.'/../Untitles/connection.php');
-		if(!$_SESSION['czyPracownik']) die();
-		$name = '';
-		$cena = '';
-		if($_SERVER["REQUEST_METHOD"] == "POST"){
-			require_once(__DIR__.'/../Untitles/Tables/SposobyPlatnosci/operations_on_SposobyPlatnosci.php');
-			if($errMsg != ''){
-				$name = $_POST['nazwa'];
-				$cena = $_POST['cena'];
-			}
-		}
-	?>
+        require_once(__DIR__.'/../Untitles/connection.php');
+        if (!$_SESSION['czyPracownik']) {
+            die();
+        }
+        $name = '';
+        $cena = '';
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            require_once(__DIR__.'/../Untitles/Tables/SposobyPlatnosci/operations_on_SposobyPlatnosci.php');
+            if ($errMsg != '') {
+                $name = $_POST['nazwa'];
+                $cena = $_POST['cena'];
+            }
+        }
+    ?>
 <div id="form">
     <form action="" method="post">
         <input type="hidden" name="akcja" value="insert">
@@ -20,11 +22,11 @@
     </form>
 </div>
 <?php
-	if($_SERVER["REQUEST_METHOD"] == "POST"){
-		if($errMsg == ''){
-			echo "<span class='succMsg'>Pomyślnie dodano usługę</span>";
-		}else if(!empty($errMsg)){
-			echo "<span class='errMsg'>$errMsg</span>";
-		}
-	}
-	?>
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        if ($errMsg == '') {
+            echo "<span class='succMsg'>Pomyślnie dodano usługę</span>";
+        } elseif (!empty($errMsg)) {
+            echo "<span class='errMsg'>$errMsg</span>";
+        }
+    }
+    ?>

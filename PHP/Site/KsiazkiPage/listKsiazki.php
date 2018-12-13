@@ -1,4 +1,6 @@
-<?php require_once(__DIR__.'/../Untitles/connection.php'); if(!$_SESSION['czyPracownik']) die(); ?>
+<?php require_once(__DIR__.'/../Untitles/connection.php'); if (!$_SESSION['czyPracownik']) {
+    die();
+} ?>
 <style>
 table,
 tr,
@@ -18,18 +20,18 @@ td {
         $default_name = "/default";
         $source = '';
         $query = 'SELECT Id, Tytul, Autor, Opis, Gatunek, Data_wydania, Wydawnictwo, Ocena_ksiazki, Cena, Sprzedanych FROM ksiazki';
-        if(!($result = $connection->query($query))){
+        if (!($result = $connection->query($query))) {
             echo 'Nie udało się wyświetlić książek';
-        }else if($result->num_rows == 0){
+        } elseif ($result->num_rows == 0) {
             echo 'W bazie danych nie ma żadnych książek';
-        }else{
+        } else {
             echo '<table>';
             echo '<tr><td>ID</td><td>TYTUŁ</td><td>AUTOR</td><td>OPIS</td><td>GATUNEK</td><td>DATA WYDANIA</td><td>WYDAWNICTWO</td><td>OCENA</td><td>CENA</td><td>SPRZEDANYCH</td><td>OKLADKA</td></tr>';
-            while($row = $result->fetch_assoc()) {
+            while ($row = $result->fetch_assoc()) {
                 clearstatcache();
-                if(file_exists("{$_SERVER['DOCUMENT_ROOT']}//GitKraken//Sklep_z_ksiazkami//PHP//Site//Okladki//okladkaID".$row['Id'].'.jpg')){
+                if (file_exists("{$_SERVER['DOCUMENT_ROOT']}//GitKraken//Sklep_z_ksiazkami//PHP//Site//Okladki//okladkaID".$row['Id'].'.jpg')) {
                     $source = $path.$name.$row['Id'].'.jpg';
-                }else{
+                } else {
                     $source = $path.$default_name.'.png';
                 }
                 echo '<tr><td>'.$row['Id'].'</td>

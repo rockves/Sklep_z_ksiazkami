@@ -7,10 +7,10 @@ if ($connection->connect_error) {
 }
 $connection->set_charset("utf8");
 
-	function prepareFormData($data) {
-	  $data = trim($data);
-	  $data = stripslashes($data);
-	  $data = htmlspecialchars($data);
-	  return $data;
-	}
-?>
+    function prepareFormData($data)
+    {
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        return $data;
+    }

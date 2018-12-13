@@ -4,32 +4,36 @@
 <head>
     <meta charset="UTF-8">
     <title>Lista użytkowników</title>
-    <?php 
-    require_once(__DIR__.'/../Untitles/connection.php'); 
+    <?php
+    require_once(__DIR__.'/../Untitles/connection.php');
     require_once(__DIR__.'/../Untitles/Tables/Uzytkownicy/classUzytkownicy.php');
-    if (session_status() == PHP_SESSION_NONE) session_start();
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
     ?>
 </head>
 
 <body>
     <?php
-    if(empty($errMsg)) $errMsg = '';
-        if(empty($_SESSION['login'])){
+    if (empty($errMsg)) {
+        $errMsg = '';
+    }
+        if (empty($_SESSION['login'])) {
             echo "Najpierw musisz się zalogować";
             die();
         }
         $user_name = (!empty($_GET['account'])) ? $_GET['account'] : $_SESSION['login'];
-    	$query = "SELECT Id, Nazwa_uzytkownika, Imie, Nazwisko, Ulica, Miasto, Kod_pocztowy, Email, Numer_telefonu, Czy_pracownik FROM uzytkownicy WHERE Nazwa_uzytkownika = '$user_name'";
-    	if(!($result = $connection->query($query))){
-			$errMsg = 'Nie udało się wyświetlić informacji o użytkowniku';
+        $query = "SELECT Id, Nazwa_uzytkownika, Imie, Nazwisko, Ulica, Miasto, Kod_pocztowy, Email, Numer_telefonu, Czy_pracownik FROM uzytkownicy WHERE Nazwa_uzytkownika = '$user_name'";
+        if (!($result = $connection->query($query))) {
+            $errMsg = 'Nie udało się wyświetlić informacji o użytkowniku';
             $result->close();
-		}else if($result->num_rows == 0){
-			$errMsg = 'W bazie danych nie ma takiego użytkownika';
+        } elseif ($result->num_rows == 0) {
+            $errMsg = 'W bazie danych nie ma takiego użytkownika';
             $result->close();
-		}else{
-			$row = $result->fetch_assoc();
+        } else {
+            $row = $result->fetch_assoc();
             $result->close();
-			$nazwa = $row['Nazwa_uzytkownika'];
+            $nazwa = $row['Nazwa_uzytkownika'];
             $imie = $row['Imie'];
             $nazwisko = $row['Nazwisko'];
             $ulica = $row['Ulica'];
@@ -37,9 +41,9 @@
             $kod = $row['Kod_pocztowy'];
             $email = $row['Email'];
             $numer = $row['Numer_telefonu'];
-		}
+        }
 
-        if($errMsg != ''){
+        if ($errMsg != '') {
             echo $errMsg;
             die();
         }
@@ -56,7 +60,7 @@
                 <div id="numer">$numer</div>
             </div>
 END;
-	?>
+    ?>
 </body>
 
 </html>

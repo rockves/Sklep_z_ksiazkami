@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Zobacz książke</title>
-    <?php 
-    require_once(__DIR__.'/../Untitles/connection.php'); 
+    <?php
+    require_once(__DIR__.'/../Untitles/connection.php');
     require_once(__DIR__.'/../Untitles/Tables/Ksiazki/classKsiazki.php');
     ?>
     <link rel="stylesheet" type="text/css" media="screen" href="../../../CSS/infoKsiazki.css" />
@@ -18,20 +18,20 @@
         $default_name = "/default";
         $source = '';
         $errMsg = '';
-        if(empty($_GET['product'])){
+        if (empty($_GET['product'])) {
             $errMsg = 'Nie podano produktu';
             echo $errMsg;
             die();
         }
 
         $query = "SELECT ksiazki.Id, ksiazki.Tytul, ksiazki.Autor,ksiazki.Opis, gatunki.Gatunek,ksiazki.Data_wydania,wydawnictwa.Wydawca AS Wydawnictwo,ksiazki.Ocena_ksiazki,ksiazki.Cena,ksiazki.Sprzedanych FROM ((ksiazki INNER JOIN gatunki ON gatunki.Id = ksiazki.Gatunek) INNER JOIN wydawnictwa ON wydawnictwa.Id = ksiazki.Wydawnictwo) WHERE ksiazki.Id = '".$_GET['product']."'";
-        if(!($result = $connection->query($query))){
+        if (!($result = $connection->query($query))) {
             $errMsg = 'Błąd bazy danych';
             $result->close();
-        }else if($result->num_rows == 0){
+        } elseif ($result->num_rows == 0) {
             $errMsg = 'Taka książka nie istnieje';
             $result->close();
-        }else{
+        } else {
             $row = $result->fetch_assoc();
             $result->close();
             $id = $row['Id'];
@@ -45,14 +45,14 @@
             $cena = $row['Cena'];
             $sprzedanych = $row['Sprzedanych'];
         }
-        if($errMsg != ''){
+        if ($errMsg != '') {
             echo $errMsg;
             die();
         }
         clearstatcache();
-        if(file_exists("{$_SERVER['DOCUMENT_ROOT']}//GitKraken//Sklep_z_ksiazkami//PHP//Site//Okladki//okladkaID".$id.'.jpg')){
+        if (file_exists("{$_SERVER['DOCUMENT_ROOT']}//GitKraken//Sklep_z_ksiazkami//PHP//Site//Okladki//okladkaID".$id.'.jpg')) {
             $source = $path.$name.$id.'.jpg';
-        }else{
+        } else {
             $source = $path.$default_name.'.png';
         }
         $self = htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'utf-8');

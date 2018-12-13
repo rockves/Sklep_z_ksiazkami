@@ -1,27 +1,27 @@
 <?php
-		require_once(__DIR__.'/../Untitles/connection.php');
-		if (!(session_status() == PHP_SESSION_NONE)) {
-			if(!empty($_SESSION['login'])){
-				echo "Jesteś już zarejestrowany";
-				die();
-			}
-		}else{
-			session_start();
-		}
-		$regNazwa = $regImie = $regNazwisko = $regUlica = $regMiasto = $regKod = $regEmail = $regNumer = '';
-		if($_SERVER["REQUEST_METHOD"] == "POST"){
-			require_once(__DIR__.'/../Untitles/Tables/Uzytkownicy/operations_on_Uzytkownicy.php');
-			if($registerErrMsg != ''){
-				$regNazwa = $_POST['regNazwa'];
-				$regImie = $_POST['regImie'];
-				$regNazwisko = $_POST['regNazwisko'];
-				$regUlica = $_POST['regUlica'];
-				$regMiasto = $_POST['regMiasto'];
-				$regKod = $_POST['regKod'];
-				$regEmail = $_POST['regEmail'];
-				$regNumer = $_POST['regNumer'];
-			}
-		}
+        require_once(__DIR__.'/../Untitles/connection.php');
+        if (!(session_status() == PHP_SESSION_NONE)) {
+            if (!empty($_SESSION['login'])) {
+                echo "Jesteś już zarejestrowany";
+                die();
+            }
+        } else {
+            session_start();
+        }
+        $regNazwa = $regImie = $regNazwisko = $regUlica = $regMiasto = $regKod = $regEmail = $regNumer = '';
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            require_once(__DIR__.'/../Untitles/Tables/Uzytkownicy/operations_on_Uzytkownicy.php');
+            if ($registerErrMsg != '') {
+                $regNazwa = $_POST['regNazwa'];
+                $regImie = $_POST['regImie'];
+                $regNazwisko = $_POST['regNazwisko'];
+                $regUlica = $_POST['regUlica'];
+                $regMiasto = $_POST['regMiasto'];
+                $regKod = $_POST['regKod'];
+                $regEmail = $_POST['regEmail'];
+                $regNumer = $_POST['regNumer'];
+            }
+        }
 ?>
 <div id="regForm">
     <form action="" method="post">
@@ -39,11 +39,11 @@
     </form>
 </div>
 <?php
-	if($_SERVER["REQUEST_METHOD"] == "POST"){
-		if($registerErrMsg == '' && $_POST['submit'] == 'Zarejestruj'){
-			echo "<span class='succMsg'>Pomyślnie zarejestrowano</span>";
-		}else if(!empty($registerErrMsg)){
-			echo "<span class='errMsg'>$registerErrMsg</span>";
-		}
-	}
-	?>
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        if ($registerErrMsg == '' && $_POST['submit'] == 'Zarejestruj') {
+            echo "<span class='succMsg'>Pomyślnie zarejestrowano</span>";
+        } elseif (!empty($registerErrMsg)) {
+            echo "<span class='errMsg'>$registerErrMsg</span>";
+        }
+    }
+    ?>

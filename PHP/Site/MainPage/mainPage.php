@@ -27,24 +27,24 @@
         <ul>
             <?php include("menu.php"); ?>
         </ul>
-        <?php 
-            if(!empty($_SESSION['czyPracownik'])){
-                if($_SESSION['czyPracownik'] == true){
+        <?php
+            if (!empty($_SESSION['czyPracownik'])) {
+                if ($_SESSION['czyPracownik'] == true) {
                     include('reportsPanel.php');
                 }
             }
         ?>
     </div>
     <div id="window">
-        <?php 
+        <?php
             require_once("mainPageUserWindow.php");
         ?>
     </div>
     <div id="rightWindow">
-        <?php 
-            include("login.php"); 
-            if(!empty($_SESSION['login']) && $_SESSION['czyPracownik']){
-                if($_SESSION['czyPracownik'] == true){
+        <?php
+            include("login.php");
+            if (!empty($_SESSION['login']) && $_SESSION['czyPracownik']) {
+                if ($_SESSION['czyPracownik'] == true) {
                     require_once("adminPanel.php");
                 }
             }
@@ -52,7 +52,9 @@
     </div>
     <footer>
         <span>&#x24B8;2018 Miłosz Leszko</span>
-        <?php if($connection->ping()) $connection->close(); ?>
+        <?php if ($connection->ping()) {
+            $connection->close();
+        } ?>
     </footer>
 </body>
 

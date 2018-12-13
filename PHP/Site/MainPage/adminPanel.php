@@ -37,6 +37,6 @@
         </dl>
     </div>
 </div>
-<?php 
- //if(!empty($_GET['table']) && !empty($_GET['action'])){if($_GET['table'] == 'Ksiazki' && $_GET['action'] == 'add'){ echo 'class="curAdminFunctionA"'; }else{ echo 'class="adminFunctionA"'; }} 
+<?php
+ //if(!empty($_GET['table']) && !empty($_GET['action'])){if($_GET['table'] == 'Ksiazki' && $_GET['action'] == 'add'){ echo 'class="curAdminFunctionA"'; }else{ echo 'class="adminFunctionA"'; }}
  ?>
