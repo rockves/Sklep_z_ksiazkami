@@ -65,7 +65,7 @@
        }";
        
         // chart object
-        $Chart = new FusionCharts("column2d", "chart-1" , "700", "400", "chart-container", "json", $chartData);
+        $Chart = new FusionCharts("column2d", "chart-1", "700", "400", "chart-container", "json", $chartData);
 
         // Attach message with message string.
         $Chart->addMessage("loadMessage", "please wait data is being loaded");

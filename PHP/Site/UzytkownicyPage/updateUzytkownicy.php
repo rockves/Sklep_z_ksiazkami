@@ -20,7 +20,11 @@
 <div id="form">
     <form action="" method="post">
         <input type="hidden" name="akcja" value="update">
-        <?php if($_SESSION['czyPracownik']){ echo "Podaj nazwe użytkownika: <input type='text' name='nazwa' value='$nazwa'/><br>"; }else{ echo "<input type='hidden' name='nazwa' value='$nazwa'/><br>"; } ?>
+        <?php if ($_SESSION['czyPracownik']) {
+        echo "Podaj nazwe użytkownika: <input type='text' name='nazwa' value='$nazwa'/><br>";
+    } else {
+        echo "<input type='hidden' name='nazwa' value='$nazwa'/><br>";
+    } ?>
         Podaj nową nazwę: <input type="text" name="newName" value="<?php echo $newName;?>" /><br>
         Podaj nowe hasło: <input type="text" name="newHaslo" /><br>
         Podaj nowe imię: <input type="text" name="newImie" value="<?php echo $newImie;?>" /><br>

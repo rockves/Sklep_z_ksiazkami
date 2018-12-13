@@ -6,7 +6,7 @@
     if (!$_SESSION['czyPracownik']) {
         die();
     }
-    if($_SERVER["REQUEST_METHOD"] != "POST"){
+    if ($_SERVER["REQUEST_METHOD"] != "POST") {
         echo<<<FORM
         <div id="form">
             <form action="" method="post">
@@ -15,10 +15,10 @@
             </form>
         </div>
 FORM;
-    }else{
-        if(empty($_POST['id'])){
-           echo "Nie wybrano zamowienia";
-        }else{
+    } else {
+        if (empty($_POST['id'])) {
+            echo "Nie wybrano zamowienia";
+        } else {
             $id = $_POST['id'];
             $query = "SELECT zamowienia.Id AS Id,
                     uzytkownicy.Nazwa_uzytkownika AS Nazwa_klienta,
@@ -72,15 +72,11 @@ ROW;
                     echo "Nie udało się wyświetlić produktów w zamówieniu";
                 } else {
                     echo "<tr><td>TYTUL</td><td>CENA</td></tr>";
-                while ($row = $result->fetch_assoc()) {
-                    echo "<tr><td><a href='mainPage.php?product={$row['Id']}'>{$row['Tytul']}</a></td><td>{$row['Cena']}</td></tr>";
+                    while ($row = $result->fetch_assoc()) {
+                        echo "<tr><td><a href='mainPage.php?product={$row['Id']}'>{$row['Tytul']}</a></td><td>{$row['Cena']}</td></tr>";
+                    }
+                    echo "</table>";
                 }
-                echo "</table>";
             }
         }
     }
-        
-}
-
-        
-?>

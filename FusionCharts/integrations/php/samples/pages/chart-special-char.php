@@ -37,7 +37,7 @@
         $xmlData .= "</chart>";
         
       // chart object
-      $Chart = new FusionCharts("column2d", "chart-1" , "600", "400", "chart-container", "xml", $xmlData);
+      $Chart = new FusionCharts("column2d", "chart-1", "600", "400", "chart-container", "xml", $xmlData);
 
       // Render the chart
       $Chart->render();

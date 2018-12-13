@@ -23,7 +23,7 @@
         <?php
 
       // chart object
-      $Chart = new FusionCharts("column2d", "chart-1" , "700", "400", "chart-container", "xmlurl", "data/data.xml");
+      $Chart = new FusionCharts("column2d", "chart-1", "700", "400", "chart-container", "xmlurl", "data/data.xml");
 
       // Render the chart
       $Chart->render();

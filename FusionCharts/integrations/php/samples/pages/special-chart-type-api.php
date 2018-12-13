@@ -82,7 +82,7 @@
        }";
        
         // chart object
-        $Chart = new FusionCharts("pie2d", "chart-1" , "700", "400", "chart-container", "json", $chartData);
+        $Chart = new FusionCharts("pie2d", "chart-1", "700", "400", "chart-container", "json", $chartData);
 
         // Attach message with message string.
         $Chart->addEvent("dataplotClick", "plotClickHandler");

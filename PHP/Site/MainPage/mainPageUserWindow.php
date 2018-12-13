@@ -95,7 +95,7 @@
                             include(__DIR__."/../ZamowieniaPage/updateZamowienia.php");
                         } elseif ($_GET['action'] == 'list') {
                             include(__DIR__."/../ZamowieniaPage/listZamowienia.php");
-                        } elseif ($_GET['action'] == 'info'){
+                        } elseif ($_GET['action'] == 'info') {
                             include(__DIR__."/../ZamowieniaPage/infoZamowienia.php");
                         }
                         break;
@@ -143,9 +143,9 @@
         } elseif (!empty($_GET['user'])) {
             switch ($_GET['user']) {
                 case 'profile':
-                    if(!empty($_GET['edit'])){
+                    if (!empty($_GET['edit'])) {
                         include(__DIR__."/../UzytkownicyPage/updateUzytkownicy.php");
-                    }else{
+                    } else {
                         include(__DIR__."/../UzytkownicyPage/infoUzytkownicy.php");
                     }
                     $default = '0';

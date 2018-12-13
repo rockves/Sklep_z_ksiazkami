@@ -141,28 +141,31 @@ define('CONVERT_PATH', '/usr/bin/convert'); // imagemagic
 // =============================================================================
 // ==                             Public Functions                            ==
 // =============================================================================
-class stitchImageCallback {
-   private $imageData;
+class stitchImageCallback
+{
+    private $imageData;
 
-   function __construct($imageData) {
-       $this->imageData = $imageData;
-   }
+    public function __construct($imageData)
+    {
+        $this->imageData = $imageData;
+    }
 
-   public function callback($matches) {
-       $imageRet = '';
-       $imageName = explode('/', $matches['2']);
-       $imageName = array_pop($imageName);
+    public function callback($matches)
+    {
+        $imageRet = '';
+        $imageName = explode('/', $matches['2']);
+        $imageName = array_pop($imageName);
 
-       foreach ($this->imageData as $key => $value) {
-           if ($value->name .'.'.$value->type == $imageName) {
-               $imageRet = $value->encodedData;
-           }
-       }
-       if ($imageRet == '') {
-           return '';
-       }
-       return $matches[1] . $imageRet;
-   }
+        foreach ($this->imageData as $key => $value) {
+            if ($value->name .'.'.$value->type == $imageName) {
+                $imageRet = $value->encodedData;
+            }
+        }
+        if ($imageRet == '') {
+            return '';
+        }
+        return $matches[1] . $imageRet;
+    }
 }
 
 /**
@@ -171,15 +174,15 @@ class stitchImageCallback {
 * @param  [array] $imageData [Image datauri array]
 * @return [string]            [SVG with imageDatauri]
 */
-function stitchImageToSvg ($svg, $imageData) {
-   if($imageData != null) {
+function stitchImageToSvg($svg, $imageData)
+{
+    if ($imageData != null) {
         $imageData = json_decode($imageData);
         $callback = new stitchImageCallback($imageData);
         return preg_replace_callback("/(<image[^>]*xlink:href *= *[\"']?)([^\"']*)/i", array($callback, 'callback'), $svg);
-   } else {
+    } else {
         return $svg;
-   }
-
+    }
 }
 /**
  *  Gets Export data from FCExporter - main module and build the export binary/objct.
@@ -188,7 +191,8 @@ function stitchImageToSvg ($svg, $imageData) {
  *              $exportParams   {array} Export related parameters
  *  @return 			image object/binary
  */
-function exportProcessor($stream, $meta, $exportParams, $imageData=null) {
+function exportProcessor($stream, $meta, $exportParams, $imageData=null)
+{
 
     // get mime type list parsing MIMETYPES constant declared in Export Resource PHP file
     $ext = strtolower($exportParams["exportformat"]);
@@ -286,7 +290,7 @@ function exportProcessor($stream, $meta, $exportParams, $imageData=null) {
         }
 
         // SVG can be streamed back directly
-    } else if ($ext == 'svg') {
+    } elseif ($ext == 'svg') {
         $stream = stitchImageToSvg($stream, $imageData);
         $return_binary = $stream;
     } else {
@@ -308,7 +312,8 @@ function exportProcessor($stream, $meta, $exportParams, $imageData=null) {
  *
  *  @return 				false is fails. {filepath} if succeeds. Only returned when action is 'save'.
  */
-function exportOutput($exportObj, $exportSettings, $quality = 1) {
+function exportOutput($exportObj, $exportSettings, $quality = 1)
+{
 
     // calls svgparser function that saves/downloads binary
     // store saving status in $doneExport which receives false if fails and true on success
@@ -316,7 +321,7 @@ function exportOutput($exportObj, $exportSettings, $quality = 1) {
 
     // check $doneExport and if true sets status to {filepath}'s value
     // set false if fails
-    $status = ( $doneExport ? basename(@$exportSettings ['filepath']) : false );
+    $status = ($doneExport ? basename(@$exportSettings ['filepath']) : false);
 
     // return status
     return $status;
@@ -330,13 +335,15 @@ function exportOutput($exportObj, $exportSettings, $quality = 1) {
  *
  *  @return     (boolean) false is fails. true if succeeds. Only returned when action is 'save'.
  */
-function filesaver($exportObject, $filepath) {
+function filesaver($exportObject, $filepath)
+{
 
     // when filepath is null the action is 'download'
     // hence write the  bimary to response stream and immediately terminate/close/end stream
     // to prevent any garbage that might get into response and corrupt the  binary
-    if (!@$filepath)
+    if (!@$filepath) {
         die($exportObject);
+    }
 
     // open file path in write mode
     $fp = @fopen($filepath, "w");
@@ -359,7 +366,8 @@ function filesaver($exportObject, $filepath) {
  * @param string $sep rgb value separator
  * @return string
  */
-function hex2rgb($h, $sep = "") {
+function hex2rgb($h, $sep = "")
+{
     $h = str_replace("#", "", $h);
 
     if (strlen($h) == 3) {

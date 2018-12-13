@@ -31,7 +31,7 @@
         
         /*Render an error message, to avoid abrupt failure, if the database connection parameters are incorrect */
         if ($dbhandle->connect_error) {
-          exit("There was an error with your connection: ".$dbhandle->connect_error);
+            exit("There was an error with your connection: ".$dbhandle->connect_error);
         }
         
         $strQuery = "SELECT Country, SUM(`Total Sales`) as TotalSales FROM sales_record GROUP BY Country";
@@ -40,8 +40,9 @@
 
         $result = $dbhandle->query($strQuery) or exit("Error code ({$dbhandle->errno}): {$dbhandle->error}");
         if ($result) {
-            while($row = mysqli_fetch_array($result)) {
-              array_push($labelValueArray, 
+            while ($row = mysqli_fetch_array($result)) {
+                array_push(
+                  $labelValueArray,
                   array(
                       "label" => $row["Country"],
                       "value" => $row["TotalSales"]
@@ -50,12 +51,12 @@
             }
         }
 
-        $chartConfigObj = array ( "chart" =>  
-                            array( 
+        $chartConfigObj = array( "chart" =>
+                            array(
                                 "caption" => "Sales by Country",
                                 "xAxisName" => "Country",
-                                "yAxisName" => "Total Sales", 
-                                "numberSuffix" => "K", 
+                                "yAxisName" => "Total Sales",
+                                "numberSuffix" => "K",
                                 "theme" => "fusion"
                             )
                           );
@@ -65,7 +66,7 @@
         $chartData = json_encode($chartConfigObj);
 
         // chart object
-        $Chart = new FusionCharts("pie3d", "chart-1" , "600", "400", "chart-container", "json", $chartData);
+        $Chart = new FusionCharts("pie3d", "chart-1", "600", "400", "chart-container", "json", $chartData);
 
         // Render the chart
         $Chart->render();

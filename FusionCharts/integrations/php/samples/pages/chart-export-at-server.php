@@ -150,7 +150,7 @@
       
                 
       // chart object
-      $Chart = new FusionCharts("mscombi3d", "chart-1" , "700", "400", "chart-container", "json", $chartData);
+      $Chart = new FusionCharts("mscombi3d", "chart-1", "700", "400", "chart-container", "json", $chartData);
 
       // Render the chart
       $Chart->render();

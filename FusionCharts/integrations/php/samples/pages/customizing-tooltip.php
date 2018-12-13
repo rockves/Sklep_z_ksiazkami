@@ -97,7 +97,7 @@
        }";
        
       // chart object
-      $Chart = new FusionCharts("marimekko", "chart-1" , "600", "400", "chart-container", "json", $chartData);
+      $Chart = new FusionCharts("marimekko", "chart-1", "600", "400", "chart-container", "json", $chartData);
 
       // Render the chart
       $Chart->render();

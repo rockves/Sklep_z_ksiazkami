@@ -50,7 +50,7 @@
                   }";
 
       // chart object
-      $Chart = new FusionCharts("pie3d", "chart-1" , "600", "400", "chart-container", "json", $chartData);
+      $Chart = new FusionCharts("pie3d", "chart-1", "600", "400", "chart-container", "json", $chartData);
 
       // Render the chart
       $Chart->render();

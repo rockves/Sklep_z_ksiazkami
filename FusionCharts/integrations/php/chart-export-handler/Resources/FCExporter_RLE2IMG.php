@@ -122,12 +122,12 @@
 // This constant lists the mime types related to each export format this resource handles
 // The value is semicolon separated key value pair for each format
 // Each key is the format and value is the mime type
-define( "MIMETYPES", "jpg=image/jpeg;jpeg=image/jpeg;gif=image/gif;png=image/png" );
+define("MIMETYPES", "jpg=image/jpeg;jpeg=image/jpeg;gif=image/gif;png=image/png");
 
 // This constant lists all the file extensions for the export formats
 // The value is semicolon separated key value pair for each format
 // Each key is the format and value is the file extension
-define( "EXTENSIONS", "jpg=jpg;jpeg=jpg;gif=gif;png=png" );
+define("EXTENSIONS", "jpg=jpg;jpeg=jpg;gif=gif;png=png");
 
 
 // =============================================================================
@@ -142,16 +142,16 @@ define( "EXTENSIONS", "jpg=jpg;jpeg=jpg;gif=gif;png=png" );
  *              $exportParams   {array} Export related parameters
  *  @return 			image object/binary
  */
-function exportProcessor( $stream, $meta, $exportParams )
+function exportProcessor($stream, $meta, $exportParams)
 {
 
-	// create a new export object
-	// here it is an image generator class that handles jpg, png, gif export
-	// pass all reqiured parameters
-	$FCExporter = new FCIMGGenerator ( $stream, $meta['width'], $meta['height'], $meta['bgColor'] );
+    // create a new export object
+    // here it is an image generator class that handles jpg, png, gif export
+    // pass all reqiured parameters
+    $FCExporter = new FCIMGGenerator($stream, $meta['width'], $meta['height'], $meta['bgColor']);
 
-	// return export ready image object
-	return $FCExporter->getImageObject();
+    // return export ready image object
+    return $FCExporter->getImageObject();
 }
 
 
@@ -166,62 +166,64 @@ function exportProcessor( $stream, $meta, $exportParams )
  *
  *  @return 				false is fails. {filepath} if succeeds. Only returned when action is 'save'.
  */
-function exportOutput ( $exportObj, $exportSettings , $quality = 1 )
+function exportOutput($exportObj, $exportSettings, $quality = 1)
 {
 
-	// decides image encoding and saving php(GD) function as per export type
-	switch( strtolower( $exportSettings['type' ]) )
-	{
-		// in case of PNG check if 'imagepng' function exists.
-		// save the image as png
-		// store saving status in $doneExport which receives false if fails and true on success
-		case "png" :
-			if( function_exists ( "imagepng" ) ) {
-				$doneExport = imagepng ( $exportObj, @$exportSettings ['filepath' ], $quality*9 );
-			}
-			break;
+    // decides image encoding and saving php(GD) function as per export type
+    switch (strtolower($exportSettings['type' ])) {
+        // in case of PNG check if 'imagepng' function exists.
+        // save the image as png
+        // store saving status in $doneExport which receives false if fails and true on success
+        case "png":
+            if (function_exists("imagepng")) {
+                $doneExport = imagepng($exportObj, @$exportSettings ['filepath' ], $quality*9);
+            }
+            break;
 
-		// in case of GIF check if 'imagegif' function exists.
-		// save the image as gif
-		// store saving status in $doneExport which receives false if fails and true on success
-		case "gif" :
-			if( function_exists ( "imagegif" ) ) {
-				// This is done as a fix to some PHP versions running on IIS
-				if( trim(@$exportSettings ['filepath']) )
-					$doneExport = imagegif ( $exportObj, @$exportSettings ['filepath'] );
-				else
-					$doneExport = imagegif ( $exportObj );
-			}
-			break;
+        // in case of GIF check if 'imagegif' function exists.
+        // save the image as gif
+        // store saving status in $doneExport which receives false if fails and true on success
+        case "gif":
+            if (function_exists("imagegif")) {
+                // This is done as a fix to some PHP versions running on IIS
+                if (trim(@$exportSettings ['filepath'])) {
+                    $doneExport = imagegif($exportObj, @$exportSettings ['filepath']);
+                } else {
+                    $doneExport = imagegif($exportObj);
+                }
+            }
+            break;
 
-		// in case of JPG/JPEG check if 'imagejpeg' function exists.
-		// save the image as jpg
-		// store saving status in $doneExport which receives false if fails and true on success
-		case "jpg" :
-		case "jpeg":
-			if( function_exists ( "imagejpeg" ) ) {
-				$doneExport = imagejpeg ( $exportObj, @$exportSettings ['filepath' ], $quality*100 );
-			}
-			break;
+        // in case of JPG/JPEG check if 'imagejpeg' function exists.
+        // save the image as jpg
+        // store saving status in $doneExport which receives false if fails and true on success
+        case "jpg":
+        case "jpeg":
+            if (function_exists("imagejpeg")) {
+                $doneExport = imagejpeg($exportObj, @$exportSettings ['filepath' ], $quality*100);
+            }
+            break;
 
-		default :
-			raise_error( "Invalid Export Format." , true);
-			break;
+        default:
+            raise_error("Invalid Export Format.", true);
+            break;
 
-	}
+    }
 
-	// clear memory after saving
-	imagedestroy( $exportObj );
+    // clear memory after saving
+    imagedestroy($exportObj);
 
-	// check 'filepath'. If it is null - the action is 'download' and hence terminate execution
-	if ( !@$exportSettings [ 'filepath' ] ) exit();
+    // check 'filepath'. If it is null - the action is 'download' and hence terminate execution
+    if (!@$exportSettings [ 'filepath' ]) {
+        exit();
+    }
 
-	// check $doneEport and if true sets status to {filepath}'s value
-	// set false if fails
-	$status =( @$doneExport ? basename ( @$exportSettings ['filepath'] ) : false );
+    // check $doneEport and if true sets status to {filepath}'s value
+    // set false if fails
+    $status =(@$doneExport ? basename(@$exportSettings ['filepath']) : false);
 
-	// return status
-	return $status;
+    // return status
+    return $status;
 }
 
 
@@ -233,95 +235,96 @@ function exportOutput ( $exportObj, $exportSettings , $quality = 1 )
 
 class FCIMGGenerator
 {
-	//Array - Stores multiple chart export data
-	var $arrExportData;
-	//stores number of pages = length of $arrExportData array
-	var $numPages=0;
+    //Array - Stores multiple chart export data
+    public $arrExportData;
+    //stores number of pages = length of $arrExportData array
+    public $numPages=0;
 
-	//Constructor - By default the chart export data can be passed to this
-	function FCIMGGenerator($imageData_FCFormat="", $width="", $height="", $bgcolor="ffffff"){
-		if($imageData_FCFormat && $width && $height){
-			$this->setBitmapData($imageData_FCFormat, $width, $height, $bgcolor);
-		}
-	}
+    //Constructor - By default the chart export data can be passed to this
+    public function FCIMGGenerator($imageData_FCFormat="", $width="", $height="", $bgcolor="ffffff")
+    {
+        if ($imageData_FCFormat && $width && $height) {
+            $this->setBitmapData($imageData_FCFormat, $width, $height, $bgcolor);
+        }
+    }
 
-	// Add chart export data
-	function setBitmapData($imageData_FCFormat, $width, $height, $bgcolor="ffffff"){
-		$this->arrExportData[$this->numPages]["width"]=$width;
-		$this->arrExportData[$this->numPages]["height"]=$height;
-		$this->arrExportData[$this->numPages]["bgcolor"]=$bgcolor;
-		$this->arrExportData[$this->numPages]["imageData"]=$imageData_FCFormat;
-		$this->numPages++;
-	}
-
-
-	function getImageObject($id=0){
-		//create image
-		$image = imagecreatetruecolor($this->arrExportData[$id]["width"], $this->arrExportData[$id]["height"]);
-
-		// Detect the background color
-		if (!$this->arrExportData[$id]["bgcolor"]){
-			$this->arrExportData[$id]["bgcolor"] = "ffffff";
-		}
-		//set Background color
-		// Some linux distro have issues with imagefill
-		// Hence, using imagefilledrectangle() instead
-		//imagefill($image, 0, 0, $this->composeColor($image,$this->arrExportData[$id]["bgcolor"]));
-		imagefilledrectangle($image, 0, 0,($this->arrExportData[$id]["width"]+0)-1, ($this->arrExportData[$id]["height"]+0)-1,$this->composeColor($image,$this->arrExportData[$id]["bgcolor"]));
-
-		// Split the data into rows using ; as separator
-		$rows = explode(";", $this->arrExportData[$id]["imageData"]);
-
-		// Iterate through all the rows
-		for($i= 0; $i<count($rows); $i++){
-			$x=0;
-			// Parse all the pixels in this row
-			$pixels = explode(",", $rows[$i]);
-			// Iterate through the pixels
-			for($j=0; $j<count($pixels); $j++){
-				// Split the pixel into color and repeat value
-				$thispix = explode("_", $pixels[$j]);
-				// Reference to color
-				$c = $thispix[0];
-				// Reference to repeat factor
-				$r = (int)$thispix[1];
-				//If color is empty (i.e., background pixel) skip
-				if ($c==""){
-					$x+=$r;
-					continue;
-					//$c=$this->arrExportData[$id]["bgcolor"];
-				}
-				// get color
-				$color=$this->composeColor($image,$c);
-				//draw line
-				imageline($image, $x, $i, ($x+$r)-1, $i, $color);
-				//set next x pixel position
-				$x+=$r;
-			}
-		}
-
-		return $image;
-	}
+    // Add chart export data
+    public function setBitmapData($imageData_FCFormat, $width, $height, $bgcolor="ffffff")
+    {
+        $this->arrExportData[$this->numPages]["width"]=$width;
+        $this->arrExportData[$this->numPages]["height"]=$height;
+        $this->arrExportData[$this->numPages]["bgcolor"]=$bgcolor;
+        $this->arrExportData[$this->numPages]["imageData"]=$imageData_FCFormat;
+        $this->numPages++;
+    }
 
 
-	// build color object for GD image object
-	// Parsee 6 Byte Hex Color string to 3 Byte RGB color
-	function composeColor($imgObj,$strHexColor){
-		if (strlen($strHexColor)<6){
-			//If the hexadecimal code is less than 6 characters, pad with 0
-			$strHexColor = str_pad($strHexColor, 6, '0', STR_PAD_LEFT);
-		}
-		//Convert value from HEX to RRGGBB (3 bytes)
-		$rr = hexdec(substr($strHexColor, 0, 2));
-		$gg = hexdec(substr($strHexColor, 2, 2));
-		$bb = hexdec(substr($strHexColor, 4, 2));
-		// Allocate the color
-		return imagecolorallocate($imgObj, $rr, $gg, $bb);
-	}
+    public function getImageObject($id=0)
+    {
+        //create image
+        $image = imagecreatetruecolor($this->arrExportData[$id]["width"], $this->arrExportData[$id]["height"]);
 
+        // Detect the background color
+        if (!$this->arrExportData[$id]["bgcolor"]) {
+            $this->arrExportData[$id]["bgcolor"] = "ffffff";
+        }
+        //set Background color
+        // Some linux distro have issues with imagefill
+        // Hence, using imagefilledrectangle() instead
+        //imagefill($image, 0, 0, $this->composeColor($image,$this->arrExportData[$id]["bgcolor"]));
+        imagefilledrectangle($image, 0, 0, ($this->arrExportData[$id]["width"]+0)-1, ($this->arrExportData[$id]["height"]+0)-1, $this->composeColor($image, $this->arrExportData[$id]["bgcolor"]));
+
+        // Split the data into rows using ; as separator
+        $rows = explode(";", $this->arrExportData[$id]["imageData"]);
+
+        // Iterate through all the rows
+        for ($i= 0; $i<count($rows); $i++) {
+            $x=0;
+            // Parse all the pixels in this row
+            $pixels = explode(",", $rows[$i]);
+            // Iterate through the pixels
+            for ($j=0; $j<count($pixels); $j++) {
+                // Split the pixel into color and repeat value
+                $thispix = explode("_", $pixels[$j]);
+                // Reference to color
+                $c = $thispix[0];
+                // Reference to repeat factor
+                $r = (int)$thispix[1];
+                //If color is empty (i.e., background pixel) skip
+                if ($c=="") {
+                    $x+=$r;
+                    continue;
+                    //$c=$this->arrExportData[$id]["bgcolor"];
+                }
+                // get color
+                $color=$this->composeColor($image, $c);
+                //draw line
+                imageline($image, $x, $i, ($x+$r)-1, $i, $color);
+                //set next x pixel position
+                $x+=$r;
+            }
+        }
+
+        return $image;
+    }
+
+
+    // build color object for GD image object
+    // Parsee 6 Byte Hex Color string to 3 Byte RGB color
+    public function composeColor($imgObj, $strHexColor)
+    {
+        if (strlen($strHexColor)<6) {
+            //If the hexadecimal code is less than 6 characters, pad with 0
+            $strHexColor = str_pad($strHexColor, 6, '0', STR_PAD_LEFT);
+        }
+        //Convert value from HEX to RRGGBB (3 bytes)
+        $rr = hexdec(substr($strHexColor, 0, 2));
+        $gg = hexdec(substr($strHexColor, 2, 2));
+        $bb = hexdec(substr($strHexColor, 4, 2));
+        // Allocate the color
+        return imagecolorallocate($imgObj, $rr, $gg, $bb);
+    }
 }
 
 //needed to validate inclusion of this resource file in main file - FCExporter.php
 return 'true';
-
-?>

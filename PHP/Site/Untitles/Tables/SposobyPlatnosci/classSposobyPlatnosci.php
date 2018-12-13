@@ -124,9 +124,9 @@
                 $czyDodane = 1;
             }
             if ($nowaCena != '') {
-                if($czyDodane == 1){
+                if ($czyDodane == 1) {
                     $query .= ", Cena_uslugi = '$nowaCena'";
-                }else{
+                } else {
                     $query .= "Cena_uslugi = '$nowaCena'";
                 }
                 $this->setCena($nowaCena);

@@ -178,7 +178,7 @@ define("EXPORT_HANDLER", "FCExporter_");
 define("HANDLER_ASSOCIATIONS", "RLE:PDF=PDF;JPEG=IMG;JPG=IMG;PNG=IMG;GIF=IMG|SVG:SVG=ALL;PDF=ALL;JPEG=ALL;JPG=ALL;PNG=ALL;GIF=ALL");
 
 // default mime types
-define( "MIME_TO_FORMAT", "image/jpg=jpg;image/jpeg=jpg;image/gif=gif;image/png=png;application/pdf=pdf;image/svg+xml=svg" );
+define("MIME_TO_FORMAT", "image/jpg=jpg;image/jpeg=jpg;image/gif=gif;image/png=png;application/pdf=pdf;image/svg+xml=svg");
 
 // Path where the export handler files are located
 // Please note that the resource path should be relative to
@@ -237,7 +237,7 @@ $exporterResource = getExporter($exportData ['parameters'] ["exportformat"], $ex
 
 
 // if resource is not found terminate with error report
-if (!@include( $exporterResource )) {
+if (!@include($exporterResource)) {
     raise_error(404, true);
 }
 
@@ -281,7 +281,8 @@ flushStatus($exportedStatus, $exportData ['meta']);
  *  @param	$exportRequestStream 	All POST data (array) from chart
  *  @return	An array of processed export data and parameters
  */
-function parseExportRequestStream($exportRequestStream) {
+function parseExportRequestStream($exportRequestStream)
+{
 
     // Check for SVG
     $exportData ['streamtype'] = strtoupper(@$exportRequestStream ['stream_type']);
@@ -289,8 +290,7 @@ function parseExportRequestStream($exportRequestStream) {
     if (!$exportData ['streamtype']) {
         if (@$exportRequestStream ['svg']) {
             $exportData ['streamtype'] = "SVG";
-        }
-        else {
+        } else {
             $exportData ['streamtype'] = "RLE";
         }
     }
@@ -303,8 +303,9 @@ function parseExportRequestStream($exportRequestStream) {
 
     // get all export related parameters and parse to validate and process these
     // add notice if 'parameters' is not retrieved. In that case default values would be taken
-    if (!@$exportRequestStream['parameters'])
+    if (!@$exportRequestStream['parameters']) {
         raise_error(102);
+    }
 
     // parse parameters
     $exportData ['parameters'] = parseExportParams(@$exportRequestStream ['parameters'], @$exportRequestStream);
@@ -335,7 +336,8 @@ function parseExportRequestStream($exportRequestStream) {
  *  @param 	$strParams A string with parameters (key=value pairs) separated  by | (pipe)
  *  @return An associative array of key => value pairs
  */
-function parseExportParams($strParams, $exportRequestStream = array()) {
+function parseExportParams($strParams, $exportRequestStream = array())
+{
     // get global definition of default parameter values
     global $defaultParameterValues;
 
@@ -345,7 +347,7 @@ function parseExportParams($strParams, $exportRequestStream = array()) {
     $exportFilename = @$params['exportfilename'];
     $exportFormat = @$params['exportformat'];
 
-     // backward compatible setting to get filename
+    // backward compatible setting to get filename
     if (!$exportFilename) {
         $exportFilename = (string)@$exportRequestStream["filename"];
         if ($exportFilename) {
@@ -354,17 +356,15 @@ function parseExportParams($strParams, $exportRequestStream = array()) {
     }
     // backward compatible setting to get exportFormat through mimetype
     if (!$exportFormat) {
-
         $mimeType = strtolower((string)@$exportRequestStream["type"]);
-	$mimeList = bang( @MIME_TO_FORMAT );
+        $mimeList = bang(@MIME_TO_FORMAT);
 
         $exportFormat = $mimeList[$mimeType];
 
         if ($exportFormat) {
-           $params['exportformat'] = $exportFormat;
-        }
-        else {
-           $params['exportformat'] = 'png';
+            $params['exportformat'] = $exportFormat;
+        } else {
+            $params['exportformat'] = 'png';
         }
     }
 
@@ -386,7 +386,8 @@ function parseExportParams($strParams, $exportRequestStream = array()) {
  *  @return A path (string) containing the Export Resource PHP file
  * 			the for specified format
  */
-function getExporter($strFormat, $streamtype = "RLE") {
+function getExporter($strFormat, $streamtype = "RLE")
+{
 
     // get array of [format => handler suffix ] from HANDLER_ASSOCIATIONS
     $associationCluster = bang(HANDLER_ASSOCIATIONS, array('|', ':'), true);
@@ -423,20 +424,25 @@ function getExporter($strFormat, $streamtype = "RLE") {
  *  @param 	$exportParams	An array of export parameters
  *  @return 				export success status ( filename if success, false if not)
  */
-function outputExportObject($exportObj, $exportParams) {
+function outputExportObject($exportObj, $exportParams)
+{
     // checks whether the export action is 'download'
     $isDownload = strtolower($exportParams ["exportaction"]) == "download";
 
 
     // dynamically call 'setupDownload' or 'setupServer' as per export action
     // pass export paramters and get back export settings in an array
-    $exportActionSettings = call_user_func('setup' . ($isDownload ? 'Download' : 'Server'), $exportParams['exportfilename'], $exportParams['exportformat'], $exportParams['exporttargetwindow']
+    $exportActionSettings = call_user_func(
+        'setup' . ($isDownload ? 'Download' : 'Server'),
+        $exportParams['exportfilename'],
+        $exportParams['exportformat'],
+        $exportParams['exporttargetwindow']
     );
 
     // check whether export setting gives a 'ready' flag to true/'download'
     // and call output handler
     // return status back (filename if success, false if not success )
-    return ( @$exportActionSettings ['ready'] ? exportOutput($exportObj, $exportActionSettings, 1) : false );
+    return (@$exportActionSettings ['ready'] ? exportOutput($exportObj, $exportActionSettings, 1) : false);
 }
 
 /**
@@ -449,7 +455,8 @@ function outputExportObject($exportObj, $exportParams) {
  * 			$msg		custom message to be added as statusMessage
  *
  */
-function flushStatus($status, $meta, $msg = '') {
+function flushStatus($status, $meta, $msg = '')
+{
     die(buildResponse(parseExportedStatus($status, $meta, $msg)));
 }
 
@@ -462,29 +469,31 @@ function flushStatus($status, $meta, $msg = '') {
  * 			$msg		custom message to be added as statusMessage
  * 	@return			 	array of status information
  */
-function parseExportedStatus($status, $meta, $msg = '') {
+function parseExportedStatus($status, $meta, $msg = '')
+{
     // get global 'notice' variable
     global $notices;
     global $exportData;
 
     // add notice
-    if ($notices)
+    if ($notices) {
         $arrStatus [] = "notice=" . @$notices;
+    }
 
     // Add DOMId
     $arrStatus [] = "DOMId=" . @$meta["DOMId"];
 
     // add file URI , width and height when status success
     // provide 0 as width and height on failure
-    $arrStatus [] = "height=" . ( @$status ? @$meta ['height'] : 0 );
-    $arrStatus [] = "width=" . ( @$status ? @$meta ['width'] : 0 );
-    $arrStatus [] = "fileName=" . ( @$status ? ( preg_replace('/([^\/]$)/i', '${1}/', HTTP_URI) . @$status ) : "" );
+    $arrStatus [] = "height=" . (@$status ? @$meta ['height'] : 0);
+    $arrStatus [] = "width=" . (@$status ? @$meta ['width'] : 0);
+    $arrStatus [] = "fileName=" . (@$status ? (preg_replace('/([^\/]$)/i', '${1}/', HTTP_URI) . @$status) : "");
 
     // add status message . Priority 1 is a custom message if provided
-    $arrStatus [] = "statusMessage=" . ( trim(@$msg) ? @$msg :
-                    ( $status ? "success" : "failure" ));
+    $arrStatus [] = "statusMessage=" . (trim(@$msg) ? @$msg :
+                    ($status ? "success" : "failure"));
     // add statusCode to 1 on success
-    $arrStatus [] = "statusCode=" . ( @$status ? "1" : "0" );
+    $arrStatus [] = "statusCode=" . (@$status ? "1" : "0");
 
     // return status information
     return $arrStatus;
@@ -499,22 +508,24 @@ function parseExportedStatus($status, $meta, $msg = '') {
  *  @param	 $arrMsg	Array of string containing status data as [key=value ]
  *  @return				A string to be written to output stream
  */
-function buildResponse($arrMsg) {
+function buildResponse($arrMsg)
+{
     // access global variable to get export action
     global $exportData;
 
     // check whether export action is download. If so the response output would be at browser
     // i.e. the output format would be HTML
-    $isHTML = ( ( $exportData ['parameters']['exportaction'] ) != null ? (strtolower(
-                            $exportData ['parameters']['exportaction']) == "download" ) : true );
+    $isHTML = (($exportData ['parameters']['exportaction']) != null ? (strtolower(
+                            $exportData ['parameters']['exportaction']
+    ) == "download") : true);
 
 
     // If the output format is not HTML then start building a quertstring hence start with a &
-    $msg = ( $isHTML ? "" : "&" );
+    $msg = ($isHTML ? "" : "&");
     // join all status data from array using & or <BE> as per export action
     // Joining with & would convert the string into a querystring as each element already contains
     // key=value.
-    $msg .= implode(( $isHTML ? "<BR>" : "&"), $arrMsg);
+    $msg .= implode(($isHTML ? "<BR>" : "&"), $arrMsg);
 
     // return response
     return $msg;
@@ -527,7 +538,8 @@ function buildResponse($arrMsg) {
  *  @param 	$target			target window where the download would happen [ Not required here ]
  *  @return 	An array containing exportSettings and ready flag
  */
-function setupServer($exportFile, $exportType, $target = "_self") {
+function setupServer($exportFile, $exportType, $target = "_self")
+{
     // get extension related to specified type
     $ext = '.' . getExtension(strtolower($exportType));
 
@@ -582,8 +594,9 @@ function setupServer($exportFile, $exportType, $target = "_self") {
     }
 
     // raise error and halt execution when overwrite is off and intelligent naming is off
-    if (!INTELLIGENTFILENAMING)
+    if (!INTELLIGENTFILENAMING) {
         raise_error(" Export handler's Overwrite setting is off. Cannot overwrite.", true);
+    }
 
     raise_error(" Using intelligent naming of file by adding an unique suffix to the exising name.");
     // Intelligent naming
@@ -615,8 +628,8 @@ function setupServer($exportFile, $exportType, $target = "_self") {
  *  @param 	$target			target window where the download would happen (_self/_blank/_parent/_top/window name)
  *  @return 	An array containing exportSettings and ready flag
  */
-function setupDownload($exportFile, $exportType, $target = "_self") {
-
+function setupDownload($exportFile, $exportType, $target = "_self")
+{
     $exportType = strtolower($exportType);
 
     // get mime type list parsing MIMETYPES constant declared in Export Resource PHP file
@@ -632,7 +645,7 @@ function setupDownload($exportFile, $exportType, $target = "_self") {
     // when target is _self the type is 'attachment'
     // when target is other than self type is 'inline'
     // NOTE : you can comment this line in order to replace present window (_self) content with the image/PDF
-    header('Content-Disposition: ' . ( strtolower($target == "_self") ? "attachment" : "inline" ) . '; filename="' . $exportFile . '.' . $ext . '"');
+    header('Content-Disposition: ' . (strtolower($target == "_self") ? "attachment" : "inline") . '; filename="' . $exportFile . '.' . $ext . '"');
 
     // return exportSetting array. Ready should be set to download
     return array('ready' => 'download', "type" => $exportType);
@@ -643,7 +656,8 @@ function setupDownload($exportFile, $exportType, $target = "_self") {
  *  @param	$exportType 	(string) export format
  *  @return file extension as string
  */
-function getExtension($exportType) {
+function getExtension($exportType)
+{
 
     // get an associative array of [type=> extension]
     // from EXTENSIONS constant defined in Export Resource PHP file
@@ -651,7 +665,7 @@ function getExtension($exportType) {
     $exportType = strtolower($exportType);
 
     // if extension type is present in $extensionList return it, otherwise return the type
-    return ( @$extensionList [$exportType] ? $extensionList [$exportType] : $exportType );
+    return (@$extensionList [$exportType] ? $extensionList [$exportType] : $exportType);
 }
 
 /**
@@ -659,13 +673,15 @@ function getExtension($exportType) {
  *  file naming
  *  @return 	a string containing UUID and random number /timestamp
  */
-function generateIntelligentFileId() {
+function generateIntelligentFileId()
+{
     //generate UUID
     $UUID = md5(uniqid(rand(), true));
 
     // chck for additional suffix : timestamp or random
     // accrodingly add random number ot timestamp
-    $UUID .= '_' . ( strtolower(FILESUFFIXFORMAT) != "timestamp" ? rand() :
+    $UUID .= '_' . (
+        strtolower(FILESUFFIXFORMAT) != "timestamp" ? rand() :
                     date('dmYHis') . '_' . round(microtime(true) - floor(microtime(true)), 2) * 100
             );
 
@@ -681,8 +697,8 @@ function generateIntelligentFileId() {
  *
  *  @return An associative array with key => value
  */
-function bang($str, $delimiterList = array(";", "="), $retainPropertyCase = false) {
-
+function bang($str, $delimiterList = array(";", "="), $retainPropertyCase = false)
+{
     if (!$delimiterList) {
         $delimiterList = array(";", "=");
     }
@@ -713,7 +729,8 @@ function bang($str, $delimiterList = array(";", "="), $retainPropertyCase = fals
  * 						OR, it can be a string containing the error message/notice
  * 	@param 		$halt 	(boolean) Whether to halt execution
  */
-function raise_error($code, $halt = false) {
+function raise_error($code, $halt = false)
+{
 
     // access global notice storage
     global $notices;
@@ -732,7 +749,7 @@ function raise_error($code, $halt = false) {
     // if $code is present as index of errorMessages array, take the value of the element
     // take Error! only when all fails
     $err_message = is_string($code) ? $code :
-            ( @$errMessages [$code] ? $errMessages [$code] : "statusMessage=ERROR!" );
+            (@$errMessages [$code] ? $errMessages [$code] : "statusMessage=ERROR!");
 
     // If halt is true stop execution and send response back to chart/output stream
     if ($halt) {
@@ -742,5 +759,3 @@ function raise_error($code, $halt = false) {
         $notices .= $err_message;
     }
 }
-
-?>

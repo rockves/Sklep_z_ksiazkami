@@ -9,7 +9,7 @@
     
     /*Render an error message, to avoid abrupt failure, if the database connection parameters are incorrect */
     if ($dbhandle->connect_error) {
-      exit("There was an error with your connection: ".$dbhandle->connect_error);
+        exit("There was an error with your connection: ".$dbhandle->connect_error);
     }
     
     // Drilldown column order
@@ -35,16 +35,17 @@
 
 
 
-    function GetDBData($columnName, $parentValue, $parentName, $dbhandle, $drillDownLevel, $maxDrill) {
+    function GetDBData($columnName, $parentValue, $parentName, $dbhandle, $drillDownLevel, $maxDrill)
+    {
         
         #echo "DrillDownLevel after: $drillDownLevel";
 
-        $chartConfigObj = array ( "chart" =>  
-                            array( 
+        $chartConfigObj = array( "chart" =>
+                            array(
                                 "caption" => "Sales by $columnName",
                                 "xAxisName" => $columnName,
-                                "yAxisName" => "Total Sales", 
-                                "numberSuffix" => "K", 
+                                "yAxisName" => "Total Sales",
+                                "numberSuffix" => "K",
                                 "theme" => "fusion"
                             )
                         );
@@ -59,10 +60,11 @@
 
         $result = $dbhandle->query($strQuery) or exit("Error code ({$dbhandle->errno}): {$dbhandle->error}");
         if ($result) {
-            while($row = mysqli_fetch_array($result)) {
-                $label = $row[$columnName];                
+            while ($row = mysqli_fetch_array($result)) {
+                $label = $row[$columnName];
                 if (((int)$drillDownLevel) <  $maxDrill - 1) {
-                    array_push($labelValueArray, 
+                    array_push(
+                        $labelValueArray,
                         array(
                             "label" => "$label",
                             "value" => $row["TotalSales"],
@@ -70,7 +72,8 @@
                         )
                     );
                 } else {
-                    array_push($labelValueArray, 
+                    array_push(
+                        $labelValueArray,
                         array(
                             "label" => "$label",
                             "value" => $row["TotalSales"]
@@ -87,4 +90,3 @@
 
         echo $jsonEncodedData;
     }
-?>

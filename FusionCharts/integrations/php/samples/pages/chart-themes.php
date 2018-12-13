@@ -98,10 +98,10 @@
               }";
 
       // Chart 1
-      $Chart1 = new FusionCharts("overlappedcolumn2d", "chart-id-1" , "600", "400", "chart-1", "json", $chartData1);
+      $Chart1 = new FusionCharts("overlappedcolumn2d", "chart-id-1", "600", "400", "chart-1", "json", $chartData1);
       
       // Chart 2
-      $Chart2 = new FusionCharts("column2d", "chart-id-2" , "600", "400", "chart-2", "json", $chartData2);
+      $Chart2 = new FusionCharts("column2d", "chart-id-2", "600", "400", "chart-2", "json", $chartData2);
 
       // Render the chart 1
       $Chart1->render();

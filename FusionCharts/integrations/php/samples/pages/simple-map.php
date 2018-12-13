@@ -35,16 +35,16 @@
             );
 
             // Widget color range data
-            $colorDataObj = array("minvalue" => "0", "code" => "#FFE0B2", "gradient" => "1", 
+            $colorDataObj = array("minvalue" => "0", "code" => "#FFE0B2", "gradient" => "1",
                                     "color" => array(
-                                        ["minValue" => "0", "maxValue" => "50", "code" => "#F2726F"], 
+                                        ["minValue" => "0", "maxValue" => "50", "code" => "#F2726F"],
                                         ["minValue" => "50", "maxValue" => "75", "code" => "#FFC533"],
                                         ["minValue" => "75", "maxValue" => "100", "code" => "#62B58F"]
                                     )
                             );
 
             // Map data array
-            $mapDataArray = array( 
+            $mapDataArray = array(
                 ["NA", ".82", "1"],
                 ["SA", "2.04", "1"],
                 ["AS", "1.78", "1"],
@@ -55,8 +55,8 @@
                     
             $mapData = array();
 
-            for($i = 0; $i < count($mapDataArray); $i++) {
-                array_push($mapData,array("id" => $mapDataArray[$i][0], "value" => $mapDataArray[$i][1], "showLabel" => $mapDataArray[$i][2]));
+            for ($i = 0; $i < count($mapDataArray); $i++) {
+                array_push($mapData, array("id" => $mapDataArray[$i][0], "value" => $mapDataArray[$i][1], "showLabel" => $mapDataArray[$i][2]));
             }
 
             $arrMapConfig["colorRange"] = $colorDataObj;
@@ -66,7 +66,7 @@
             $jsonEncodedData = json_encode($arrMapConfig);
 
             // Map object
-            $Map = new FusionCharts("maps/world", "MyFirstMap" , "800", "500", "map-container", "json", $jsonEncodedData);
+            $Map = new FusionCharts("maps/world", "MyFirstMap", "800", "500", "map-container", "json", $jsonEncodedData);
 
             // Render the Map
             $Map->render();

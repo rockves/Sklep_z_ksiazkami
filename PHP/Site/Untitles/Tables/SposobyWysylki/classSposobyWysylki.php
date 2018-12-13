@@ -131,9 +131,9 @@
                 $czyDodane = 1;
             }
             if ($nowaSzybkosc != '') {
-                if($czyDodane == 1){
+                if ($czyDodane == 1) {
                     $query .= ", Szybkosc_dostawy = '$nowaSzybkosc'";
-                }else{
+                } else {
                     $query .= "Szybkosc_dostawy = '$nowaSzybkosc'";
                 }
                 
@@ -141,9 +141,9 @@
                 $czyDodane = 1;
             }
             if ($nowaCena != '') {
-                if($czyDodane == 1){
+                if ($czyDodane == 1) {
                     $query .= ", Cena_uslugi = '$nowaCena'";
-                }else{
+                } else {
                     $query = "Cena_uslugi = '$nowaCena'";
                 }
                 

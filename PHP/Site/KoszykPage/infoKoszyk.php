@@ -108,11 +108,10 @@ LIST;
         $row = $result->fetch_assoc();
         $total_pages = ceil($row['total'] / $result_count);
         if ($total_pages < 2) {
-            
-        }else{
-        echo "<div class='pageList'>";
-        for ($i = 1; $i <= $total_pages; $i++) {
-            echo "<a href='$self?strona=$i&count=$result_count'".($i==$strona ? "class='curPageIndex'" : "class='pageIndex'").">$i</a> ";
-        }
-        echo "</div>";
+        } else {
+            echo "<div class='pageList'>";
+            for ($i = 1; $i <= $total_pages; $i++) {
+                echo "<a href='$self?strona=$i&count=$result_count'".($i==$strona ? "class='curPageIndex'" : "class='pageIndex'").">$i</a> ";
+            }
+            echo "</div>";
         }

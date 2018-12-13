@@ -262,7 +262,7 @@
                   }";
 
       // chart object
-      $Chart = new FusionCharts("maps/usa", "map-1" , "700", "400", "map-container", "json", $mapData);
+      $Chart = new FusionCharts("maps/usa", "map-1", "700", "400", "map-container", "json", $mapData);
 
       // Render the chart
       $Chart->render();

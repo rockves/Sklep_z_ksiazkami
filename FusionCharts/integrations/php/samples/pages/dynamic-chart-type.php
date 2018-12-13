@@ -79,7 +79,7 @@
                   }";
 
       // chart object
-      $Chart = new FusionCharts("column2d", "chart-1" , "600", "350", "chartContainer", "json", $mapData);
+      $Chart = new FusionCharts("column2d", "chart-1", "600", "350", "chartContainer", "json", $mapData);
 
       // Render the chart
       $Chart->render();

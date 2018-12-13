@@ -289,9 +289,9 @@
             }
             if ($newHaslo != '') {
                 $hash = password_hash($newHaslo, PASSWORD_BCRYPT);
-                if($czyDodane == 1){
+                if ($czyDodane == 1) {
                     $query .= ", Haslo = '$hash'";
-                }else{
+                } else {
                     $query .= "Haslo = '$hash'";
                 }
                 
@@ -299,9 +299,9 @@
                 $czyDodane = 1;
             }
             if ($newImie != '') {
-                if($czyDodane == 1){
+                if ($czyDodane == 1) {
                     $query .= ", Imie = '$newImie'";
-                }else{
+                } else {
                     $query .= "Imie = '$newImie'";
                 }
                 
@@ -309,9 +309,9 @@
                 $czyDodane = 1;
             }
             if ($newNazwisko != '') {
-                if($czyDodane == 1){
+                if ($czyDodane == 1) {
                     $query .= ", Nazwisko = '$newNazwisko'";
-                }else{
+                } else {
                     $query .= "Nazwisko = '$newNazwisko'";
                 }
                 
@@ -319,9 +319,9 @@
                 $czyDodane = 1;
             }
             if ($newUlica != '') {
-                if($czyDodane == 1){
+                if ($czyDodane == 1) {
                     $query .= ", Ulica = '$newUlica'";
-                }else{
+                } else {
                     $query .= "Ulica = '$newUlica'";
                 }
                 
@@ -329,9 +329,9 @@
                 $czyDodane = 1;
             }
             if ($newMiasto != '') {
-                if($czyDodane == 1){
+                if ($czyDodane == 1) {
                     $query .= ", Miasto = '$newMiasto'";
-                }else{
+                } else {
                     $query .= "Miasto = '$newMiasto'";
                 }
                 
@@ -339,9 +339,9 @@
                 $czyDodane = 1;
             }
             if ($newKodPocztowy != '') {
-                if($czyDodane == 1){
+                if ($czyDodane == 1) {
                     $query .= ", Kod_pocztowy = '$newKodPocztowy'";
-                }else{
+                } else {
                     $query .= "Kod_pocztowy = '$newKodPocztowy'";
                 }
                 
@@ -349,9 +349,9 @@
                 $czyDodane = 1;
             }
             if ($newEmail != '') {
-                if($czyDodane == 1){
+                if ($czyDodane == 1) {
                     $query .= ", Email = '$newEmail'";
-                }else{
+                } else {
                     $query .= "Email = '$newEmail'";
                 }
                 
@@ -359,9 +359,9 @@
                 $czyDodane = 1;
             }
             if ($newNumer != '') {
-                if($czyDodane == 1){
+                if ($czyDodane == 1) {
                     $query .= ", Numer_telefonu = '$newNumer'";
-                }else{
+                } else {
                     $query .= "Numer_telefonu = '$newNumer'";
                 }
                 

@@ -24,10 +24,10 @@
                 $arrChartConfig = array(
                   "chart" => array(
                     "caption" => "Countries With Most Oil Reserves [2017-18]",
-                    "subCaption" => "In MMbbl = One Million barrels", 
+                    "subCaption" => "In MMbbl = One Million barrels",
                     "xAxisName" => "Country",
-                    "yAxisName" => "Reserves (MMbbl)", 
-                    "numberSuffix" => "K", 
+                    "yAxisName" => "Reserves (MMbbl)",
+                    "numberSuffix" => "K",
                     "theme" => "fusion"
                     )
                 );
@@ -47,7 +47,7 @@
               $arrLabelValueData = array();
 
             // Pushing labels and values
-            for($i = 0; $i < count($arrChartData); $i++) {
+            for ($i = 0; $i < count($arrChartData); $i++) {
                 array_push($arrLabelValueData, array(
                     "label" => $arrChartData[$i][0], "value" => $arrChartData[$i][1]
                 ));
@@ -59,7 +59,7 @@
       $jsonEncodedData = json_encode($arrChartConfig);
 
       // chart object
-      $Chart = new FusionCharts("column2d", "MyFirstChart" , "600", "350", "chart-container", "json", $jsonEncodedData);
+      $Chart = new FusionCharts("column2d", "MyFirstChart", "600", "350", "chart-container", "json", $jsonEncodedData);
 
       // Render the chart
       $Chart->render();

@@ -64,7 +64,7 @@
        }";
        
         // chart object
-        $Chart = new FusionCharts("hlineargauge", "chart-1" , "600", "400", "chart-container", "json", $chartData);
+        $Chart = new FusionCharts("hlineargauge", "chart-1", "600", "400", "chart-container", "json", $chartData);
 
         # Attach event with method name
         $Chart->addEvent("realtimeUpdateComplete", "onUpdate");

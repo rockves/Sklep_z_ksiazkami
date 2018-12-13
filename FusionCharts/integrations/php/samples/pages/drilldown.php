@@ -22,7 +22,7 @@
     <body>
         <?php
             // chart object
-            $Chart = new FusionCharts("column2d", "MyDrillDownChart" , "600", "350", "chart-container", "jsonurl", "drilldown-data-handler.php");
+            $Chart = new FusionCharts("column2d", "MyDrillDownChart", "600", "350", "chart-container", "jsonurl", "drilldown-data-handler.php");
 
             // Render the chart
             $Chart->render();

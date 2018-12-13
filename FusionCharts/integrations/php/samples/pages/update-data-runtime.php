@@ -60,7 +60,7 @@
                 }";
 
       // chart object
-      $Chart = new FusionCharts("angulargauge", "angulargauge-1" ,"450", "270", "angulargauge-container", "json", $gaugeData);
+      $Chart = new FusionCharts("angulargauge", "angulargauge-1", "450", "270", "angulargauge-container", "json", $gaugeData);
 
       // Render the chart
       $Chart->render();

@@ -414,7 +414,7 @@
                         }";
        
         // chart object
-        $Chart = new FusionCharts("selectscatter", "chart-1" , "700", "400", "chart-container", "json", $chartData);
+        $Chart = new FusionCharts("selectscatter", "chart-1", "700", "400", "chart-container", "json", $chartData);
 
         $Chart->addEvent("renderComplete", "onRenderComplete");
         $Chart->addEvent("beforeDataSubmit", "onBeforeDataSubmit");
