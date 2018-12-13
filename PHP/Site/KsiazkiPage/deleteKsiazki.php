@@ -12,7 +12,7 @@
 <div id="form">
     <form action="" method="post">
         <input type="hidden" name="akcja" value="delete">
-        Podaj gatunek do usunięcia: <input type="text" name="tytul" value="<?php echo $tytul;?>" />
+        Podaj książkę do usunięcia: <input type="text" name="tytul" value="<?php echo $tytul;?>" />
         <input type="submit" />
     </form>
 </div>

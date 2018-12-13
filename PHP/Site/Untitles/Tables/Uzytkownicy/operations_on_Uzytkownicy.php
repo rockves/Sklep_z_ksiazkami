@@ -5,9 +5,8 @@
 	$loginErrMsg = '';
 	$registerErrMsg = '';
 
-	if (empty($_POST['akcja'])) {
-		exit();
-	}
+	if (!empty($_POST['akcja'])) {
+		
 
 	if ($_POST['akcja'] == 'insert') {
 		if(empty($_POST['nazwa'])) $errMsg .= 'Nie podano nazwy użytkownika';
@@ -112,7 +111,7 @@
 				$registerErrMsg .= '<br>Nie podano kodu pocztowego';
 			}else{
 				$regKod=prepareFormData($_POST['regKod']);
-				if(!preg_match("//d{2}-/d{3}/",$regKod)) {
+				if(!preg_match("/\d{2}-\d{3}/",$regKod)) {
 					$registerErrMsg .= '<br>Należy podać poprawny kod pocztowy'; 
 				}
 			} 
@@ -137,4 +136,5 @@
 				$registerErrMsg = $uzytkownik->insertUzytkownik();
 			}
 		}
+	}
 ?>

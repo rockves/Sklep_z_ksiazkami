@@ -61,12 +61,13 @@ LIST;
             }else{
                 echo '<fieldset id="wysylkaForm" style="border:0;"><span style="font-weight:bold">Wybierz metodę wysyłki:</span><table class="wysylkaTable">';
                 while($row = $result->fetch_assoc()){
+                $cenaW = ($row['Cena_uslugi'] == 0) ? "Za darmo" : "{$row['Cena_uslugi']} zł";
                 echo<<<LIST
                     <tr>
                         <td><input type="radio" value="{$row['Id']}" name="wysylkaForm"></td>
                         <td>{$row['Nazwa_uslugi']}</td>
                         <td>{$row['Szybkosc_dostawy']} dni</td>
-                        <td>{$row['Cena_uslugi']} zł</td>
+                        <td>$cenaW</td>
                     </tr>
 LIST;
             }
@@ -83,11 +84,12 @@ LIST;
             }else{
                 echo '<fieldset id="platnoscForm" style="border:0;"><span style="font-weight:bold">Wybierz metodę płatnosci:</span><table class="platnoscTable">';
                 while($row = $result->fetch_assoc()){
+                $cenaP = ($row['Cena_uslugi'] == 0) ? "Za darmo" : "{$row['Cena_uslugi']} zł";
                 echo<<<LIST
                     <tr>
                         <td><input type="radio" value="{$row['Id']}" name="platnoscForm"></td>
                         <td>{$row['Nazwa_uslugi']}</td>
-                        <td>{$row['Cena_uslugi']} zł</td>
+                        <td>$cenaP</td>
                     </tr>
 LIST;
             }

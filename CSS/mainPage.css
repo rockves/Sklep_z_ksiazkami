@@ -107,7 +107,8 @@ a.headerText {
 
 .gatunekLi:hover {}
 
-div.adminPanel>div.functionList>dl {
+div.adminPanel>div.functionList>dl,
+    {
     list-style-type: circle;
 }
 
@@ -204,6 +205,29 @@ table.adminList {
     min-height: 90%;
     box-sizing: border-box;
     float: left;
+}
+
+div.reportsPanel>div.reportsList>dl,
+    {
+    list-style-type: circle;
+}
+
+div.reportsPanel>div.reportsList>dl>dt {
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+}
+
+div.reportsPanel>div.reportsList>dl>dd {
+    display: list-item;
+    list-style-type: disc;
+    margin-left: 8%;
+}
+
+div.reportsPanel>div.reportsList>dl>dd>a {
+    text-decoration: none;
+    color: black;
+
 }
 
 footer {

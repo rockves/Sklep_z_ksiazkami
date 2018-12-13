@@ -85,10 +85,28 @@
                         break;
 
                 }
+            }else if(!empty($_GET['report'])){
+                switch($_GET['report']){
+                    case 'top10':
+                        include(__DIR__."/../Reports/top10.php");
+                        break;
+                    case 'top10Zysk':
+                        include(__DIR__."/../Reports/top10Zysk.php");
+                        break;
+                    case 'sellList':
+                        include(__DIR__."/../Reports/sellList.php");
+                        break;
+                    case 'sellListZysk':
+                        include(__DIR__."/../Reports/sellListZysk.php");
+                        break;
+                    case 'orderCount':
+                        include(__DIR__."/../Reports/orderCount.php");
+                        break;
+                }
             }
         }
     }
-    if(empty($_GET['table'])){
+    if(empty($_GET['table']) && empty($_GET['report'])){
         if(!empty($_GET['cart'])){
             switch ($_GET['cart']){
                 case 'add':

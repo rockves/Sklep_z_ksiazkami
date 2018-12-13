@@ -28,9 +28,9 @@
             <?php include("menu.php"); ?>
         </ul>
         <?php 
-            if(!empty($_SESSION['login']) && $_SESSION['czyPracownik']){
+            if(!empty($_SESSION['czyPracownik'])){
                 if($_SESSION['czyPracownik'] == true){
-                    require_once("adminPanel.php");
+                    include('reportsPanel.php');
                 }
             }
         ?>
@@ -41,7 +41,14 @@
         ?>
     </div>
     <div id="rightWindow">
-        <?php include("login.php"); ?>
+        <?php 
+            include("login.php"); 
+            if(!empty($_SESSION['login']) && $_SESSION['czyPracownik']){
+                if($_SESSION['czyPracownik'] == true){
+                    require_once("adminPanel.php");
+                }
+            }
+        ?>
     </div>
     <footer>
         <span>&#x24B8;2018 Miłosz Leszko</span>

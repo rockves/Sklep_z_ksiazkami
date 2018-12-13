@@ -8,7 +8,7 @@
     require_once(__DIR__.'/../Untitles/connection.php');
     require_once(__DIR__.'/../Untitles/link.php'); 
     (!empty($_GET['strona'])) ? $strona = $_GET['strona'] : $strona = 1;
-    (!empty($_GET['count'])) ? $result_count = $_GET['count'] : $result_count = 12;
+    (!empty($_GET['count'])) ? $result_count = $_GET['count'] : $result_count = 9;
     $start_index = ($strona - 1) * $result_count;
     ?>
 </head>

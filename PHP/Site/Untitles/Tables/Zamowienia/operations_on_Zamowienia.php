@@ -3,9 +3,6 @@
 	$errMsg = '';
 
 	if (empty($_POST['akcja'])) {
-		exit();
-	}
-
 	if($_POST['akcja'] == 'delete'){
 		if(!empty($_POST['id'])){
 			$query = "SELECT Id FROM zamowienia WHERE Id = '{$_POST['id']}' LIMIT 1";
@@ -37,4 +34,5 @@
 			}
 		}
 	}
+}
 ?>

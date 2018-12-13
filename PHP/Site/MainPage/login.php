@@ -20,7 +20,7 @@ if(empty($_SESSION['login'])){
 		<form action='$self' method='POST'>
 			<input type="hidden" name="akcja" value="login"/>
 			Login: <input type="text" name="logNazwa" value="$logNazwa"/><br>
-			Haslo: <input type="password" name="logHaslo"/><br>
+			Hasło: <input type="password" name="logHaslo"/><br>
 			<input type="submit" name="submit" value='Zaloguj'/>
 			<a href='$self?user=register'>Zarejestruj</a>
 		</form>

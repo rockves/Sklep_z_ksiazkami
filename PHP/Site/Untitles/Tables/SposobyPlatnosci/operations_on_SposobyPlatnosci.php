@@ -21,7 +21,7 @@
 		}
 	} else if($_POST['akcja'] == 'delete'){
 		if(!empty($_POST['nazwa'])){
-            $sposobPlatnosci = new SposobPlatnosci($_POST['nazwa'], $_POST['cena']);
+            $sposobPlatnosci = new SposobPlatnosci($_POST['nazwa']);
             $errMsg = $sposobPlatnosci->deleteSposobPlatnosci();
 		}else{
 			$errMsg = "Nie podano nazwy usługi";
