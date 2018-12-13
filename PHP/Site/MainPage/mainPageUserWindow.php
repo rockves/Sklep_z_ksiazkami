@@ -143,7 +143,11 @@
         } elseif (!empty($_GET['user'])) {
             switch ($_GET['user']) {
                 case 'profile':
-                    include(__DIR__."/../UzytkownicyPage/infoUzytkownicy.php");
+                    if(!empty($_GET['edit'])){
+                        include(__DIR__."/../UzytkownicyPage/updateUzytkownicy.php");
+                    }else{
+                        include(__DIR__."/../UzytkownicyPage/infoUzytkownicy.php");
+                    }
                     $default = '0';
                     break;
                 case 'register':

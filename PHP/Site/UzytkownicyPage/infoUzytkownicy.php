@@ -59,6 +59,7 @@
                 <div id="email">$email</div>
                 <div id="numer">$numer</div>
             </div>
+            <a href="mainPage.php?user=profile&edit=1">Edytuj</a>
 END;
     ?>
 </body>

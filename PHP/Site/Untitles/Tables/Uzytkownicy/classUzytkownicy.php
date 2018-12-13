@@ -263,40 +263,115 @@
             }
         }
 
-        public function updateSposobWysylki($newNazwa, $newHaslo, $newImie, $newNazwisko, $newUlica, $newMiasto, $newKodPocztowy, $newEmail, $newNumer)
+        public function updateUzytkownik($newNazwa, $newHaslo, $newImie, $newNazwisko, $newUlica, $newMiasto, $newKodPocztowy, $newEmail, $newNumer)
         {
             global $connection;
             if (!$connection) {
                 require_once(__DIR__.'/../../connection.php');
             }
             $errMsg = '';
-            
+            $staraNazwa = $this->nazwa;
             $query = "SELECT Nazwa_uzytkownika FROM uzytkownicy WHERE Nazwa_uzytkownika = '$this->nazwa' LIMIT 1";
             if (!($result = $connection->query($query))) {
                 $errMsg = 'Zmiany w danych użytkownika nie powiodły się';
-                return;
+                return $errMsg;
             }
             if ($result->num_rows == 0) {
                 $errMsg = 'Taki użytkownik nie istnieje';
-                return;
+                return $errMsg;
             }
-            $query = "UPDATE sposoby_wysylki SET";
-            if ($nowaNazwa != '') {
-                $query .= " Nazwa_uslugi = '$nowaNazwa'";
-                $this->setNazwa($nowaNazwa);
+            $query = "UPDATE uzytkownicy SET ";
+            $czyDodane = 0;
+            if ($newNazwa != '') {
+                $query .= " Nazwa_uzytkownika = '$newNazwa'";
+                $this->setNazwa($newNazwa);
+                $czyDodane = 1;
             }
-            if ($nowaSzybkosc != '') {
-                $query .= ", Szybkosc_dostawy = '$nowaSzybkosc'";
-                $this->setSzybkosc($nowaSzybkosc);
+            if ($newHaslo != '') {
+                $hash = password_hash($newHaslo, PASSWORD_BCRYPT);
+                if($czyDodane == 1){
+                    $query .= ", Haslo = '$hash'";
+                }else{
+                    $query .= "Haslo = '$hash'";
+                }
+                
+                $this->setHaslo($hash);
+                $czyDodane = 1;
             }
-            if ($nowaCena != '') {
-                $query .= ", Cena_uslugi = '$nowaCena'";
-                $this->setCena($nowaCena);
+            if ($newImie != '') {
+                if($czyDodane == 1){
+                    $query .= ", Imie = '$newImie'";
+                }else{
+                    $query .= "Imie = '$newImie'";
+                }
+                
+                $this->setImie($newImie);
+                $czyDodane = 1;
             }
-            $query .= " WHERE Nazwa_uslugi = '$this->nazwa'";
+            if ($newNazwisko != '') {
+                if($czyDodane == 1){
+                    $query .= ", Nazwisko = '$newNazwisko'";
+                }else{
+                    $query .= "Nazwisko = '$newNazwisko'";
+                }
+                
+                $this->setNazwisko($newNazwisko);
+                $czyDodane = 1;
+            }
+            if ($newUlica != '') {
+                if($czyDodane == 1){
+                    $query .= ", Ulica = '$newUlica'";
+                }else{
+                    $query .= "Ulica = '$newUlica'";
+                }
+                
+                $this->setUlica($newUlica);
+                $czyDodane = 1;
+            }
+            if ($newMiasto != '') {
+                if($czyDodane == 1){
+                    $query .= ", Miasto = '$newMiasto'";
+                }else{
+                    $query .= "Miasto = '$newMiasto'";
+                }
+                
+                $this->setMiasto($newMiasto);
+                $czyDodane = 1;
+            }
+            if ($newKodPocztowy != '') {
+                if($czyDodane == 1){
+                    $query .= ", Kod_pocztowy = '$newKodPocztowy'";
+                }else{
+                    $query .= "Kod_pocztowy = '$newKodPocztowy'";
+                }
+                
+                $this->setKod($newKodPocztowy);
+                $czyDodane = 1;
+            }
+            if ($newEmail != '') {
+                if($czyDodane == 1){
+                    $query .= ", Email = '$newEmail'";
+                }else{
+                    $query .= "Email = '$newEmail'";
+                }
+                
+                $this->setEmail($newEmail);
+                $czyDodane = 1;
+            }
+            if ($newNumer != '') {
+                if($czyDodane == 1){
+                    $query .= ", Numer_telefonu = '$newNumer'";
+                }else{
+                    $query .= "Numer_telefonu = '$newNumer'";
+                }
+                
+                $this->setNumer($newNumer);
+                $czyDodane = 1;
+            }
+            $query .= " WHERE Nazwa_uzytkownika = '$staraNazwa'";
             if (!$connection->query($query)) {
-                $errMsg = 'Zmiany w sposobie wysyłki nie powiodły się';
-                return;
+                $errMsg = 'Zmiany w danych użytkownika nie powiodły się';
+                return $errMsg;
             }
         }
     }

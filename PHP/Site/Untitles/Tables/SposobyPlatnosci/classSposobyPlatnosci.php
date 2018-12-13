@@ -116,14 +116,21 @@
                 $result->close();
                 return $errMsg;
             }
-            $query = "UPDATE sposoby_platnosci SET";
+            $query = "UPDATE sposoby_platnosci SET ";
+            $czyDodane = 0;
             if ($nowaNazwa != '') {
-                $query .= " Nazwa_uslugi = '$nowaNazwa'";
+                $query .= "Nazwa_uslugi = '$nowaNazwa'";
                 $this->setNazwa($nowaNazwa);
+                $czyDodane = 1;
             }
             if ($nowaCena != '') {
-                $query .= ", Cena_uslugi = '$nowaCena'";
+                if($czyDodane == 1){
+                    $query .= ", Cena_uslugi = '$nowaCena'";
+                }else{
+                    $query .= "Cena_uslugi = '$nowaCena'";
+                }
                 $this->setCena($nowaCena);
+                $czyDodane = 1;
             }
             $query .= " WHERE Nazwa_uslugi = '$staraNazwa'";
             if (!$connection->query($query)) {

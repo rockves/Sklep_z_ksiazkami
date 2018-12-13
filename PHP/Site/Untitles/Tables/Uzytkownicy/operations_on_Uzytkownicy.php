@@ -58,13 +58,13 @@
             }
         } elseif ($_POST['akcja'] == 'update') {
             if(!empty($_POST['nazwa'])){
-                if(empty($_POST['newNazwa']) && empty($_POST['newHaslo']) && empty($_POST['newImie']) && empty($_POST['newNazwisko']) && empty($_POST['newUlica']) && empty($_POST['newMiasto']) && empty($_POST['newKodPocztowy']) && empty($_POST['newEmail']) && empty($_POST['newNumer'])){
+                if(empty($_POST['newName']) && empty($_POST['newHaslo']) && empty($_POST['newImie']) && empty($_POST['newNazwisko']) && empty($_POST['newUlica']) && empty($_POST['newMiasto']) && empty($_POST['newKodPocztowy']) && empty($_POST['newEmail']) && empty($_POST['newNumer'])){
                     $errMsg = "Nie podano danych do edycji";
                 }else{
-                    $newNazwa = $newHaslo = $newImie = $newNazwisko = $newUlica = $newMiasto = $newKodPocztowy = $newEmail = $newNumer = '';
-                    if(!empty($_POST['newNazwa'])){
-                        $newNazwa=prepareFormData($_POST['newNazwa']);
-                        if (!preg_match("/^[a-zA-Z0-9]*$/", $newNazwa)) {
+                    $newName = $newHaslo = $newImie = $newNazwisko = $newUlica = $newMiasto = $newKodPocztowy = $newEmail = $newNumer = '';
+                    if(!empty($_POST['newName'])){
+                        $newName=prepareFormData($_POST['newName']);
+                        if (!preg_match("/^[a-zA-Z0-9]*$/", $newName)) {
                             $errMsg = 'Nazwa użytkownika może zawierać tylko litery i cyfry';
                         }
                     }
@@ -91,20 +91,22 @@
                     }
                     if(!empty($_POST['newEmail'])){
                         $newEmail=prepareFormData($_POST['newEmail']);
-                        if (!filter_var($regEmail, FILTER_VALIDATE_EMAIL)) {
+                        if (!filter_var($newEmail, FILTER_VALIDATE_EMAIL)) {
                             $errMsg .= '<br>Należy podać poprawny adres email';
                         }
                     }
                     if(!empty($_POST['newNumer'])){
                         $newNumer=prepareFormData($_POST['newNumer']);
-                        if (!preg_match("/^[0-9]{9,9}$/", $regNumer)) {
+                        if (!preg_match("/^[0-9]{9,9}$/", $newNumer)) {
                             $errMsg .= '<br>Należy podać poprawny numer telefonu';
                         }
                     }
                     if($errMsg == ''){
-                    updateSposobWysylki($newNazwa, $newHaslo, $newImie, $newNazwisko, $newUlica, $newMiasto, $newKodPocztowy, $newEmail, $newNumer);
+                        $uzytkownik = new Uzytkownik($_POST['nazwa']);
+                        $uzytkownik->updateUzytkownik($newName, $newHaslo, $newImie, $newNazwisko, $newUlica, $newMiasto, $newKodPocztowy, $newEmail, $newNumer);
                     }
                 }
+            }
         } elseif ($_POST['akcja'] == 'login' && $_POST['submit'] == 'Zaloguj') {
             if (!empty($_POST['logNazwa'])) {
                 if (!empty($_POST['logHaslo'])) {
@@ -193,4 +195,3 @@
             }
         }
     }
-}
