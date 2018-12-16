@@ -1,0 +1,250 @@
+* {
+    margin: 0;
+    font-family: 'Bitter', serif;
+}
+
+html,
+body {
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background: #eae8dc;
+}
+
+#header {
+    height: 6%;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+    background-color: #699148;
+    border-bottom: 4px solid #466031;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+}
+
+a.headerText {
+    color: #466031;
+    text-decoration: none;
+    font-size: 1.5vw;
+    font-weight: 600;
+}
+
+#search {
+    width: 90%;
+    margin: 5%;
+}
+
+#menu {
+    width: 23%;
+    margin-left: 1%;
+    margin-right: 1%;
+    box-sizing: border-box;
+    min-height: 90%;
+    float: left;
+    /*background-color: pink;*/
+    background: #eae8dc;
+}
+
+#loginForm {
+    width: 100%;
+    margin-top: 10px;
+}
+
+#userMenu {
+    width: 100%;
+    font-size: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-top: 3px solid #ceccc0;
+    border-bottom: 3px solid #ceccc0;
+    text-align: center;
+}
+
+.a-login {
+    text-decoration: none;
+    color: red;
+}
+
+.a-login:hover {
+    color: #ad0808;
+}
+
+#menu>ul {
+    display: block;
+    margin-top: 10px;
+    padding-left: 20px;
+}
+
+#menu>ul>li {
+    margin-top: 2px;
+}
+
+#menu>ul>li>a {
+    text-decoration: none;
+}
+
+.curGatunekLi {
+    color: red;
+    font-weight: bold;
+}
+
+.curGatunekLi:link {}
+
+.curGatunekLi:visited {}
+
+.curGatunekLi:hover {}
+
+.gatunekLi {
+    color: black;
+}
+
+.gatunekLi:link {}
+
+.gatunekLi:visited {}
+
+.gatunekLi:hover {}
+
+div.adminPanel>div.functionList>dl,
+    {
+    list-style-type: circle;
+}
+
+div.adminPanel>div.functionList>dl>dt {
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+}
+
+div.adminPanel>div.functionList>dl>dd {
+    display: list-item;
+    list-style-type: disc;
+    margin-left: 8%;
+}
+
+div.adminPanel>div.functionList>dl>dd>a {
+    text-decoration: none;
+    color: black;
+
+}
+
+#window {
+    width: 50%;
+    min-height: 90%;
+    box-sizing: border-box;
+    float: left;
+    /*background-color: red;*/
+    border-right: 4px solid #466031;
+    border-left: 4px solid #466031;
+    background: #eae8dc;
+}
+
+.produktContainer {
+    width: 100%;
+    margin-top: 1%;
+    height: 94%;
+}
+
+div.produktList {
+    height: 100%;
+}
+
+div.produktItem {
+    height: 260px;
+    width: 30%;
+    float: left;
+    margin-right: 3%;
+    text-align: center;
+    font-size: 95%;
+}
+
+a.itemImage>img {
+    height: 128px;
+    width: 96px;
+}
+
+a.itemTitle {
+    text-decoration: none;
+    color: #466031;
+    font-weight: 600;
+}
+
+.pageList {
+    height: 5%;
+    width: 100%;
+    text-align: center;
+    clear: both;
+}
+
+.curPageIndex {
+    color: red;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.pageIndex {
+    color: black;
+    text-decoration: none;
+}
+
+table.adminList {
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 5px;
+    text-align: center;
+}
+
+#regForm {
+    width: 100%;
+}
+
+#rightWindow {
+    width: 25%;
+    min-height: 90%;
+    box-sizing: border-box;
+    float: left;
+}
+
+div.reportsPanel>div.reportsList>dl,
+    {
+    list-style-type: circle;
+}
+
+div.reportsPanel>div.reportsList>dl>dt {
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+}
+
+div.reportsPanel>div.reportsList>dl>dd {
+    display: list-item;
+    list-style-type: disc;
+    margin-left: 8%;
+}
+
+div.reportsPanel>div.reportsList>dl>dd>a {
+    text-decoration: none;
+    color: black;
+
+}
+
+footer {
+    clear: both;
+    height: 4%;
+    width: 100%;
+    box-sizing: border-box;
+    /*background-color: orange;*/
+    text-align: center;
+    border-top: 4px solid #466031;
+    background-color: #699148;
+    color: #466031;
+}
+
+footer>span {
+    display: inline-block;
+    vertical-align: middle;
+    line-height: normal;
+    font-size: 0.95rem;
+}

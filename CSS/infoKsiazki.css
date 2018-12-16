@@ -1,0 +1,22 @@
+.ksiazkiInfo {}
+
+.ksiazkiInfo>img {
+    height: 20%;
+    width: 20%;
+}
+
+.ksiazkiInfo>#tytul {}
+
+.ksiazkiInfo>#autor {}
+
+.ksiazkiInfo>#opis {}
+
+.ksiazkiInfo>#gatunek {}
+
+.ksiazkiInfo>#data {}
+
+.ksiazkiInfo>#wydawnictwo {}
+
+.ksiazkiInfo>#ocena {}
+
+.ksiazkiInfo>#cena {}
